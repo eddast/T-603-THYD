@@ -18,17 +18,16 @@
 
 /* private rules */
 num         [0-9]
-decimal     {num}+
+int         {num}+
 charUpper   [A-Z]
 charLower   [a-z]
 char        {charUpper}|{charLower}
-exponent    E(\+|-)?({decimal})+
-frac        \.{decimal}
+exponent    E(\+|-)?({int})+
+frac        \.{int}
 
 /* ids and variable type recognizers */
 identifier  ({char}|\_)+({num}|{char}|\_)*
-int         {num}+
-real        {decimal}{frac}({exponent})?
+real        {int}{frac}({exponent})?
 bool        true|false
 
 /* relational */
@@ -81,16 +80,18 @@ rparen      \)
 semicolon   \;
 comma       \,
 
-comment \/{multop}({char}|{ws}|{int})*{multop}\/
+multicomment     \/\*(.|{ws})*\*\/
+singlecomment    \/\/.*\n
 
-eoi \<<EOF>>
 
 
 
 %%
     /** match punctuation **/
+
 {ws}+
-{comment}
+{multicomment}
+{singlecomment}
 {lbrace}        { return Tokentype::ptLBrace; }
 {rbrace}        { return Tokentype::ptRBrace; }
 {lbracket}      { return Tokentype::ptLBracket; }
@@ -141,8 +142,7 @@ eoi \<<EOF>>
     /** identifiers **/
 {identifier}    { return Tokentype::Identifier; }
 
-    /** match end of input (TODO: VIRKAR EKKI) **/
-<<EOF>>         { return Tokentype::EOI; }
+
 
     /** match any other token as unknown **/
 .               { return Tokentype::ErrUnknown; }

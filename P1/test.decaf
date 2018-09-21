@@ -1,5 +1,8 @@
 /* This is a multiline comment*/
 /*Thisisamultilinecommentsmushedtogether*/
+/* this multiline comment contains some weird symbols! % # $ &7819*__ 2"
+    and also some newlines! */
+// This is a singleline comment with _, &, % and !
 
 class Program {
     int i, j;
@@ -9,6 +12,7 @@ class Program {
     static void main() {
         i = 0;
         j = 1;
+        // This is a singleline comment
         if ( i < j ) {
            number = 12.34;
         }
