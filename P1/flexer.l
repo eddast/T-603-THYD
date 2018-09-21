@@ -24,10 +24,9 @@ charLower   [a-z]
 char        {charUpper}|{charLower}
 exponent    E(\+|-)?({decimal})+
 frac        \.{decimal}
-comment     [\*]{char}+[*\]
 
 /* ids and variable type recognizers */
-identifier  ({char}|\-)+({num}|{char}|\-)*
+identifier  ({char}|\_)+({num}|{char}|\_)*
 int         {num}+
 real        {decimal}{frac}({exponent})?
 bool        true|false
@@ -82,11 +81,16 @@ rparen      \)
 semicolon   \;
 comma       \,
 
+comment \/{multop}({char}|{ws}|{int})*{multop}\/
+
 eoi \<<EOF>>
+
+
 
 %%
     /** match punctuation **/
 {ws}+
+{comment}
 {lbrace}        { return Tokentype::ptLBrace; }
 {rbrace}        { return Tokentype::ptRBrace; }
 {lbracket}      { return Tokentype::ptLBracket; }
