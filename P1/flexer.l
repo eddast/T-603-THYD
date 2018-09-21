@@ -17,69 +17,70 @@
 %}
 
 /* private rules */
-num [0-9]
-decimal {num}+
-charUpper [A-Z]
-charLower [a-z]
-char {charUpper}|{charLower}
-exponent E(\+|-)?({decimal})+
-frac \.{decimal}
+num         [0-9]
+decimal     {num}+
+charUpper   [A-Z]
+charLower   [a-z]
+char        {charUpper}|{charLower}
+exponent    E(\+|-)?({decimal})+
+frac        \.{decimal}
+comment     [\*]{char}+[*\]
 
 /* ids and variable type recognizers */
-identifier ({char}|\-)+({num}|{char}|\-)*
-int {num}+
-real {decimal}{frac}({exponent})?
-bool true|false
+identifier  ({char}|\-)+({num}|{char}|\-)*
+int         {num}+
+real        {decimal}{frac}({exponent})?
+bool        true|false
 
 /* relational */
-eqop ==
-noteqop !=
-lessop <
-lesseqop <=
-greaterop >
+eqop        ==
+noteqop     !=
+lessop      <
+lesseqop    <=
+greaterop   >
 greatereqop >=
 
 /* arithmetic */
 incrementop \+\+
 decrementop \-\-
-plusop \+
-minusop \-
-multop \*
-divop \\
-modop %
+plusop      \+
+minusop     \-
+multop      \*
+divop       \\
+modop       %
 
 /* logical */
-andop &&
-orop \|\|
-notop !
+andop       &&
+orop        \|\|
+notop       !
 
 /* assignment */
 assignmentop =
 
 /* keywords */
-kwclass class
-kwstatic static
-kwvoid void
-kwif if
-kwelse else
-kwfor for
-kwreturn return
-kwbreak break
-kwcontinue continue
-kwint int
-kwreal real
-kwbool bool
+kwclass     class
+kwstatic    static
+kwvoid      void
+kwif        if
+kwelse      else
+kwfor       for
+kwreturn    return
+kwbreak     break
+kwcontinue  continue
+kwint       int
+kwreal      real
+kwbool      bool
 
 /* punctuation */
-ws [ \t\r\n]
-lbrace \{
-rbrace \}
-lbracket \[
-rbracket \]
-lparen \(
-rparen \)
-semicolon \;
-comma \,
+ws          [ \t\r\n]
+lbrace      \{
+rbrace      \}
+lbracket    \[
+rbracket    \]
+lparen      \(
+rparen      \)
+semicolon   \;
+comma       \,
 
 eoi \<<EOF>>
 
