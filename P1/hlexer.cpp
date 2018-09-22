@@ -26,7 +26,9 @@ void HLexer::get_next( Token& token )
         return;
     }
 
+
     switch ( c_ ) {
+        /* punctuation */
         case '{':
             token.type = Tokentype::ptLBrace;
             token.lexeme.push_back(c_);
@@ -37,10 +39,51 @@ void HLexer::get_next( Token& token )
             token.lexeme.push_back(c_);
             is_.get(c_);
             break;
-        default:
-            token.type = Tokentype::ErrUnknown;
+        case '[':
+            token.type = Tokentype::ptLBrace;
             token.lexeme.push_back(c_);
             is_.get(c_);
+            break;
+        case ']':
+            token.type = Tokentype::ptRBrace;
+            token.lexeme.push_back(c_);
+            is_.get(c_);
+            break;
+        case '(':
+            token.type = Tokentype::ptLParen;
+            token.lexeme.push_back(c_);
+            is_.get(c_);
+            break;
+        case ')':
+            token.type = Tokentype::ptRParen;
+            token.lexeme.push_back(c_);
+            is_.get(c_);
+            break;
+        case ';':
+            token.type = Tokentype::ptSemicolon;
+            token.lexeme.push_back(c_);
+            is_.get(c_);
+            break;
+        case ',':
+            token.type = Tokentype::ptComma;
+            token.lexeme.push_back(c_);
+            is_.get(c_);
+            break;
+
+        default:
+            if( isdigit(c_) ){
+                while(isdigit(c_)){
+                    token.type = Tokentype::IntValue;
+                    token.lexeme.push_back(c_);
+                    c_ = is_.get();
+                }
+            }
+            else{
+                token.type = Tokentype::ErrUnknown;
+                token.lexeme.push_back(c_);
+                is_.get(c_);
+            }
+
             break;
     }
 }

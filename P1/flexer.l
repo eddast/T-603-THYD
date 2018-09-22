@@ -44,7 +44,7 @@ decrementop \-\-
 plusop      \+
 minusop     \-
 multop      \*
-divop       \\
+divop       \/
 modop       %
 
 /* logical */
@@ -80,18 +80,17 @@ rparen      \)
 semicolon   \;
 comma       \,
 
-multicomment     \/\*(.|{ws})*\*\/
+multicomment     \/\*([^*]|(\*+[^*/]))*\*+\/
 singlecomment    \/\/.*\n
-
 
 
 
 %%
     /** match punctuation **/
 
+{multicomment}  { return Tokentype::ptLBrace; }
+{singlecomment} { return Tokentype::ptLBrace; }
 {ws}+
-{multicomment}
-{singlecomment}
 {lbrace}        { return Tokentype::ptLBrace; }
 {rbrace}        { return Tokentype::ptRBrace; }
 {lbracket}      { return Tokentype::ptLBracket; }
@@ -142,7 +141,7 @@ singlecomment    \/\/.*\n
     /** identifiers **/
 {identifier}    { return Tokentype::Identifier; }
 
-
+<<EOF>>         { return Tokentype::EOI; }
 
     /** match any other token as unknown **/
 .               { return Tokentype::ErrUnknown; }

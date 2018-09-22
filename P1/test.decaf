@@ -1,7 +1,5 @@
 /* This is a multiline comment*/
-/*Thisisamultilinecommentsmushedtogether*/
-/* this multiline comment contains some weird symbols! % # $ &7819*__ 2"
-    and also some newlines! */
+
 // This is a singleline comment with _, &, % and !
 
 class Program {
@@ -16,9 +14,47 @@ class Program {
         if ( i < j ) {
            number = 12.34;
         }
+        /* this multiline comment contains some weird symbols! % # $ &7819*__ 2"
+            and also some newlines!
+            */
         else {
            number = 12.34E7
         }
         i = i * j;
+
+         public double slopeTo(Point that) {
+            // (y1 − y0)/(x1 − x0)
+
+            // Degenerate line (between point and itself)
+            if(xequals && yequals) {
+                return Double.NEGATIVE_INFINITY;
+            }
+            // Vertical line
+            if(xequals) {
+                return Double.POSITIVE_INFINITY;
+                head.setData()
+            }
+            // Horizontal line
+            if(yequals) {
+                return 0;
+            }
+
+            class Example {
+                void main() {
+                    int x; int y;
+                    x = read();
+                    y = read();
+                    print(gcd(x, y));
+                }
+                int gcd(int a, int b) {
+                    if ( b == 0 )
+                        return a;
+                    else
+                        return gcd(b, a % b);
+                }
+            }
+
+            return ((double) y)/x;
+        }
     }
 }
