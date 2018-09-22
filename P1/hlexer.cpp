@@ -3,55 +3,28 @@
 
 using namespace std;
 
+/* Initilize Lexer with input stream and line number */
 HLexer::HLexer( std::istream& is  )
     : Lexer( is ), line_no_(1)
 {
     is_.get( c_ );
 }
 
-void HLexer::match_error(Token& token){
-    token.type = Tokentype::ErrUnknown;
-    token.lexeme.push_back(c_);
-    is_.get(c_);
-}
-
-void HLexer::match_digit(Token& token){
-    while(isdigit(c_)){
-        token.lexeme.push_back(c_);
-        c_ = is_.get();
+/* Strips input of whitespaces */
+void HLexer::strip_whitespaces( Token& token )
+{
+    while ( is_.good() && isspace(c_) ) {
+        if ( c_ == '\n' ) { ++line_no_; }
+        is_.get(c_);
     }
 }
 
-
-void HLexer::match_real(Token& token){
-    token.lexeme.push_back(c_);
-    c_ = is_.get();
-
-    if(isdigit(c_)){
-        token.type = Tokentype::RealValue;
-        match_digit(token);
-        if(c_ == 'E'){
-            token.lexeme.push_back(c_);
-            c_ = is_.get();
-
-            if(c_ == '+' || c_ == '-'){
-                token.lexeme.push_back(c_);
-                c_ = is_.get();
-            }
-            if(isdigit(c_)){
-                token.type = Tokentype::RealValue;
-                match_digit(token);
-            } else { match_error(token); }
-        }
-    } else {  match_error(token); }
-}
-
-void HLexer::match_multiline(Token& token){
-    token.lexeme.clear();
-    while(true){
-        if ( c_ == '\n' ) {
-            ++line_no_;
-        }
+/* Strips input of multi line comment */
+void HLexer::strip_multi_line_comment( Token& token )
+{
+    initialize_token( token );
+    while( true ) {
+        if ( c_ == '\n' ) { ++line_no_; }
         if(c_ == '*'){
             c_ = is_.get();
             if(c_ == '/'){
@@ -60,62 +33,109 @@ void HLexer::match_multiline(Token& token){
             }
         }
         c_ = is_.get();
+        strip_whitespaces();
     }
 }
-
-void HLexer::match_singleline(Token& token){
-    token.lexeme.clear();
-    while(true){
+/* Strips input of single line comments */
+void HLexer::strip_single_line_comment( Token& token )
+{
+    initialize_token( token );
+    while ( true ) {
         if(c_ == '\n'){
-             ++line_no_;
+            ++line_no_;
             c_ = is_.get();
             break;
         }
         c_ = is_.get();
+        strip_whitespaces();
     }
 }
 
+/* Matches token as an unknown token */
+void HLexer::match_error( Token& token )
+{
+    token.type = Tokentype::ErrUnknown;
+    token.lexeme.push_back(c_);
+    is_.get(c_);
+}
 
-void HLexer::get_next( Token& token )
+/* Helper function, matches and adds a digit [0-9]+ */
+void HLexer::match_digit( Token& token )
+{
+    while( isdigit(c_) ) {
+        token.lexeme.push_back(c_);
+        c_ = is_.get();
+    }
+}
+
+/* Matches a real value */
+void HLexer::match_real( Token& token )
+{
+    // Mandatory fraction part after digit part
+    if( c_ != '.' ) return;
+    token.lexeme.push_back(c_);
+    c_ = is_.get();
+
+    // At least one digit is present after fraction
+    if( isdigit(c_) ) {
+        token.type = Tokentype::RealValue;
+        match_digit(token);
+
+        // match optional exponent part
+        if( c_ == 'E' ) {
+            token.lexeme.push_back(c_);
+            c_ = is_.get();
+            if( c_ == '+' || c_ == '-' ) {
+                token.lexeme.push_back(c_);
+                c_ = is_.get();
+            }
+            if( isdigit(c_) ) {
+                token.type = Tokentype::RealValue;
+                match_digit(token);
+                return;
+            }
+        }
+        else return;
+    }
+    match_error(token);
+}
+
+/* Initilizes token */
+void initialize_token ( Token& token )
 {
     token.lexeme.clear();
-
-    while ( is_.good() && isspace(c_) ) {
-        if ( c_ == '\n' ) { ++line_no_; }
-        is_.get(c_);
-    }
-
     token.line = line_no_;
     token.type = Tokentype::ErrUnknown;
+}
 
+/* Match and scan type of next token */
+void HLexer::get_next( Token& token )
+{
+    // Stop scanning on end of input
     if ( !is_.good() ) {
         token.type = Tokentype::EOI;
         return;
     }
 
+    // Initialize token for next iteration
+    initialize_token( token );
+
+    // Strip whitespaces encountered
+    strip_whitespaces( token );
+
     switch ( c_ ) {
-        /* Comments */
+
+        // Encountering a '/' can denote either division operator if standalone
+        // Or syntax comments in case of another '*' or '/' in which are stripped
         case '/':
-            std::cout << "1" << std::endl;
+
+            token.type = Tokentype::OpArtDiv;
             token.lexeme.push_back(c_);
             is_.get(c_);
-            std::cout << "token now: " << static_cast<char>(c_) << std::endl;
-            if(c_ == '*'){
-                match_multiline(token);
-            } else if(c_ == '/'){
-                std::cout << "2" << std::endl;
-                match_singleline(token);
-            } else {
-                token.type = Tokentype::OpArtDiv;
-                break;
-            }
 
-        case '\n':
-            ++line_no_;
-            while ( is_.good() && isspace(c_) ) {
-                if ( c_ == '\n' ) { ++line_no_; }
-                is_.get(c_);
-            }
+            if( c_ == '*' ) strip_multi_line_comment(token);
+            else if( c_ == '/' ) strip_single_line_comment(token);
+            else break;
 
         /* Punctuation */
         case '{':
@@ -158,8 +178,6 @@ void HLexer::get_next( Token& token )
             token.lexeme.push_back(c_);
             is_.get(c_);
             break;
-
-
 
             /* Logical operators */
         case '&':
@@ -259,18 +277,22 @@ void HLexer::get_next( Token& token )
 
 
         default:
-            /* Matching int and real*/
-            if( isdigit(c_) ){
+
+            // Matching all possible numerical values encountered
+            // Regarded as int value unless fraction is encountered, then as real value
+            if( isdigit(c_) ) {
                 token.type = Tokentype::IntValue;
                 match_digit(token);
-                if(c_ == '.'){
-                    match_real(token);
-                }
+                match_real(token);
+                return;
             }
 
+            // Matching all word values encountered
+            // Regarded as identifier unless it matches a known keyword in language in full
+            else if ( isalpha(c_) || (c_ == '_') ) {
 
-            else if ( isalpha(c_) || (c_ == '_')){
                 while( isalpha(c_) ){
+
                     token.type = Tokentype::Identifier;
                     token.lexeme.push_back(c_);
 
@@ -291,28 +313,25 @@ void HLexer::get_next( Token& token )
 
                     is_.get(c_);
                 }
-                while( isalpha(c_) || isdigit(c_) || (c_ == '_')){
+                while( isalpha(c_) || isdigit(c_) || (c_ == '_') ) {
                     token.type = Tokentype::Identifier;
                     token.lexeme.push_back(c_);
                     is_.get(c_);
                 }
-
+                return;
             }
-
-
-            else{  match_error(token); }
-
-            break;
+            match_error(token);
     }
 }
 
-
-
-
-std::string HLexer::get_name() const {
+/* Get lexer's name */
+std::string HLexer::get_name() const
+{
     return "handmade";
 }
 
+/* Destructor */
 HLexer::~HLexer()
 {
+
 }
