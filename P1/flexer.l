@@ -88,8 +88,8 @@ singlecomment    \/\/.*\n
 %%
     /** match punctuation **/
 
-{multicomment}  { return Tokentype::ptLBrace; }
-{singlecomment} { return Tokentype::ptLBrace; }
+{multicomment}
+{singlecomment}
 {ws}+
 {lbrace}        { return Tokentype::ptLBrace; }
 {rbrace}        { return Tokentype::ptRBrace; }

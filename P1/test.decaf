@@ -1,6 +1,6 @@
 /* This is a multiline comment*/
 
-// This is a singleline comment with _, &, % and !
+// Singleline comments
 
 class Program {
     int i, j;
@@ -10,7 +10,17 @@ class Program {
     static void main() {
         i = 0;
         j = 1;
-        // This is a singleline comment
+        k = 22;
+
+
+        _jkjs99;
+        _09383;
+        jkdjld09902_
+        edda_829892_jesklhoehe9938939_i93803jhks
+
+        03_edda &
+
+
         if ( i < j ) {
            number = 12.34;
         }
@@ -18,7 +28,7 @@ class Program {
             and also some newlines!
             */
         else {
-           number = 12.34E7
+           number = 12.34E+7
         }
         i = i * j;
 
@@ -48,11 +58,17 @@ class Program {
                 }
                 int gcd(int a, int b) {
                     if ( b == 0 )
+                        hehe = !hehe;
                         return a;
+
+                    else if ( j != k ) {
+                        return k;
+                    }
                     else
                         return gcd(b, a % b);
                 }
             }
+
 
             return ((double) y)/x;
         }
