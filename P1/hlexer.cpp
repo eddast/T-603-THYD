@@ -1,12 +1,12 @@
-/************************************************
+/***********************************************************
  *      SC-T-603-THYD Fall 2018
  *      Assignment: Project part I
  *      Due: 24th of September 2018
- *      Part: Section 1 Handwritten Lexer
+ *      Part: Section 1 Handwritten Lexer (Implementation)
  *      Authors:
  *          Edda Pétursdóttir
  *          Edda Steinunn Rúnarsdóttir
- ************************************************/
+ *****************************************************+****/
 
 #include "hlexer.h"
 #include <map>
