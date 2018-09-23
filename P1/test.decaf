@@ -1,3 +1,7 @@
+/* This is a multiline comment*/
+
+// Singleline comments
+
 class Program {
     int i, j;
     real number;

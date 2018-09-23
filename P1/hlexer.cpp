@@ -11,7 +11,7 @@ HLexer::HLexer( std::istream& is  )
     is_.get( c_ );
 }
 
-/* A map of all characters and their token types that can be determined unrelated to next token */
+/* A map of all characters to their token types that can be determined unrelated to next token */
 map<int, Tokentype> SINGLETON_TOKENS =
 {
     {'{', Tokentype::ptLBrace},     {'}', Tokentype::ptRBrace},     {'[', Tokentype::ptLBracket},
@@ -20,7 +20,7 @@ map<int, Tokentype> SINGLETON_TOKENS =
     {'%', Tokentype::OpArtModulus}
 };
 
-/* A map of all keywords Decaf recognizes and their token types */
+/* A map of all keywords Decaf recognizes to their token types */
 map<std::string, Tokentype> KEYWORD_TOKENS =
 {
     {"class", Tokentype::kwClass},      {"static", Tokentype::kwStatic},    {"void", Tokentype::kwVoid},
@@ -28,6 +28,30 @@ map<std::string, Tokentype> KEYWORD_TOKENS =
     {"return", Tokentype::kwReturn},    {"break", Tokentype::kwBreak},      {"continue", Tokentype::kwContinue},
     {"int", Tokentype::kwInt},          {"real", Tokentype::kwReal},        {"bool", Tokentype::kwBool},
     {"true", Tokentype::BoolValue},     {"false", Tokentype::BoolValue},
+};
+
+/* a struct of ambigous token matches */
+/* i.e. the first and second characters in ambigous prefix and their first and second choice token type matches */
+struct Ambigous_Token_Matches {
+    Ambigous_Token_Matches( int first, int second, Tokentype first_match, Tokentype second_match ) :
+            first( first ), second( second ), first_match( first_match ), second_match( second_match ) {}
+    int first;
+    int second;
+    Tokentype first_match;
+    Tokentype second_match;
+};
+
+/* A map of all sets of characters and their token types that cannot be determined unrelated to next token */
+map<int, Ambigous_Token_Matches> AMBIGOUS_TOKENS =
+{
+    {'&', Ambigous_Token_Matches('&', '&', Tokentype::ErrUnknown, Tokentype::OpLogAnd)},
+    {'|', Ambigous_Token_Matches('|', '|', Tokentype::ErrUnknown, Tokentype::OpLogOr)},
+    {'=', Ambigous_Token_Matches('=', '=', Tokentype::OpAssign, Tokentype::OpRelEQ)},
+    {'!', Ambigous_Token_Matches('!', '=', Tokentype::OpLogNot, Tokentype::OpRelNEQ)},
+    {'<', Ambigous_Token_Matches('<', '=', Tokentype::OpRelLT, Tokentype::OpRelLTE)},
+    {'>', Ambigous_Token_Matches('>', '=', Tokentype::OpRelGT, Tokentype::OpRelGTE)},
+    {'+', Ambigous_Token_Matches('+', '+', Tokentype::OpArtPlus, Tokentype::OpArtInc)},
+    {'-', Ambigous_Token_Matches('-', '-', Tokentype::OpArtMinus, Tokentype::OpArtDec)},
 };
 
 /* Initializes token */
@@ -47,7 +71,7 @@ void HLexer::strip_whitespace( Token& token )
     }
 }
 
-/* Strips input of a multi line comment */
+/* Strips out comments */
 void HLexer::strip_multi_line_comment( Token& token )
 {
     /* token should be re-initialized */
@@ -65,6 +89,7 @@ void HLexer::strip_multi_line_comment( Token& token )
         strip_whitespace( token );
     }
 }
+
 /* Strips input of a single line comment */
 void HLexer::strip_single_line_comment( Token& token )
 {
@@ -156,143 +181,72 @@ void HLexer::get_next( Token& token )
         else return;
     }
 
-    switch ( c_ ) {
-
-            /* Logical operators */
-        case '&':
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if(c_ == '&'){
-                token.type = Tokentype::OpLogAnd;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-            }
-            break;
-            /* Logical operators */
-        case '|':
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if(c_ == '|'){
-                token.type = Tokentype::OpLogOr;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-            }
-            break;
-
-            /* Relational operators */
-        case '=':
-            token.type = Tokentype::OpAssign;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if(c_ == '='){
-                token.type = Tokentype::OpRelEQ;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-            }
-            break;
-        case '!':
-            token.type = Tokentype::OpLogNot;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if(c_ == '='){
-                token.type = Tokentype::OpRelNEQ;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-            }
-            break;
-        case '<':
-            token.type = Tokentype::OpRelLT;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if(c_ == '='){
-                token.type = Tokentype::OpRelLTE;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-            }
-            break;
-        case '>':
-            token.type = Tokentype::OpRelGT;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if(c_ == '='){
-                token.type = Tokentype::OpRelGTE;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-            }
-            break;
-
-            /* Arithmetic operators */
-        case '+':
-            token.type = Tokentype::OpArtPlus;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if(c_ == '+'){
-                token.type = Tokentype::OpArtInc;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-            }
-            break;
-        case '-':
-            token.type = Tokentype::OpArtMinus;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if(c_ == '-'){
-                token.type = Tokentype::OpArtDec;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-            }
-            break;
-
-        default:
-
-            // Matching all tokens that can unambiguously be matched
-            // I.e. singleton tokens whose token type can be determined without looking at next character
-            std::map<int,Tokentype>::iterator singletonToken = SINGLETON_TOKENS.find(c_);
-            if ( singletonToken != SINGLETON_TOKENS.end() ) {
-                token.type = singletonToken->second;
-                token.lexeme.push_back(c_);
-                is_.get(c_);
-                return;
-            }
-
-            // Matching all possible numerical values encountered
-            // Regarded as int value unless fraction is encountered, then as real value
-            else if( isdigit(c_) ) {
-                token.type = Tokentype::IntValue;
-                match_digit(token);
-                match_real(token);
-                return;
-            }
-
-            // Matching all word values encountered that start with character or underscore
-            // Regarded as identifier unless it matches a known keyword in language in full
-            else if( isalpha(c_) || c_ == '_' ) {
-
-                while( isalpha(c_) ) {
-                    token.type = Tokentype::Identifier;
-                    token.lexeme.push_back(c_);
-
-                    // Match lexeme as a keyword token if appropriate
-                    map<string, Tokentype>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
-                    if ( keyword != KEYWORD_TOKENS.end() ) {
-                        token.type = keyword->second;
-                    }
-                    is_.get(c_);
-                }
-
-                // Identifier can also include digit or underscore
-                while( isalpha(c_) || isdigit(c_) || c_ == '_' ) {
-                    token.type = Tokentype::Identifier;
-                    token.lexeme.push_back(c_);
-                    is_.get(c_);
-                }
-                return;
-            }
-
-            // If no condition applies or returns,
-            // We assume token is unknown
-            match_unknown( token );
+    // Matching all possible numerical values encountered
+    // Regarded as int value unless fraction is encountered, then as real value
+    if( isdigit(c_) ) {
+        token.type = Tokentype::IntValue;
+        match_digit(token);
+        match_real(token);
+        return;
     }
+
+    // Matching all word values encountered that start with character or underscore
+    // Regarded as identifier unless it matches a known keyword (or "true"/"false") in Decaf's language in full
+    else if( isalpha(c_) || c_ == '_' ) {
+
+        while( isalpha(c_) ) {
+            token.type = Tokentype::Identifier;
+            token.lexeme.push_back(c_);
+            map<string, Tokentype>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
+            if ( keyword != KEYWORD_TOKENS.end() ) {
+                token.type = keyword->second;
+            }
+            is_.get(c_);
+        }
+
+        // Consume token as Identifier when digit or underscore is encountered as well
+        while( isalpha(c_) || isdigit(c_) || c_ == '_' ) {
+            token.type = Tokentype::Identifier;
+            token.lexeme.push_back(c_);
+            is_.get(c_);
+        }
+
+        return;
+    }
+
+    // Matching all the singleton tokens that can unambiguously be matched
+    // I.e. the tokens whose token type can be determined without having to look at next character in stream
+    map<int, Tokentype>::iterator singletonToken = SINGLETON_TOKENS.find(c_);
+    if ( singletonToken != SINGLETON_TOKENS.end() ) {
+        token.type = singletonToken->second;
+        token.lexeme.push_back(c_);
+        is_.get(c_);
+
+        return;
+    }
+
+    // Matching all the tokens that cannot unambiguously be matched
+    // I.e. the tokens whose token type can only be determined by looking at next character in stream
+    map<int, Ambigous_Token_Matches>::iterator ambigousToken = AMBIGOUS_TOKENS.find(c_);
+    if ( ambigousToken != AMBIGOUS_TOKENS.end() ) {
+
+        // Match first choice of token type
+        token.type = ambigousToken->second.first_match;
+        token.lexeme.push_back(c_);
+        is_.get(c_);
+
+        // If the second character that changes token type is encountered, match second choice of token type
+        if( c_ == ambigousToken->second.second ) {
+            token.type = ambigousToken->second.second_match;
+            token.lexeme.push_back(c_);
+            is_.get(c_);
+        }
+        return;
+    }
+
+    // If no condition applies or returns,
+    // We assume token is unknown
+    match_unknown( token );
 }
 
 /* Get lexer's name */
