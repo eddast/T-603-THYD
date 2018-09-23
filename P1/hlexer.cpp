@@ -237,7 +237,7 @@ void HLexer::get_next( Token& token )
                 is_.get(c_);
             }
             break;
-            
+
         default:
 
             // Matching all tokens that can unambiguously be matched
