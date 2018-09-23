@@ -16,15 +16,15 @@ class Program
      */
      static void main( )
      {
-        // Get GCD of two integer values 'first' and 'second'
-        int first = 400; int second = 4;
-        int gcd = calculate_gcd( first, second );
+        // Get GCD of two integer values 'intfirst' and 'intsecond'
+        int intfirst = 400; int intsecond = 4;
+        int gcd = calculate_gcd( intfirst, intsecond );
 
-        // Calculate sum of maximum of ten subsequent non negative numbers for 'second'
-        int sum_of_ten_subsequents = calculate_sum_of_ten_non_negative( second );
+        // Calculate sum of maximum of ten subsequent non negative numbers for 'intsecond'
+        int sum_of_ten_subsequents = calculate_sum_of_ten_non_negative( intsecond );
 
-        // Calculate factorial value of 'second'
-        int factorial = calculate_factorial( second );
+        // Calculate factorial value of 'intsecond'
+        int factorial = calculate_factorial( intsecond );
 
         // Calculate the sum of 1-10 in an array
         int sum_1_to_10 = sum_of_1_to_10_array( );
