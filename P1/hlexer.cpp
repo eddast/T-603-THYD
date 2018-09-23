@@ -1,12 +1,12 @@
-/************************************************
+/***********************************************************
  *      SC-T-603-THYD Fall 2018
  *      Assignment: Project part I
  *      Due: 24th of September 2018
- *      Part: Section 1 Handwritten Lexer
+ *      Part: Section 1 Handwritten Lexer (Implementation)
  *      Authors:
  *          Edda Pétursdóttir
  *          Edda Steinunn Rúnarsdóttir
- ************************************************/
+ *****************************************************+****/
 
 #include "hlexer.h"
 #include <map>
@@ -38,7 +38,7 @@ std::map<std::string, Tokentype> KEYWORD_TOKENS =
 };
 
 /* a struct of ambigous token matches */
-/* i.e. the first and second characters in ambigous prefix and their first and second choice token type matches */
+/* i.e. the first and second characters in ambiguous prefix and their first and second choice token type matches */
 struct Ambigous_Token_Matches {
     Ambigous_Token_Matches( int first, int second, Tokentype first_match, Tokentype second_match ) :
             first( first ), second( second ), first_match( first_match ), second_match( second_match ) {}

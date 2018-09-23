@@ -1,80 +1,182 @@
-/* multi
-line
-comment*/
+/***********************************************************
+ *      SC-T-603-THYD Fall 2018
+ *      Assignment: Project part I
+ *      Due: 24th of September 2018
+ *      Part:   Decaf Test File for Lexers
+ *              (Includes all tokens lexer recognizer)
+ *      Authors:
+ *          Edda Pétursdóttir
+ *          Edda Steinunn Rúnarsdóttir
+ **********************************************************/
 
-// Singleline comments
+class Program
+{
+    /*
+     * Runs main application of program
+     */
+     static void main( )
+     {
+        // Get GCD of two integer values 'intfirst' and 'intsecond'
+        int intfirst = 400; int intsecond = 4;
+        int gcd = calculate_gcd( intfirst, intsecond );
 
-class Program {
-    int i, j;
-    real number;
-    bool hehe = false;
+        // Calculate sum of maximum of ten subsequent non negative numbers for 'intsecond'
+        int sum_of_ten_subsequents = calculate_sum_of_ten_non_negative( intsecond );
 
-    static void main() {
-        i = 0;
-        j = 1;
-        k = 22;
+        // Calculate factorial value of 'intsecond'
+        int factorial = calculate_factorial( intsecond );
 
+        // Calculate the sum of 1-10 in an array
+        int sum_1_to_10 = sum_of_1_to_10_array( );
 
-        _jkjs99;
-        _09383;
-        jkdjld09902_
-        edda_829892_jesklhoehe9938939_i93803jhks
+        // Get largest of four real values
+        real _val1 = 13.37E+1337;   // Has optional exponent part with optional '+'
+        real _val2 = 13.37E-1337;   // Has optional exponent part with optional '-'
+        real _val3 = 13.37E23;      // Has optional exponent part without '+' or '-'
+        real _val4 = 13.37;         // No optional exponent part
+        real largest = get_largest_of_four_distinct_numbers( _val1, _val2, _val3, _val4 );
 
-        03_edda &
+        // Get mean value of three real values
+        real mean = calculate_mean_of_three( _val1, _val2, _val3 );
 
-
-        if ( i < j ) {
-           number = 12.34;
+        // Check whether this year is a leap year
+        // Then check if next year is a leap year
+        // If neither years are leap years, check whether previous year is a leap year
+        int year = 2018;
+        bool is_leap_now = is_leap_year ( year );
+        bool is_leap_next = is_leap_year ( year+1 );
+        if( !(is_leap_now || is_leap_next) ) {
+            bool is_leap_previous = is_leap_year ( year-1 );
         }
-        /* this multiline comment contains some weird symbols! % # $ &7819*__ 2"
-            and also some newlines!
-            */
-        else {
-           number = 12.34E+7;
-           number = 12.3E-BB;
-           12BBEE;
-        }
-        i = i * j;
+     }
 
-         public double slopeTo(Point that) {
-            // (y1 − y0)/(x1 − x0)
-
-            // Degenerate line (between point and itself)
-            if(xequals && yequals) {
-                return Double.NEGATIVE_INFINITY;
-            }
-            // Vertical line
-            if(xequals) {
-                return Double.POSITIVE_INFINITY;
-                head.setData()
-            }
-            // Horizontal line
-            if(yequals) {
-                return 0;
-            }
-
-            class Example {
-                void main() {
-                    int x; int y;
-                    x = read();
-                    y = read();
-                    print(gcd(x, y));
-                }
-                int gcd(int a, int b) {
-                    if ( b == 0 )
-                        hehe = !hehe;
-                        return a;
-
-                    else if ( j != k ) {
-                        return k;
-                    }
-                    else
-                        return gcd(b, a % b);
-                }
-            }
-
-
-            return ((double) y)/x;
-        }
+    /*
+     * Calculates the greatest common denominator between two numbers
+     *
+     * @param a left-hand side integer to calculate gcd
+     * @param b right-hand side integer to calculate gcd
+     * @returns the greatest common demoniator of a and b
+     */
+    static int calculate_gcd( int a, int b )
+    {
+        if ( b == 0 ) return a;
+        else return calculate_gcd( b, a % b );
     }
+
+    /*
+     * Calculates the sum of numbers 1-10 stored in an array in reverse order
+     * i.e. starts iterating from end of array to the beginning
+     *
+     * @returns the sum of all numbers in the range 1-10 (55)
+     */
+    public static int sum_of_1_to_10_array( )
+    {
+        int sum = 0;
+        int array[10] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        for( int i = 9; i >= 0; i-- ) {
+         	 sum = sum + array[i];
+        }
+        return sum;
+    }
+
+    /* Calculates the sum of n to n's maximum of ten subsequent numbers
+    * But skips negative numbers from calculation
+    * Will also stop adding to sum for any number above the number 30000
+    *
+    * @param n starting point number to calculate sum from
+    * @returns the sum of 10 subsequent non-negative numbers from n
+    */
+    static int calculate_sum_of_ten_non_negative( int n )
+    {
+        int sum = 0;
+        for( int i = 0; i < 10; i++ ) {
+            n++;
+
+            // Skip negative numbers and stop calculation if n is larger than 3000
+            if( n < 0 ) continue;
+            if( n > 30000 ) break;
+
+            // Otherwise add n to the sum
+            sum = sum + n; n++;
+        }
+        return sum;
+    }
+
+    /*
+     * Calculates factorial for int value
+     *
+     * @param number integer to calculate factorial of
+     * @returns the factorial of parameter number
+     */
+    static int calculate_factorial( int number )
+    {
+      int factorial = 1;
+      for( int i = 1; i <= number; i++ ) factorial = factorial * i;
+
+      return factorial;
+    }
+
+    /*
+     * Returns the largest of three distinct real numbers
+     *
+     * @param a real value
+     * @param b real value
+     * @param c real value
+     * @param d real value
+     * @returns the largest number among a,b and c if they are distinct values, otherwise 0
+     */
+    static real get_largest_of_four_distinct_numbers( real a, real b, real c, real d )
+    {
+        // Numbers must all be distinct for function to work
+        if( a != b && a != c && b != c ) {
+            if( a >= b && c <= a ) return a;
+            else if ( b >= a && c <= b ) return b;
+            else return c;
+        }
+        return 0;
+    }
+
+    /*
+     * Calculates the mean value of three real values
+     *
+     * @param one real value
+     * @param two real value
+     * @param three real value
+     * @returns real value, the mean value of the three parameter values
+     */
+    real calculate_mean_of_three( real one, real two, real three )
+    {
+        real sum = one + two + three;
+        real mean = sum/3;
+        return sum/3;
+    }
+
+    /*
+     * Determines whether year is a leap year
+     *
+     * @param year to determine whether it is a leap year
+     * @returns bool, true if year is a leap year false otherwise
+     */
+    static bool is_leap_year( int year )
+    {
+        bool _is_leap = false;
+
+        if( year % 4 != 0 ) _is_leap = false;
+        else if( year % 100 == 0 ) {
+            if ( year % 400 == 0) _is_leap = true;
+            else _is_leap = false;
+        } else _is_leap = true;
+
+        return _is_leap;
+    }
+
+    /*
+     * A function that would not compile in theory: TESTING ERROR TOKENS
+     * All tokens in this function are not recognized (i.e. ErrUnknown tokens)
+     * such as # $ & and a badly-formatted real value
+     */
+     static void WOULD_NOT_COMPILE_TESTING_ERROR_TOKENS( )
+     {
+        # $ & 13.37EB
+     }
 }
