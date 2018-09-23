@@ -1,4 +1,5 @@
 // SC-T-603-THYD Fall 2018. Project part I.
+#include <map>
 #include "hlexer.h"
 
 using namespace std;
@@ -11,7 +12,7 @@ HLexer::HLexer( std::istream& is  )
 }
 
 /* A map of all characters and their token types that can be determined unrelated to next token */
-std::map<int, Tokentype> SINGLETON_TOKENS =
+map<int, Tokentype> SINGLETON_TOKENS =
 {
     {'{', Tokentype::ptLBrace},     {'}', Tokentype::ptRBrace},     {'[', Tokentype::ptLBracket},
     {']', Tokentype::ptRBracket},   {'(', Tokentype::ptLParen},     {')', Tokentype::ptRParen},
@@ -20,17 +21,25 @@ std::map<int, Tokentype> SINGLETON_TOKENS =
 };
 
 /* A map of all keywords Decaf recognizes and their token types */
-std::map<std::string, Tokentype> KEYWORD_TOKENS =
+map<std::string, Tokentype> KEYWORD_TOKENS =
 {
-    {'class', Tokentype::kwClass},      {'static', Tokentype::kwStatic},    {'void', Tokentype::kwVoid},
-    {'if', Tokentype::kwIf},            {'else', Tokentype::kwElse},        {'for', Tokentype::kwFor},
-    {'return', Tokentype::kwReturn},    {'break', Tokentype::kwBreak},      {'continue', Tokentype::kwContinue},
-    {'int', Tokentype::kwInt},          {'real', Tokentype::kwReal},        {'bool', Tokentype::kwBool},
-    {'true', Tokentype::BoolValue},     {'false', Tokentype::BoolValue},
+    {"class", Tokentype::kwClass},      {"static", Tokentype::kwStatic},    {"void", Tokentype::kwVoid},
+    {"if", Tokentype::kwIf},            {"else", Tokentype::kwElse},        {"for", Tokentype::kwFor},
+    {"return", Tokentype::kwReturn},    {"break", Tokentype::kwBreak},      {"continue", Tokentype::kwContinue},
+    {"int", Tokentype::kwInt},          {"real", Tokentype::kwReal},        {"bool", Tokentype::kwBool},
+    {"true", Tokentype::BoolValue},     {"false", Tokentype::BoolValue},
 };
 
+/* Initializes token */
+void initialize_token ( Token& token, int line_no_ )
+{
+    token.lexeme.clear();
+    token.line = line_no_;
+    token.type = Tokentype::ErrUnknown;
+}
+
 /* Strips input of whitespaces */
-void HLexer::strip_whitespaces( Token& token )
+void HLexer::strip_whitespace( Token& token )
 {
     while ( is_.good() && isspace(c_) ) {
         if ( c_ == '\n' ) { ++line_no_; }
@@ -41,7 +50,8 @@ void HLexer::strip_whitespaces( Token& token )
 /* Strips input of a multi line comment */
 void HLexer::strip_multi_line_comment( Token& token )
 {
-    initialize_token( token );
+    /* token should be re-initialized */
+    initialize_token( token, line_no_ );
     while( true ) {
         if ( c_ == '\n' ) { ++line_no_; }
         if(c_ == '*'){
@@ -52,13 +62,13 @@ void HLexer::strip_multi_line_comment( Token& token )
             }
         }
         c_ = is_.get();
-        strip_whitespaces();
+        strip_whitespace( token );
     }
 }
 /* Strips input of a single line comment */
 void HLexer::strip_single_line_comment( Token& token )
 {
-    initialize_token( token );
+    initialize_token( token, line_no_ );
     while ( true ) {
         if(c_ == '\n'){
             ++line_no_;
@@ -67,7 +77,7 @@ void HLexer::strip_single_line_comment( Token& token )
         }
         c_ = is_.get();
     }
-    strip_whitespaces();
+    strip_whitespace( token );
 }
 
 /* Matches token as an unknown token */
@@ -119,14 +129,6 @@ void HLexer::match_real( Token& token )
     match_error(token);
 }
 
-/* Initializes token */
-void initialize_token ( Token& token )
-{
-    token.lexeme.clear();
-    token.line = line_no_;
-    token.type = Tokentype::ErrUnknown;
-}
-
 /* Match and scan type of next token */
 void HLexer::get_next( Token& token )
 {
@@ -137,10 +139,10 @@ void HLexer::get_next( Token& token )
     }
 
     // Initialize token for next iteration
-    initialize_token( token );
+    initialize_token( token, line_no_ );
 
     // Strip whitespaces encountered
-    strip_whitespaces( token );
+    strip_whitespace( token );
 
     switch ( c_ ) {
 
@@ -242,7 +244,7 @@ void HLexer::get_next( Token& token )
 
             // Matching all tokens that can unambiguously be matched
             // I.e. singleton tokens whose token type can be determined without looking at next character
-            std::map<char,int>::iterator singletonToken = SINGLETON_TOKENS.find(c_);
+            std::map<int,Tokentype>::iterator singletonToken = SINGLETON_TOKENS.find(c_);
             if ( singletonToken != SINGLETON_TOKENS.end() ) {
                 token.type = singletonToken->second;
                 token.lexeme.push_back(c_);
@@ -268,7 +270,7 @@ void HLexer::get_next( Token& token )
                     token.lexeme.push_back(c_);
 
                     // Match lexeme as a keyword token if appropriate
-                    std::map<char,int>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
+                    std::map<std::string, Tokentype>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
                     if ( keyword != KEYWORD_TOKENS.end() ) {
                         token.type = keyword->second;
                     }

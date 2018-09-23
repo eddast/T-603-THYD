@@ -15,7 +15,6 @@ public:
     virtual void match_error( Token& token );
     virtual void match_digit( Token& token );
     virtual void match_real( Token& token );
-    virtual void match_keyword( Token& token );
 
 
     virtual ~HLexer();
