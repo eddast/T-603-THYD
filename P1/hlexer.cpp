@@ -3,12 +3,31 @@
 
 using namespace std;
 
-/* Initilize Lexer with input stream and line number */
+/* Initialize Lexer with input stream and line number */
 HLexer::HLexer( std::istream& is  )
     : Lexer( is ), line_no_(1)
 {
     is_.get( c_ );
 }
+
+/* A map of all characters and their token types that can be determined unrelated to next token */
+std::map<int, Tokentype> SINGLETON_TOKENS =
+{
+    {'{', Tokentype::ptLBrace},     {'}', Tokentype::ptRBrace},     {'[', Tokentype::ptLBracket},
+    {']', Tokentype::ptRBracket},   {'(', Tokentype::ptLParen},     {')', Tokentype::ptRParen},
+    {';', Tokentype::ptSemicolon},  {',', Tokentype::ptComma},      {'*', Tokentype::OpArtMult},
+    {'%', Tokentype::OpArtModulus}
+};
+
+/* A map of all keywords Decaf recognizes and their token types */
+std::map<std::string, Tokentype> KEYWORD_TOKENS =
+{
+    {'class', Tokentype::kwClass},      {'static', Tokentype::kwStatic},    {'void', Tokentype::kwVoid},
+    {'if', Tokentype::kwIf},            {'else', Tokentype::kwElse},        {'for', Tokentype::kwFor},
+    {'return', Tokentype::kwReturn},    {'break', Tokentype::kwBreak},      {'continue', Tokentype::kwContinue},
+    {'int', Tokentype::kwInt},          {'real', Tokentype::kwReal},        {'bool', Tokentype::kwBool},
+    {'true', Tokentype::BoolValue},     {'false', Tokentype::BoolValue},
+};
 
 /* Strips input of whitespaces */
 void HLexer::strip_whitespaces( Token& token )
@@ -19,7 +38,7 @@ void HLexer::strip_whitespaces( Token& token )
     }
 }
 
-/* Strips input of multi line comment */
+/* Strips input of a multi line comment */
 void HLexer::strip_multi_line_comment( Token& token )
 {
     initialize_token( token );
@@ -36,7 +55,7 @@ void HLexer::strip_multi_line_comment( Token& token )
         strip_whitespaces();
     }
 }
-/* Strips input of single line comments */
+/* Strips input of a single line comment */
 void HLexer::strip_single_line_comment( Token& token )
 {
     initialize_token( token );
@@ -47,8 +66,8 @@ void HLexer::strip_single_line_comment( Token& token )
             break;
         }
         c_ = is_.get();
-        strip_whitespaces();
     }
+    strip_whitespaces();
 }
 
 /* Matches token as an unknown token */
@@ -100,7 +119,7 @@ void HLexer::match_real( Token& token )
     match_error(token);
 }
 
-/* Initilizes token */
+/* Initializes token */
 void initialize_token ( Token& token )
 {
     token.lexeme.clear();
@@ -128,57 +147,12 @@ void HLexer::get_next( Token& token )
         // Encountering a '/' can denote either division operator if standalone
         // Or syntax comments in case of another '*' or '/' in which are stripped
         case '/':
-
             token.type = Tokentype::OpArtDiv;
             token.lexeme.push_back(c_);
             is_.get(c_);
-
             if( c_ == '*' ) strip_multi_line_comment(token);
             else if( c_ == '/' ) strip_single_line_comment(token);
             else break;
-
-        /* Punctuation */
-        case '{':
-            token.type = Tokentype::ptLBrace;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-        case '}':
-            token.type = Tokentype::ptRBrace;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-        case '[':
-            token.type = Tokentype::ptLBracket;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-        case ']':
-            token.type = Tokentype::ptRBracket;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-        case '(':
-            token.type = Tokentype::ptLParen;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-        case ')':
-            token.type = Tokentype::ptRParen;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-        case ';':
-            token.type = Tokentype::ptSemicolon;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-        case ',':
-            token.type = Tokentype::ptComma;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-
             /* Logical operators */
         case '&':
             token.lexeme.push_back(c_);
@@ -263,63 +237,54 @@ void HLexer::get_next( Token& token )
                 is_.get(c_);
             }
             break;
-        case '*':
-            token.type = Tokentype::OpArtMult;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-        case '%':
-            token.type = Tokentype::OpArtModulus;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            break;
-
-
-
+            
         default:
+
+            // Matching all tokens that can unambiguously be matched
+            // I.e. singleton tokens whose token type can be determined without looking at next character
+            std::map<char,int>::iterator singletonToken = SINGLETON_TOKENS.find(c_);
+            if ( singletonToken != SINGLETON_TOKENS.end() ) {
+                token.type = singletonToken->second;
+                token.lexeme.push_back(c_);
+                is_.get(c_);
+                return;
+            }
 
             // Matching all possible numerical values encountered
             // Regarded as int value unless fraction is encountered, then as real value
-            if( isdigit(c_) ) {
+            else if( isdigit(c_) ) {
                 token.type = Tokentype::IntValue;
                 match_digit(token);
                 match_real(token);
                 return;
             }
 
-            // Matching all word values encountered
+            // Matching all word values encountered that start with character or underscore
             // Regarded as identifier unless it matches a known keyword in language in full
-            else if ( isalpha(c_) || (c_ == '_') ) {
+            else if( isalpha(c_) || c_ == '_' ) {
 
-                while( isalpha(c_) ){
-
+                while( isalpha(c_) ) {
                     token.type = Tokentype::Identifier;
                     token.lexeme.push_back(c_);
 
-                    if( token.lexeme == "class"){ token.type = Tokentype::kwClass; }
-                    if( token.lexeme == "static"){ token.type = Tokentype::kwStatic; }
-                    if( token.lexeme == "void"){ token.type = Tokentype::kwVoid; }
-                    if( token.lexeme == "if"){ token.type = Tokentype::kwIf;}
-                    if( token.lexeme == "else"){ token.type = Tokentype::kwElse; }
-                    if( token.lexeme == "for"){ token.type = Tokentype::kwFor; }
-                    if( token.lexeme == "return"){ token.type = Tokentype::kwReturn; }
-                    if( token.lexeme == "break"){ token.type = Tokentype::kwBreak; }
-                    if( token.lexeme == "continue"){ token.type = Tokentype::kwContinue; }
-                    if( token.lexeme == "int"){ token.type = Tokentype::kwInt; }
-                    if( token.lexeme == "real"){ token.type = Tokentype::kwReal; }
-                    if( token.lexeme == "bool"){ token.type = Tokentype::kwBool; }
-                    if( token.lexeme == "true"){ token.type = Tokentype::BoolValue; }
-                    if( token.lexeme == "false"){ token.type = Tokentype::BoolValue; }
-
+                    // Match lexeme as a keyword token if appropriate
+                    std::map<char,int>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
+                    if ( keyword != KEYWORD_TOKENS.end() ) {
+                        token.type = keyword->second;
+                    }
                     is_.get(c_);
                 }
-                while( isalpha(c_) || isdigit(c_) || (c_ == '_') ) {
+
+                // Identifier can also include digit or underscore
+                while( isalpha(c_) || isdigit(c_) || c_ == '_' ) {
                     token.type = Tokentype::Identifier;
                     token.lexeme.push_back(c_);
                     is_.get(c_);
                 }
                 return;
             }
+
+            // If no condition applies or returns, we assume token is an error
             match_error(token);
     }
 }
