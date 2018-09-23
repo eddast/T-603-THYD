@@ -1,8 +1,15 @@
-// SC-T-603-THYD Fall 2018. Project part I.
-#include <map>
-#include "hlexer.h"
+/************************************************
+ *      SC-T-603-THYD Fall 2018
+ *      Assignment: Project part I
+ *      Due: 24th of September 2018
+ *      Part: Section 1 Handwritten Lexer
+ *      Authors:
+ *          Edda Pétursdóttir
+ *          Edda Steinunn Rúnarsdóttir
+ ************************************************/
 
-using namespace std;
+#include "hlexer.h"
+#include <map>
 
 /* Initialize Lexer with input stream and line number */
 HLexer::HLexer( std::istream& is  )
@@ -12,7 +19,7 @@ HLexer::HLexer( std::istream& is  )
 }
 
 /* A map of all characters to their token types that can be determined unrelated to next token */
-map<int, Tokentype> SINGLETON_TOKENS =
+std::map<int, Tokentype> SINGLETON_TOKENS =
 {
     {'{', Tokentype::ptLBrace},     {'}', Tokentype::ptRBrace},     {'[', Tokentype::ptLBracket},
     {']', Tokentype::ptRBracket},   {'(', Tokentype::ptLParen},     {')', Tokentype::ptRParen},
@@ -21,7 +28,7 @@ map<int, Tokentype> SINGLETON_TOKENS =
 };
 
 /* A map of all keywords Decaf recognizes to their token types */
-map<std::string, Tokentype> KEYWORD_TOKENS =
+std::map<std::string, Tokentype> KEYWORD_TOKENS =
 {
     {"class", Tokentype::kwClass},      {"static", Tokentype::kwStatic},    {"void", Tokentype::kwVoid},
     {"if", Tokentype::kwIf},            {"else", Tokentype::kwElse},        {"for", Tokentype::kwFor},
@@ -42,16 +49,16 @@ struct Ambigous_Token_Matches {
 };
 
 /* A map of all sets of characters and their token types that cannot be determined unrelated to next token */
-map<int, Ambigous_Token_Matches> AMBIGOUS_TOKENS =
+std::map<int, Ambigous_Token_Matches> AMBIGOUS_TOKENS =
 {
-    {'&', Ambigous_Token_Matches('&', '&', Tokentype::ErrUnknown, Tokentype::OpLogAnd)},
-    {'|', Ambigous_Token_Matches('|', '|', Tokentype::ErrUnknown, Tokentype::OpLogOr)},
-    {'=', Ambigous_Token_Matches('=', '=', Tokentype::OpAssign, Tokentype::OpRelEQ)},
-    {'!', Ambigous_Token_Matches('!', '=', Tokentype::OpLogNot, Tokentype::OpRelNEQ)},
-    {'<', Ambigous_Token_Matches('<', '=', Tokentype::OpRelLT, Tokentype::OpRelLTE)},
-    {'>', Ambigous_Token_Matches('>', '=', Tokentype::OpRelGT, Tokentype::OpRelGTE)},
-    {'+', Ambigous_Token_Matches('+', '+', Tokentype::OpArtPlus, Tokentype::OpArtInc)},
-    {'-', Ambigous_Token_Matches('-', '-', Tokentype::OpArtMinus, Tokentype::OpArtDec)},
+    {'&',    Ambigous_Token_Matches('&', '&', Tokentype::ErrUnknown, Tokentype::OpLogAnd)},
+    {'|',    Ambigous_Token_Matches('|', '|', Tokentype::ErrUnknown, Tokentype::OpLogOr)},
+    {'=',    Ambigous_Token_Matches('=', '=', Tokentype::OpAssign, Tokentype::OpRelEQ)},
+    {'!',    Ambigous_Token_Matches('!', '=', Tokentype::OpLogNot, Tokentype::OpRelNEQ)},
+    {'<',    Ambigous_Token_Matches('<', '=', Tokentype::OpRelLT, Tokentype::OpRelLTE)},
+    {'>',    Ambigous_Token_Matches('>', '=', Tokentype::OpRelGT, Tokentype::OpRelGTE)},
+    {'+',    Ambigous_Token_Matches('+', '+', Tokentype::OpArtPlus, Tokentype::OpArtInc)},
+    {'-',    Ambigous_Token_Matches('-', '-', Tokentype::OpArtMinus, Tokentype::OpArtDec)},
 };
 
 /* Initializes token */
@@ -151,6 +158,8 @@ void HLexer::match_real( Token& token )
         }
         else return;
     }
+
+    // If real value is badly formatted, i.e. includes alphabetic letters or something (f.x. 12EEBB, raise error
     match_unknown(token);
 }
 
@@ -197,7 +206,7 @@ void HLexer::get_next( Token& token )
         while( isalpha(c_) ) {
             token.type = Tokentype::Identifier;
             token.lexeme.push_back(c_);
-            map<string, Tokentype>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
+            std::map<std::string, Tokentype>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
             if ( keyword != KEYWORD_TOKENS.end() ) {
                 token.type = keyword->second;
             }
@@ -216,7 +225,7 @@ void HLexer::get_next( Token& token )
 
     // Matching all the singleton tokens that can unambiguously be matched
     // I.e. the tokens whose token type can be determined without having to look at next character in stream
-    map<int, Tokentype>::iterator singletonToken = SINGLETON_TOKENS.find(c_);
+    std::map<int, Tokentype>::iterator singletonToken = SINGLETON_TOKENS.find(c_);
     if ( singletonToken != SINGLETON_TOKENS.end() ) {
         token.type = singletonToken->second;
         token.lexeme.push_back(c_);
@@ -227,7 +236,7 @@ void HLexer::get_next( Token& token )
 
     // Matching all the tokens that cannot unambiguously be matched
     // I.e. the tokens whose token type can only be determined by looking at next character in stream
-    map<int, Ambigous_Token_Matches>::iterator ambigousToken = AMBIGOUS_TOKENS.find(c_);
+    std::map<int, Ambigous_Token_Matches>::iterator ambigousToken = AMBIGOUS_TOKENS.find(c_);
     if ( ambigousToken != AMBIGOUS_TOKENS.end() ) {
 
         // Match first choice of token type
@@ -241,6 +250,7 @@ void HLexer::get_next( Token& token )
             token.lexeme.push_back(c_);
             is_.get(c_);
         }
+
         return;
     }
 

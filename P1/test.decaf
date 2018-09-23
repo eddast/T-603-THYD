@@ -28,7 +28,9 @@ class Program {
             and also some newlines!
             */
         else {
-           number = 12.34E+7
+           number = 12.34E+7;
+           number = 12.3E-BB;
+           12BBEE;
         }
         i = i * j;
 

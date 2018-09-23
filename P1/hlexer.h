@@ -7,6 +7,7 @@
 class HLexer : public Lexer {
 public:
     HLexer( std::istream& is );
+
     virtual void get_next( Token& token );
     virtual std::string get_name() const;
     virtual void strip_whitespace( Token& token );
@@ -15,7 +16,6 @@ public:
     virtual void match_unknown( Token& token );
     virtual void match_digit( Token& token );
     virtual void match_real( Token& token );
-
 
     virtual ~HLexer();
 private:

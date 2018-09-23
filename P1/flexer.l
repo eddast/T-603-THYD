@@ -2,7 +2,7 @@
  * SC-T-603-THYD Fall 2018
  * Assignment: Project part I
  * Due: 24th of September 2018
- * Part: section 2 flexer
+ * Part: Section 2 - Flexer
  * Authors:
  *  Edda Pétursdóttir
  *  Edda Steinunn Rúnarsdóttir
