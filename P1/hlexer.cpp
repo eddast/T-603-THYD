@@ -73,7 +73,10 @@ void initialize_token ( Token& token, int line_no_ )
 void HLexer::strip_whitespace( Token& token )
 {
     while ( is_.good() && isspace(c_) ) {
-        if ( c_ == '\n' ) { ++line_no_; }
+        if ( c_ == '\n' ) {
+            ++line_no_;
+            token.line = line_no_;
+        }
         is_.get(c_);
     }
 }
@@ -84,7 +87,10 @@ void HLexer::strip_multi_line_comment( Token& token )
     /* token should be re-initialized */
     initialize_token( token, line_no_ );
     while( true ) {
-        if( c_ == '\n' ) { ++line_no_; }
+        if( c_ == '\n' ) {
+            ++line_no_;
+            token.line = line_no_;
+        }
         if( c_ == '*' ) {
             c_ = is_.get();
             if(c_ == '/'){
@@ -105,6 +111,7 @@ void HLexer::strip_single_line_comment( Token& token )
     while ( true ) {
         if(c_ == '\n') {
             ++line_no_;
+            token.line = line_no_;
             c_ = is_.get();
             break;
         }
