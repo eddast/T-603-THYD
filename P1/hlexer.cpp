@@ -84,17 +84,18 @@ void HLexer::strip_multi_line_comment( Token& token )
     /* token should be re-initialized */
     initialize_token( token, line_no_ );
     while( true ) {
-        if ( c_ == '\n' ) { ++line_no_; }
-        if(c_ == '*'){
+        if( c_ == '\n' ) { ++line_no_; }
+        if( c_ == '*' ) {
             c_ = is_.get();
             if(c_ == '/'){
                 c_ = is_.get();
                 break;
             }
+        } else {
+            c_ = is_.get();
         }
-        c_ = is_.get();
-        strip_whitespace( token );
     }
+    strip_whitespace( token );
 }
 
 /* Strips input of a single line comment */
@@ -102,7 +103,7 @@ void HLexer::strip_single_line_comment( Token& token )
 {
     initialize_token( token, line_no_ );
     while ( true ) {
-        if(c_ == '\n'){
+        if(c_ == '\n') {
             ++line_no_;
             c_ = is_.get();
             break;
@@ -181,7 +182,7 @@ void HLexer::get_next( Token& token )
     // Encountering a '/' is a special case:
     // Can denote division operator if stand-alone
     // Can denote comment in case of following '*' or '/'
-    if( c_ == '/' ) {
+    while( c_ == '/' ) {
         token.type = Tokentype::OpArtDiv;
         token.lexeme.push_back(c_);
         is_.get(c_);
