@@ -12,7 +12,7 @@ public:
     virtual void strip_whitespace( Token& token );
     virtual void strip_multi_line_comment( Token& token );
     virtual void strip_single_line_comment( Token& token );
-    virtual void match_error( Token& token );
+    virtual void match_unknown( Token& token );
     virtual void match_digit( Token& token );
     virtual void match_real( Token& token );
 

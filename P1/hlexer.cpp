@@ -81,7 +81,7 @@ void HLexer::strip_single_line_comment( Token& token )
 }
 
 /* Matches token as an unknown token */
-void HLexer::match_error( Token& token )
+void HLexer::match_unknown( Token& token )
 {
     token.type = Tokentype::ErrUnknown;
     token.lexeme.push_back(c_);
@@ -126,7 +126,7 @@ void HLexer::match_real( Token& token )
         }
         else return;
     }
-    match_error(token);
+    match_unknown(token);
 }
 
 /* Match and scan type of next token */
@@ -144,17 +144,20 @@ void HLexer::get_next( Token& token )
     // Strip whitespaces encountered
     strip_whitespace( token );
 
+    // Encountering a '/' is a special case:
+    // Can denote division operator if stand-alone
+    // Can denote comment in case of following '*' or '/'
+    if( c_ == '/' ) {
+        token.type = Tokentype::OpArtDiv;
+        token.lexeme.push_back(c_);
+        is_.get(c_);
+        if (c_ == '*')      {   strip_multi_line_comment(token);    }
+        else if (c_ == '/') {   strip_single_line_comment(token);   }
+        else return;
+    }
+
     switch ( c_ ) {
 
-        // Encountering a '/' can denote either division operator if standalone
-        // Or syntax comments in case of another '*' or '/' in which are stripped
-        case '/':
-            token.type = Tokentype::OpArtDiv;
-            token.lexeme.push_back(c_);
-            is_.get(c_);
-            if( c_ == '*' ) strip_multi_line_comment(token);
-            else if( c_ == '/' ) strip_single_line_comment(token);
-            else break;
             /* Logical operators */
         case '&':
             token.lexeme.push_back(c_);
@@ -270,7 +273,7 @@ void HLexer::get_next( Token& token )
                     token.lexeme.push_back(c_);
 
                     // Match lexeme as a keyword token if appropriate
-                    std::map<std::string, Tokentype>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
+                    map<string, Tokentype>::iterator keyword = KEYWORD_TOKENS.find(token.lexeme);
                     if ( keyword != KEYWORD_TOKENS.end() ) {
                         token.type = keyword->second;
                     }
@@ -286,8 +289,9 @@ void HLexer::get_next( Token& token )
                 return;
             }
 
-            // If no condition applies or returns, we assume token is an error
-            match_error(token);
+            // If no condition applies or returns,
+            // We assume token is unknown
+            match_unknown( token );
     }
 }
 
