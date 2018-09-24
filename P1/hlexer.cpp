@@ -84,17 +84,28 @@ void HLexer::strip_whitespace( Token& token )
 /* Strips out comments */
 void HLexer::strip_multi_line_comment( Token& token )
 {
-    /* token should be re-initialized */
-    initialize_token( token, line_no_ );
     while( true ) {
+        token.lexeme.push_back(c_);
         if( c_ == '\n' ) {
             ++line_no_;
             token.line = line_no_;
         }
+        // End of file encountered means comment wasn't ended (ERROR)
+        if(!is_.good()) {
+            token.type = Tokentype::ErrUnknown;
+            break;
+        }
         if( c_ == '*' ) {
             c_ = is_.get();
+            // End of file encountered means comment wasn't ended (ERROR)
+            if(!is_.good()) {
+                token.type = Tokentype::ErrUnknown;
+                break;
+            }
+            // end of multiline comment
             if(c_ == '/'){
                 c_ = is_.get();
+                initialize_token( token, line_no_ ); // Token re-initialized
                 break;
             }
         } else {
@@ -124,8 +135,6 @@ void HLexer::strip_single_line_comment( Token& token )
 void HLexer::match_unknown( Token& token )
 {
     token.type = Tokentype::ErrUnknown;
-    token.lexeme.push_back(c_);
-    is_.get(c_);
 }
 
 /* Helper function, matches and adds a digit [0-9]+ */
@@ -160,7 +169,10 @@ void HLexer::match_real( Token& token )
             }
             if( isdigit(c_) ) {
                 token.type = Tokentype::RealValue;
-                match_digit(token);
+                while( isdigit(is_.peek()) ) {
+                    c_ = is_.get();
+                    token.lexeme.push_back(c_);
+                }
                 return;
             }
         }
@@ -265,6 +277,8 @@ void HLexer::get_next( Token& token )
     // If no condition applies or returns,
     // We assume token is unknown
     match_unknown( token );
+    token.lexeme.push_back(c_);
+    is_.get(c_);
 }
 
 /* Get lexer's name */

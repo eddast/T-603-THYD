@@ -30,11 +30,11 @@ class Program
         int sum_1_to_10 = sum_of_1_to_10_array( );
 
         // Get largest of four real values
-        real _val1 = 13.37E+1337;   // Has optional exponent part with optional '+'
+        /*real _val1 = 13.37E+1337;   // Has optional exponent part with optional '+'
         real _val2 = 13.37E-1337;   // Has optional exponent part with optional '-'
         real _val3 = 13.37E23;      // Has optional exponent part without '+' or '-'
         real _val4 = 13.37;         // No optional exponent part
-        real largest = get_largest_of_four_distinct_numbers( _val1, _val2, _val3, _val4 );
+        real largest = get_largest_of_four_distinct_numbers( _val1, _val2, _val3, _val4 );*/
 
         // Get mean value of three real values
         real mean = calculate_mean_of_three( _val1, _val2, _val3 );
