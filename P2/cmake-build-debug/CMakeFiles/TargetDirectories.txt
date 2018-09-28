@@ -1,0 +1,3 @@
+/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/CMakeFiles/DecafParser.dir
