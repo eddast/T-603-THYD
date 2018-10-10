@@ -9,7 +9,7 @@ class Program {
     bool b;
     int a[10];
 
-    /* Commented out for new, until parser can handle the code.
+    /* Commented out for new, until parser can handle the code.*/
     static int myFunc( int n ) {
         n = n * 2.1E-3;
         return n;
@@ -18,7 +18,7 @@ class Program {
     static void main() {
        int n;
 
-       i = myFunc(3);
+       /*i = myFunc(3);*/
        i++;
 
        if ( i > 2 ) {
@@ -29,8 +29,7 @@ class Program {
        }
 
        for ( n=0 ; n<5; n++ ) {
-            myFunc( n );
+            /* myFunc( n ); */
        }
     }
-    */
 }

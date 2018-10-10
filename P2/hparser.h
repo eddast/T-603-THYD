@@ -121,12 +121,40 @@ public:
     virtual std::string get_name() const override { return "Handmade"; }
 
 private:
-
-    // Add your private functions and variables here below ...
     ProgramNode* program();
     std::list<VariableDeclarationNode*>* variable_declarations();
     std::list<VariableNode*>* variable_list();
     VariableNode* variable();
+    VariableExprNode* variable_expr();
+    AssignStmNode* variable_assignment_expr();
     ValueType type();
+    std::list<MethodNode*>* method_declarations();
+    MethodNode* method_declaration();
+    ValueType method_return_type();
+    std::list<ParameterNode*>* parameters();
+    std::list<ParameterNode*>* parameter_list();
+    IncrDecrStmNode* inc_dec_statement();
+    std::list<StmNode*>* statement_list();
+    StmNode* statement();
+    StmNode* id_start_stm();
+    BlockStmNode* statement_block();
+    BlockStmNode* optional_else();
+    std::list<ExprNode*>* expr_list();
+    std::list<ExprNode*>* more_expr( std::list<ExprNode*>* &list_ex );
+    ExprNode* expr();
+    ExprNode* expr2( ExprNode* lhs );
+    ExprNode* expr_and();
+    ExprNode* expr_and2( ExprNode* lhs );
+    ExprNode* expr_eq();
+    ExprNode* expr_eq2( ExprNode* lhs );
+    ExprNode* expr_rel();
+    ExprNode* expr_rel2( ExprNode* lhs );
+    ExprNode* expr_add();
+    ExprNode* expr_add2( ExprNode* lhs );
+    ExprNode* expr_mult();
+    ExprNode* expr_mult2( ExprNode* lhs );
+    ExprNode* expr_unary();
+    ExprNode* factor();
+    ExprNode* value();
 };
 #endif //DECAFPARSER_HPARSER_H
