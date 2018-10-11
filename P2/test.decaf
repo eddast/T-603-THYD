@@ -18,7 +18,7 @@ class Program {
     static void main() {
        int n;
 
-       /*i = myFunc(3);*/
+       i = myFunc(3);
        i++;
 
        if ( i > 2 ) {
@@ -29,7 +29,7 @@ class Program {
        }
 
        for ( n=0 ; n<5; n++ ) {
-            /* myFunc( n ); */
+            myFunc( n );
        }
     }
 }

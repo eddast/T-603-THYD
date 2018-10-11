@@ -151,6 +151,7 @@ HParser::variable_assignment_expr()
     }
     match( decaf::token_type::OpAssign );
     auto rhs = expr();
+    match( decaf::token_type::ptSemicolon );
     return new AssignStmNode( new VariableExprNode( lhs ), rhs );
 }
 
@@ -314,7 +315,6 @@ HParser::statement_list()
         match( decaf::token_type::kwFor );
         match( decaf::token_type::ptLParen );
         auto node_asstm = variable_assignment_expr();
-        match( decaf::token_type::ptSemicolon );
         auto node_ex = expr();
         match( decaf::token_type::ptSemicolon );
         auto node_inc_dec = inc_dec_statement();
@@ -379,6 +379,7 @@ HParser::statement_list()
         match( decaf::token_type::ptLParen );
         auto list_ex = expr_list();
         match( decaf::token_type::ptRParen );
+        match( decaf::token_type::ptSemicolon );
         return new MethodCallExprStmNode( name, list_ex );
     }
     // variable
@@ -429,7 +430,7 @@ HParser::statement_block()
 /**
  * Matches an optional else statement within program
  * optional_else ::= else statement_block | Ɛ
- * @return TODO
+ * @return block statement AST node for statement or null pointer if none is matched
  */
 BlockStmNode*
 HParser::optional_else()
@@ -725,15 +726,21 @@ HParser::factor()
         return node_ex;
     }
     else if( token_.type == decaf::token_type::Identifier ) {
+        string id = token_.lexeme;
+        match( decaf::token_type::Identifier );
         if( token_.type == decaf::token_type::ptLParen ) {
-            match( decaf::token_type::Identifier );
             match( decaf::token_type::ptLParen );
-            expr_list(); // TODO
+            auto list_ex = expr_list();
             match( decaf::token_type::ptRParen );
-            return nullptr; // TODO
+            return new MethodCallExprStmNode( id, list_ex );
         }
         else {
-            return variable_expr();
+            if ( token_.type == decaf::token_type::ptLBracket ) {
+                match( decaf::token_type::ptLBracket );
+                match( decaf::token_type::IntValue );
+                match( decaf::token_type::ptRBracket );
+            }
+            return new VariableExprNode( id );
         }
     }
     else if ( token_.type == decaf::token_type::IntValue ||
