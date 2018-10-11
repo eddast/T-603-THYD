@@ -74,16 +74,37 @@ class Parser;
 %token <std::string> BoolValue
 %token <std::string> ErrUnknown
 
-
+/*
 %type <std::list<VariableDeclarationNode*>*> variable_declarations
 %type <ValueType> type
 %type <std::list<VariableNode*>*> variable_list
 %type <VariableNode*> variable
+*/
+
+%type <ExprNode*> expr
+
+%left OpArtPlus OpArtMinus
+%left OpArtMult
+%right OpLogNot
 
 %%
 
 ////////////////////////////////////////////////////////////////////////////////////
 
+/***** IN CLASS CODE 11.10.18 ******/
+program: expr
+            { driver.set_AST( $1 ); }
+
+expr    :   expr OpArtPlus expr     { $$ = new PlusExprNode( $1, $3 ); }
+        |   expr OpArtMinus expr    { $$ = new MinusExprNode( $1, $3 ); }
+        |   expr OpArtMult expr     { $$ = new MultiplyExprNode( $1, $3 ); }
+        |   OpArtMinus expr          %prec OpLogNot
+                                    { $$ = new MinusExprNode( $2 ); }
+        |   IntValue                { $$ = new ValueExprNode( $1 ); }
+
+
+
+/*
 program: kwClass Identifier ptLBrace
              variable_declarations
          ptRBrace
@@ -104,6 +125,9 @@ variable_list: variable
 
 variable:  Identifier                                 { $$ = new VariableNode($1); }
          | Identifier ptLBracket IntValue ptRBracket  { $$ = new VariableNode($1,std::stoi($3)); }
+*/
+
+
 %%
 
 ////////////////////////////////////////////////////////////////////////////////////

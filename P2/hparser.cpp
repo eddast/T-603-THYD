@@ -242,6 +242,7 @@ HParser::parameter_list()
     auto node_ve = this->variable_expr();
     list_p->push_back( new ParameterNode(type, node_ve) );
     while ( token_.type == decaf::token_type::ptComma ) {
+        match( decaf::token_type::ptComma );
         type = this->type( );
         node_ve = this->variable_expr( );
         list_p->push_back( new ParameterNode( type, node_ve ) );

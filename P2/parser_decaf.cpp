@@ -251,20 +251,8 @@ namespace yy {
   {
     switch (that.type_get ())
     {
-      case 48: // type
-        value.copy< ValueType > (that.value);
-        break;
-
-      case 50: // variable
-        value.copy< VariableNode* > (that.value);
-        break;
-
-      case 47: // variable_declarations
-        value.copy< std::list<VariableDeclarationNode*>* > (that.value);
-        break;
-
-      case 49: // variable_list
-        value.copy< std::list<VariableNode*>* > (that.value);
+      case 47: // expr
+        value.copy< ExprNode* > (that.value);
         break;
 
       case 40: // Identifier
@@ -286,20 +274,8 @@ namespace yy {
   {
     switch (that.type_get ())
     {
-      case 48: // type
-        value.move< ValueType > (that.value);
-        break;
-
-      case 50: // variable
-        value.move< VariableNode* > (that.value);
-        break;
-
-      case 47: // variable_declarations
-        value.move< std::list<VariableDeclarationNode*>* > (that.value);
-        break;
-
-      case 49: // variable_list
-        value.move< std::list<VariableNode*>* > (that.value);
+      case 47: // expr
+        value.move< ExprNode* > (that.value);
         break;
 
       case 40: // Identifier
@@ -324,20 +300,8 @@ namespace yy {
     state = that.state;
     switch (that.type_get ())
     {
-      case 48: // type
-        value.copy< ValueType > (that.value);
-        break;
-
-      case 50: // variable
-        value.copy< VariableNode* > (that.value);
-        break;
-
-      case 47: // variable_declarations
-        value.copy< std::list<VariableDeclarationNode*>* > (that.value);
-        break;
-
-      case 49: // variable_list
-        value.copy< std::list<VariableNode*>* > (that.value);
+      case 47: // expr
+        value.copy< ExprNode* > (that.value);
         break;
 
       case 40: // Identifier
@@ -575,20 +539,8 @@ namespace yy {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case 48: // type
-        yylhs.value.build< ValueType > ();
-        break;
-
-      case 50: // variable
-        yylhs.value.build< VariableNode* > ();
-        break;
-
-      case 47: // variable_declarations
-        yylhs.value.build< std::list<VariableDeclarationNode*>* > ();
-        break;
-
-      case 49: // variable_list
-        yylhs.value.build< std::list<VariableNode*>* > ();
+      case 47: // expr
+        yylhs.value.build< ExprNode* > ();
         break;
 
       case 40: // Identifier
@@ -620,67 +572,43 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 90 "decaf.yy" // lalr1.cc:870
-    { driver.set_AST( new ProgramNode( yystack_[3].value.as< std::string > (), yystack_[1].value.as< std::list<VariableDeclarationNode*>* > (), nullptr ) ); }
-#line 626 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 96 "decaf.yy" // lalr1.cc:870
+    { driver.set_AST( yystack_[0].value.as< ExprNode* > () ); }
+#line 578 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 3:
-#line 93 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< std::list<VariableDeclarationNode*>* > () = yystack_[3].value.as< std::list<VariableDeclarationNode*>* > (); yylhs.value.as< std::list<VariableDeclarationNode*>* > ()->push_back( new VariableDeclarationNode(yystack_[2].value.as< ValueType > (),yystack_[1].value.as< std::list<VariableNode*>* > ()) ); }
-#line 632 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 98 "decaf.yy" // lalr1.cc:870
+    { yylhs.value.as< ExprNode* > () = new PlusExprNode( yystack_[2].value.as< ExprNode* > (), yystack_[0].value.as< ExprNode* > () ); }
+#line 584 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 4:
-#line 94 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< std::list<VariableDeclarationNode*>* > () = new std::list<VariableDeclarationNode*>(); }
-#line 638 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 99 "decaf.yy" // lalr1.cc:870
+    { yylhs.value.as< ExprNode* > () = new MinusExprNode( yystack_[2].value.as< ExprNode* > (), yystack_[0].value.as< ExprNode* > () ); }
+#line 590 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 5:
-#line 96 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< ValueType > () = ValueType::IntVal; }
-#line 644 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 100 "decaf.yy" // lalr1.cc:870
+    { yylhs.value.as< ExprNode* > () = new MultiplyExprNode( yystack_[2].value.as< ExprNode* > (), yystack_[0].value.as< ExprNode* > () ); }
+#line 596 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 6:
-#line 97 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< ValueType > () = ValueType::RealVal; }
-#line 650 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 102 "decaf.yy" // lalr1.cc:870
+    { yylhs.value.as< ExprNode* > () = new MinusExprNode( yystack_[0].value.as< ExprNode* > () ); }
+#line 602 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 7:
-#line 98 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< ValueType > () = ValueType::BoolVal; }
-#line 656 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
-    break;
-
-  case 8:
-#line 101 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< std::list<VariableNode*>* > () = new std::list<VariableNode*>(); yylhs.value.as< std::list<VariableNode*>* > ()->push_back( yystack_[0].value.as< VariableNode* > () ); }
-#line 662 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
-    break;
-
-  case 9:
 #line 103 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< std::list<VariableNode*>* > () = yystack_[2].value.as< std::list<VariableNode*>* > (); yylhs.value.as< std::list<VariableNode*>* > ()->push_back( yystack_[0].value.as< VariableNode* > () ); }
-#line 668 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
-    break;
-
-  case 10:
-#line 105 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< VariableNode* > () = new VariableNode(yystack_[0].value.as< std::string > ()); }
-#line 674 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
-    break;
-
-  case 11:
-#line 106 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< VariableNode* > () = new VariableNode(yystack_[3].value.as< std::string > (),std::stoi(yystack_[1].value.as< std::string > ())); }
-#line 680 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+    { yylhs.value.as< ExprNode* > () = new ValueExprNode( yystack_[0].value.as< std::string > () ); }
+#line 608 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
 
-#line 684 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 612 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
             default:
               break;
             }
@@ -938,72 +866,67 @@ namespace yy {
   }
 
 
-  const signed char parser_decaf::yypact_ninf_ = -35;
+  const signed char parser_decaf::yypact_ninf_ = -26;
 
   const signed char parser_decaf::yytable_ninf_ = -1;
 
   const signed char
   parser_decaf::yypact_[] =
   {
-       2,   -34,     7,    -7,   -35,   -35,    -6,   -35,   -35,   -35,
-     -35,   -31,    -5,   -16,   -35,   -30,   -31,   -35,    -4,   -35,
-     -35
+     -25,   -25,   -26,     5,   -22,   -26,   -26,   -25,   -25,   -25,
+     -20,   -20,   -26
   };
 
   const unsigned char
   parser_decaf::yydefact_[] =
   {
-       0,     0,     0,     0,     1,     4,     0,     5,     6,     7,
-       2,     0,    10,     0,     8,     0,     0,     3,     0,     9,
-      11
+       0,     0,     7,     0,     2,     6,     1,     0,     0,     0,
+       3,     4,     5
   };
 
   const signed char
   parser_decaf::yypgoto_[] =
   {
-     -35,   -35,   -35,   -35,   -35,    -3
+     -26,   -26,     0
   };
 
   const signed char
   parser_decaf::yydefgoto_[] =
   {
-      -1,     2,     6,    11,    13,    14
+      -1,     3,     4
   };
 
   const unsigned char
   parser_decaf::yytable_[] =
   {
-       7,     8,     9,    16,    17,     1,     3,     4,     5,    12,
-      10,    18,    15,    19,    20
+       1,     5,     7,     8,     9,     6,     9,    10,    11,    12,
+       0,     0,     0,     0,     0,     0,     2
   };
 
-  const unsigned char
+  const signed char
   parser_decaf::yycheck_[] =
   {
-       6,     7,     8,    19,    20,     3,    40,     0,    15,    40,
-      16,    41,    17,    16,    18
+      25,     1,    24,    25,    26,     0,    26,     7,     8,     9,
+      -1,    -1,    -1,    -1,    -1,    -1,    41
   };
 
   const unsigned char
   parser_decaf::yystos_[] =
   {
-       0,     3,    46,    40,     0,    15,    47,     6,     7,     8,
-      16,    48,    40,    49,    50,    17,    19,    20,    41,    50,
-      18
+       0,    25,    41,    46,    47,    47,     0,    24,    25,    26,
+      47,    47,    47
   };
 
   const unsigned char
   parser_decaf::yyr1_[] =
   {
-       0,    45,    46,    47,    47,    48,    48,    48,    49,    49,
-      50,    50
+       0,    45,    46,    47,    47,    47,    47,    47
   };
 
   const unsigned char
   parser_decaf::yyr2_[] =
   {
-       0,     2,     5,     4,     0,     1,     1,     1,     1,     3,
-       1,     4
+       0,     2,     1,     3,     3,     3,     2,     1
   };
 
 
@@ -1021,15 +944,14 @@ namespace yy {
   "OpArtInc", "OpArtDec", "OpRelEQ", "OpRelNEQ", "OpRelLT", "OpRelLTE",
   "OpRelGT", "OpRelGTE", "OpLogAnd", "OpLogOr", "OpLogNot", "Identifier",
   "IntValue", "RealValue", "BoolValue", "ErrUnknown", "$accept", "program",
-  "variable_declarations", "type", "variable_list", "variable", YY_NULLPTR
+  "expr", YY_NULLPTR
   };
 
 #if YYDEBUG
   const unsigned char
   parser_decaf::yyrline_[] =
   {
-       0,    87,    87,    92,    94,    96,    97,    98,   100,   102,
-     105,   106
+       0,    95,    95,    98,    99,   100,   101,   103
   };
 
   // Print the state stack on the debug stream.
@@ -1064,8 +986,8 @@ namespace yy {
 
 
 } // yy
-#line 1068 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:1181
-#line 107 "decaf.yy" // lalr1.cc:1182
+#line 990 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:1181
+#line 131 "decaf.yy" // lalr1.cc:1182
 
 
 ////////////////////////////////////////////////////////////////////////////////////

@@ -300,24 +300,15 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // type
-      char dummy1[sizeof(ValueType)];
-
-      // variable
-      char dummy2[sizeof(VariableNode*)];
-
-      // variable_declarations
-      char dummy3[sizeof(std::list<VariableDeclarationNode*>*)];
-
-      // variable_list
-      char dummy4[sizeof(std::list<VariableNode*>*)];
+      // expr
+      char dummy1[sizeof(ExprNode*)];
 
       // Identifier
       // IntValue
       // RealValue
       // BoolValue
       // ErrUnknown
-      char dummy5[sizeof(std::string)];
+      char dummy2[sizeof(std::string)];
 };
 
     /// Symbol semantic values.
@@ -420,13 +411,7 @@ namespace yy {
 
   basic_symbol (typename Base::kind_type t, const location_type& l);
 
-  basic_symbol (typename Base::kind_type t, const ValueType& v, const location_type& l);
-
-  basic_symbol (typename Base::kind_type t, const VariableNode*& v, const location_type& l);
-
-  basic_symbol (typename Base::kind_type t, const std::list<VariableDeclarationNode*>*& v, const location_type& l);
-
-  basic_symbol (typename Base::kind_type t, const std::list<VariableNode*>*& v, const location_type& l);
+  basic_symbol (typename Base::kind_type t, const ExprNode*& v, const location_type& l);
 
   basic_symbol (typename Base::kind_type t, const std::string& v, const location_type& l);
 
@@ -754,7 +739,7 @@ namespace yy {
   // number is the opposite.  If YYTABLE_NINF, syntax error.
   static const unsigned char yytable_[];
 
-  static const unsigned char yycheck_[];
+  static const signed char yycheck_[];
 
   // YYSTOS[STATE-NUM] -- The (internal number of the) accessing
   // symbol of state STATE-NUM.
@@ -876,9 +861,9 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 14,     ///< Last index in yytable_.
-      yynnts_ = 6,  ///< Number of nonterminal symbols.
-      yyfinal_ = 4, ///< Termination state number.
+      yylast_ = 16,     ///< Last index in yytable_.
+      yynnts_ = 3,  ///< Number of nonterminal symbols.
+      yyfinal_ = 6, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
       yyntokens_ = 45  ///< Number of tokens.
@@ -961,20 +946,8 @@ namespace yy {
   {
     switch (other.type_get ())
     {
-      case 48: // type
-        value.copy< ValueType > (other.value);
-        break;
-
-      case 50: // variable
-        value.copy< VariableNode* > (other.value);
-        break;
-
-      case 47: // variable_declarations
-        value.copy< std::list<VariableDeclarationNode*>* > (other.value);
-        break;
-
-      case 49: // variable_list
-        value.copy< std::list<VariableNode*>* > (other.value);
+      case 47: // expr
+        value.copy< ExprNode* > (other.value);
         break;
 
       case 40: // Identifier
@@ -1000,20 +973,8 @@ namespace yy {
     (void) v;
     switch (this->type_get ())
     {
-      case 48: // type
-        value.copy< ValueType > (v);
-        break;
-
-      case 50: // variable
-        value.copy< VariableNode* > (v);
-        break;
-
-      case 47: // variable_declarations
-        value.copy< std::list<VariableDeclarationNode*>* > (v);
-        break;
-
-      case 49: // variable_list
-        value.copy< std::list<VariableNode*>* > (v);
+      case 47: // expr
+        value.copy< ExprNode* > (v);
         break;
 
       case 40: // Identifier
@@ -1039,28 +1000,7 @@ namespace yy {
   {}
 
   template <typename Base>
-  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const ValueType& v, const location_type& l)
-    : Base (t)
-    , value (v)
-    , location (l)
-  {}
-
-  template <typename Base>
-  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const VariableNode*& v, const location_type& l)
-    : Base (t)
-    , value (v)
-    , location (l)
-  {}
-
-  template <typename Base>
-  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<VariableDeclarationNode*>*& v, const location_type& l)
-    : Base (t)
-    , value (v)
-    , location (l)
-  {}
-
-  template <typename Base>
-  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<VariableNode*>*& v, const location_type& l)
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const ExprNode*& v, const location_type& l)
     : Base (t)
     , value (v)
     , location (l)
@@ -1097,20 +1037,8 @@ namespace yy {
     // Type destructor.
   switch (yytype)
     {
-      case 48: // type
-        value.template destroy< ValueType > ();
-        break;
-
-      case 50: // variable
-        value.template destroy< VariableNode* > ();
-        break;
-
-      case 47: // variable_declarations
-        value.template destroy< std::list<VariableDeclarationNode*>* > ();
-        break;
-
-      case 49: // variable_list
-        value.template destroy< std::list<VariableNode*>* > ();
+      case 47: // expr
+        value.template destroy< ExprNode* > ();
         break;
 
       case 40: // Identifier
@@ -1142,20 +1070,8 @@ namespace yy {
     super_type::move (s);
     switch (this->type_get ())
     {
-      case 48: // type
-        value.move< ValueType > (s.value);
-        break;
-
-      case 50: // variable
-        value.move< VariableNode* > (s.value);
-        break;
-
-      case 47: // variable_declarations
-        value.move< std::list<VariableDeclarationNode*>* > (s.value);
-        break;
-
-      case 49: // variable_list
-        value.move< std::list<VariableNode*>* > (s.value);
+      case 47: // expr
+        value.move< ExprNode* > (s.value);
         break;
 
       case 40: // Identifier
@@ -1491,7 +1407,7 @@ namespace yy {
 
 
 } // yy
-#line 1495 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
+#line 1411 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
 
 
 
