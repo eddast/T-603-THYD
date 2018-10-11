@@ -800,6 +800,7 @@ HParser::expr_unary()
 ExprNode*
 HParser::factor()
 {
+    // (expr)
     if ( token_.type == decaf::token_type::ptLParen ) {
         match( decaf::token_type::ptLParen );
         ExprNode* node_ex = expr( );

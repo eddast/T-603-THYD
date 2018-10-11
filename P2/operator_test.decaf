@@ -1,11 +1,11 @@
 
-
+/*
 class Program {
     bool x, y, z, res;
     int n, m, v, num;
 
     static void main() {
-        if ( ! ( !(x && y) || x && y ) >= z ) {
+        if ( x && !y || x && y >= z ) {
             res = false;
         }
         if ( (n != m) && !( v >= n ) || ( m == n ) ) {
@@ -13,3 +13,5 @@ class Program {
         }
     }
 }
+
+function( ab, ( y > 1 ), false, 23.4 )

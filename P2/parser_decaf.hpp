@@ -301,14 +301,20 @@ namespace yy {
     union union_type
     {
       // expr
+      // varExpr
+      // valueExpr
       char dummy1[sizeof(ExprNode*)];
+
+      // expr_list
+      // more_expr
+      char dummy2[sizeof(std::list<ExprNode*>*)];
 
       // Identifier
       // IntValue
       // RealValue
       // BoolValue
       // ErrUnknown
-      char dummy2[sizeof(std::string)];
+      char dummy3[sizeof(std::string)];
 };
 
     /// Symbol semantic values.
@@ -412,6 +418,8 @@ namespace yy {
   basic_symbol (typename Base::kind_type t, const location_type& l);
 
   basic_symbol (typename Base::kind_type t, const ExprNode*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const std::list<ExprNode*>*& v, const location_type& l);
 
   basic_symbol (typename Base::kind_type t, const std::string& v, const location_type& l);
 
@@ -737,7 +745,7 @@ namespace yy {
   // YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
   // positive, shift that token.  If negative, reduce the rule whose
   // number is the opposite.  If YYTABLE_NINF, syntax error.
-  static const unsigned char yytable_[];
+  static const signed char yytable_[];
 
   static const signed char yycheck_[];
 
@@ -861,9 +869,9 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 16,     ///< Last index in yytable_.
-      yynnts_ = 3,  ///< Number of nonterminal symbols.
-      yyfinal_ = 6, ///< Termination state number.
+      yylast_ = 148,     ///< Last index in yytable_.
+      yynnts_ = 7,  ///< Number of nonterminal symbols.
+      yyfinal_ = 19, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
       yyntokens_ = 45  ///< Number of tokens.
@@ -946,8 +954,15 @@ namespace yy {
   {
     switch (other.type_get ())
     {
-      case 47: // expr
+      case 49: // expr
+      case 50: // varExpr
+      case 51: // valueExpr
         value.copy< ExprNode* > (other.value);
+        break;
+
+      case 47: // expr_list
+      case 48: // more_expr
+        value.copy< std::list<ExprNode*>* > (other.value);
         break;
 
       case 40: // Identifier
@@ -973,8 +988,15 @@ namespace yy {
     (void) v;
     switch (this->type_get ())
     {
-      case 47: // expr
+      case 49: // expr
+      case 50: // varExpr
+      case 51: // valueExpr
         value.copy< ExprNode* > (v);
+        break;
+
+      case 47: // expr_list
+      case 48: // more_expr
+        value.copy< std::list<ExprNode*>* > (v);
         break;
 
       case 40: // Identifier
@@ -1001,6 +1023,13 @@ namespace yy {
 
   template <typename Base>
   parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const ExprNode*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<ExprNode*>*& v, const location_type& l)
     : Base (t)
     , value (v)
     , location (l)
@@ -1037,8 +1066,15 @@ namespace yy {
     // Type destructor.
   switch (yytype)
     {
-      case 47: // expr
+      case 49: // expr
+      case 50: // varExpr
+      case 51: // valueExpr
         value.template destroy< ExprNode* > ();
+        break;
+
+      case 47: // expr_list
+      case 48: // more_expr
+        value.template destroy< std::list<ExprNode*>* > ();
         break;
 
       case 40: // Identifier
@@ -1070,8 +1106,15 @@ namespace yy {
     super_type::move (s);
     switch (this->type_get ())
     {
-      case 47: // expr
+      case 49: // expr
+      case 50: // varExpr
+      case 51: // valueExpr
         value.move< ExprNode* > (s.value);
+        break;
+
+      case 47: // expr_list
+      case 48: // more_expr
+        value.move< std::list<ExprNode*>* > (s.value);
         break;
 
       case 40: // Identifier
@@ -1407,7 +1450,7 @@ namespace yy {
 
 
 } // yy
-#line 1411 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
+#line 1454 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
 
 
 
