@@ -121,24 +121,33 @@ public:
     virtual std::string get_name() const override { return "Handmade"; }
 
 private:
+
+    // Parse program as whole
     ProgramNode* program();
+
+    // Parse variables and types
     std::list<VariableDeclarationNode*>* variable_declarations();
     std::list<VariableNode*>* variable_list();
     VariableNode* variable();
     VariableExprNode* variable_expr();
-    AssignStmNode* variable_assignment_expr();
     ValueType type();
+
+    // Parse methods and parameters
     std::list<MethodNode*>* method_declarations();
     MethodNode* method_declaration();
     ValueType method_return_type();
     std::list<ParameterNode*>* parameters();
     std::list<ParameterNode*>* parameter_list();
-    IncrDecrStmNode* inc_dec_statement();
+
+    // Parse statements and blocks
     std::list<StmNode*>* statement_list();
     StmNode* statement();
+    IncrDecrStmNode* inc_dec_statement();
     StmNode* id_start_stm();
     BlockStmNode* statement_block();
     BlockStmNode* optional_else();
+
+    // Parse expressions
     std::list<ExprNode*>* expr_list();
     std::list<ExprNode*>* more_expr( std::list<ExprNode*>* &list_ex );
     ExprNode* expr();
@@ -154,7 +163,12 @@ private:
     ExprNode* expr_mult();
     ExprNode* expr_mult2( ExprNode* lhs );
     ExprNode* expr_unary();
+    bool next_token_is_expr();
+
+    // Parse factors, variables and values (expressions)
     ExprNode* factor();
     ExprNode* value();
+    AssignStmNode* variable_assignment_expr();
+
 };
 #endif //DECAFPARSER_HPARSER_H

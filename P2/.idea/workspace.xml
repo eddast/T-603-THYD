@@ -12,12 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a0f90ad-211c-459a-9a58-3f4578fbf3a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/hparser.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/hparser.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/DecafParser" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DecafParser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hparser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/hparser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.decaf" beforeDir="false" afterPath="$PROJECT_DIR$/test.decaf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hparser.h" beforeDir="false" afterPath="$PROJECT_DIR$/hparser.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,7 +36,7 @@
         <counts>
           <entry key="cpp" value="3" />
           <entry key="decaf" value="3" />
-          <entry key="h" value="5" />
+          <entry key="h" value="6" />
           <entry key="hpp" value="2" />
           <entry key="l" value="1" />
           <entry key="list" value="1" />
@@ -48,21 +44,21 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="ObjectiveC" value="11" />
+          <entry key="ObjectiveC" value="12" />
           <entry key="PLAIN_TEXT" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="8093" />
+          <entry key="cpp" value="9648" />
           <entry key="decaf" value="74" />
-          <entry key="h" value="498" />
+          <entry key="h" value="767" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Doxygen file" value="98" />
-          <entry key="ObjectiveC" value="8493" />
+          <entry key="Doxygen file" value="102" />
+          <entry key="ObjectiveC" value="10313" />
           <entry key="PLAIN_TEXT" value="74" />
         </counts>
       </usages-collector>
@@ -73,8 +69,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hparser.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="103" selection-start-line="103" selection-end-line="103" />
+            <state relative-caret-position="297">
+              <caret line="170" column="28" selection-start-line="170" selection-start-column="28" selection-end-line="170" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -82,17 +78,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hparser.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="733" column="49" selection-start-line="733" selection-start-column="49" selection-end-line="733" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.decaf">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+            <state relative-caret-position="97">
+              <caret line="513" selection-start-line="513" selection-end-line="513" />
             </state>
           </provider>
         </entry>
@@ -101,7 +88,16 @@
         <entry file="file://$PROJECT_DIR$/ast.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="134">
-              <caret line="334" column="27" selection-start-line="334" selection-start-column="6" selection-end-line="334" selection-end-column="27" />
+              <caret line="338" column="4" selection-start-line="338" selection-start-column="4" selection-end-line="338" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.decaf">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -119,10 +115,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>valueExpr</find>
-      <find>exprNode</find>
-      <find>variable</find>
-      <find>op_mult</find>
       <find>kwreturn</find>
       <find>method_decl</find>
       <find>factor</find>
@@ -141,14 +133,18 @@
       <find>variable_expr()</find>
       <find>expr()</find>
       <find>opartinc</find>
-      <find>kwfor</find>
       <find>exprnode :</find>
       <find>kw</find>
-      <find>expr_list</find>
       <find>statement_block</find>
       <find>statement</find>
-      <find>statement()</find>
       <find>methodcall</find>
+      <find>call</find>
+      <find>statement()</find>
+      <find>kwfor</find>
+      <find>decl</find>
+      <find>inc_dec_st</find>
+      <find>else</find>
+      <find>expr_list</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,8 +153,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/hparser.h" />
         <option value="$PROJECT_DIR$/test.decaf" />
+        <option value="$PROJECT_DIR$/hparser.h" />
         <option value="$PROJECT_DIR$/hparser.cpp" />
       </list>
     </option>
@@ -238,12 +234,12 @@
       <option name="presentableId" value="Default" />
       <updated>1538148419198</updated>
       <workItem from="1538148420718" duration="1008000" />
-      <workItem from="1539118076749" duration="21597000" />
+      <workItem from="1539118076749" duration="26353000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22605000" />
+    <option name="totallyTimeSpent" value="27361000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -258,18 +254,18 @@
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25377643" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25377643" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.30802292" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.30802292" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39971346" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3295129" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Messages" order="8" visible="true" weight="0.32808024" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32808024" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.3295129" />
@@ -319,13 +315,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hparser.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/parser.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -333,24 +322,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ast.h">
+    <entry file="file://$PROJECT_DIR$/test.decaf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="334" column="27" selection-start-line="334" selection-start-column="6" selection-end-line="334" selection-end-column="27" />
+        <state relative-caret-position="300">
+          <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.decaf">
+    <entry file="file://$PROJECT_DIR$/ast.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        <state relative-caret-position="134">
+          <caret line="338" column="4" selection-start-line="338" selection-start-column="4" selection-end-line="338" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hparser.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="170" column="28" selection-start-line="170" selection-start-column="28" selection-end-line="170" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hparser.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="733" column="49" selection-start-line="733" selection-start-column="49" selection-end-line="733" selection-end-column="49" />
+        <state relative-caret-position="97">
+          <caret line="513" selection-start-line="513" selection-end-line="513" />
         </state>
       </provider>
     </entry>
