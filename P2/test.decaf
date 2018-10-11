@@ -17,6 +17,9 @@ class Program {
 
     static void main() {
        int n;
+       int y;
+
+       y = noParamFunc();
 
        i = myFunc(3);
        i++;

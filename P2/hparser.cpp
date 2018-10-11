@@ -345,12 +345,9 @@ HParser::statement_list()
         return statement_block( );
     }
     // match id start statement
-    else if( token_.type == decaf::token_type::Identifier ) {
+    else  {
         return id_start_stm( );
     }
-    error( decaf::token_type::kwIf );
-
-    return nullptr;
 }
 
 /**
@@ -473,18 +470,17 @@ HParser::optional_else()
 list<ExprNode*>*
 HParser::expr_list()
 {
+    list<ExprNode*>* list_ex = new list<ExprNode*>();
+
     // Check if next token is in FIRST for expression
-    // Otherwise nothing is matched for list
+    // Otherwise nothing is matched for list (expr_list is optional)
     if( next_token_is_expr( ) ) {
-        list<ExprNode*>* list_ex = new list<ExprNode*>();
         auto node_ex = expr();
         list_ex->push_back(node_ex);
         list_ex = more_expr(list_ex);
-
-        return list_ex;
     }
 
-    return nullptr;
+    return list_ex;
 }
 
 /**
@@ -512,10 +508,10 @@ HParser::more_expr( list<ExprNode*>* &list_ex )
 ExprNode*
 HParser::expr( )
 {
-    // Match and expresssion (mandatory)
+    // Match and expression (mandatory)
     auto node_ex = expr_and( );
 
-    // Check if next token is an expression (expr2 is optional)
+    // Check if next token is an or expression (expr2 is optional)
     if( token_.type == decaf::token_type::OpLogOr ) {
         return expr2( node_ex );
     }
@@ -842,6 +838,7 @@ HParser::factor()
 /**
  * Matches value within program
  * value ::= int_value | real_value | bool_value
+ * @return AST expression node for value expression
  */
 ExprNode*
 HParser::value()
