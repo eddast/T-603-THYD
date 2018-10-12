@@ -300,21 +300,62 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
+      // variable_assign
+      char dummy1[sizeof(AssignStmNode*)];
+
+      // statement_block
+      // optional_else
+      char dummy2[sizeof(BlockStmNode*)];
+
       // expr
-      // varExpr
-      // valueExpr
-      char dummy1[sizeof(ExprNode*)];
+      // value_expr
+      char dummy3[sizeof(ExprNode*)];
+
+      // incr_decr_var
+      char dummy4[sizeof(IncrDecrStmNode*)];
+
+      // method_dec
+      char dummy5[sizeof(MethodNode*)];
+
+      // statement
+      char dummy6[sizeof(StmNode*)];
+
+      // type
+      // method_ret_type
+      char dummy7[sizeof(ValueType)];
+
+      // variable_expr
+      char dummy8[sizeof(VariableExprNode*)];
+
+      // variable
+      char dummy9[sizeof(VariableNode*)];
 
       // expr_list
       // more_expr
-      char dummy2[sizeof(std::list<ExprNode*>*)];
+      char dummy10[sizeof(std::list<ExprNode*>*)];
+
+      // method_decs
+      char dummy11[sizeof(std::list<MethodNode*>*)];
+
+      // parameters
+      // parameter_list
+      char dummy12[sizeof(std::list<ParameterNode*>*)];
+
+      // statement_list
+      char dummy13[sizeof(std::list<StmNode*>*)];
+
+      // variable_decs
+      char dummy14[sizeof(std::list<VariableDeclarationNode*>*)];
+
+      // var_list
+      char dummy15[sizeof(std::list<VariableNode*>*)];
 
       // Identifier
       // IntValue
       // RealValue
       // BoolValue
       // ErrUnknown
-      char dummy3[sizeof(std::string)];
+      char dummy16[sizeof(std::string)];
 };
 
     /// Symbol semantic values.
@@ -417,9 +458,35 @@ namespace yy {
 
   basic_symbol (typename Base::kind_type t, const location_type& l);
 
+  basic_symbol (typename Base::kind_type t, const AssignStmNode*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const BlockStmNode*& v, const location_type& l);
+
   basic_symbol (typename Base::kind_type t, const ExprNode*& v, const location_type& l);
 
+  basic_symbol (typename Base::kind_type t, const IncrDecrStmNode*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const MethodNode*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const StmNode*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const ValueType& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const VariableExprNode*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const VariableNode*& v, const location_type& l);
+
   basic_symbol (typename Base::kind_type t, const std::list<ExprNode*>*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const std::list<MethodNode*>*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const std::list<ParameterNode*>*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const std::list<StmNode*>*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const std::list<VariableDeclarationNode*>*& v, const location_type& l);
+
+  basic_symbol (typename Base::kind_type t, const std::list<VariableNode*>*& v, const location_type& l);
 
   basic_symbol (typename Base::kind_type t, const std::string& v, const location_type& l);
 
@@ -729,7 +796,7 @@ namespace yy {
     // Tables.
   // YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
   // STATE-NUM.
-  static const signed char yypact_[];
+  static const short yypact_[];
 
   // YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
   // Performed when YYTABLE does not specify something else to do.  Zero
@@ -737,7 +804,7 @@ namespace yy {
   static const unsigned char yydefact_[];
 
   // YYPGOTO[NTERM-NUM].
-  static const signed char yypgoto_[];
+  static const short yypgoto_[];
 
   // YYDEFGOTO[NTERM-NUM].
   static const signed char yydefgoto_[];
@@ -869,9 +936,9 @@ namespace yy {
     enum
     {
       yyeof_ = 0,
-      yylast_ = 148,     ///< Last index in yytable_.
-      yynnts_ = 7,  ///< Number of nonterminal symbols.
-      yyfinal_ = 19, ///< Termination state number.
+      yylast_ = 224,     ///< Last index in yytable_.
+      yynnts_ = 22,  ///< Number of nonterminal symbols.
+      yyfinal_ = 4, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
       yyntokens_ = 45  ///< Number of tokens.
@@ -954,15 +1021,69 @@ namespace yy {
   {
     switch (other.type_get ())
     {
-      case 49: // expr
-      case 50: // varExpr
-      case 51: // valueExpr
+      case 51: // variable_assign
+        value.copy< AssignStmNode* > (other.value);
+        break;
+
+      case 59: // statement_block
+      case 61: // optional_else
+        value.copy< BlockStmNode* > (other.value);
+        break;
+
+      case 64: // expr
+      case 66: // value_expr
         value.copy< ExprNode* > (other.value);
         break;
 
-      case 47: // expr_list
-      case 48: // more_expr
+      case 60: // incr_decr_var
+        value.copy< IncrDecrStmNode* > (other.value);
+        break;
+
+      case 53: // method_dec
+        value.copy< MethodNode* > (other.value);
+        break;
+
+      case 58: // statement
+        value.copy< StmNode* > (other.value);
+        break;
+
+      case 48: // type
+      case 54: // method_ret_type
+        value.copy< ValueType > (other.value);
+        break;
+
+      case 65: // variable_expr
+        value.copy< VariableExprNode* > (other.value);
+        break;
+
+      case 50: // variable
+        value.copy< VariableNode* > (other.value);
+        break;
+
+      case 62: // expr_list
+      case 63: // more_expr
         value.copy< std::list<ExprNode*>* > (other.value);
+        break;
+
+      case 52: // method_decs
+        value.copy< std::list<MethodNode*>* > (other.value);
+        break;
+
+      case 55: // parameters
+      case 56: // parameter_list
+        value.copy< std::list<ParameterNode*>* > (other.value);
+        break;
+
+      case 57: // statement_list
+        value.copy< std::list<StmNode*>* > (other.value);
+        break;
+
+      case 47: // variable_decs
+        value.copy< std::list<VariableDeclarationNode*>* > (other.value);
+        break;
+
+      case 49: // var_list
+        value.copy< std::list<VariableNode*>* > (other.value);
         break;
 
       case 40: // Identifier
@@ -988,15 +1109,69 @@ namespace yy {
     (void) v;
     switch (this->type_get ())
     {
-      case 49: // expr
-      case 50: // varExpr
-      case 51: // valueExpr
+      case 51: // variable_assign
+        value.copy< AssignStmNode* > (v);
+        break;
+
+      case 59: // statement_block
+      case 61: // optional_else
+        value.copy< BlockStmNode* > (v);
+        break;
+
+      case 64: // expr
+      case 66: // value_expr
         value.copy< ExprNode* > (v);
         break;
 
-      case 47: // expr_list
-      case 48: // more_expr
+      case 60: // incr_decr_var
+        value.copy< IncrDecrStmNode* > (v);
+        break;
+
+      case 53: // method_dec
+        value.copy< MethodNode* > (v);
+        break;
+
+      case 58: // statement
+        value.copy< StmNode* > (v);
+        break;
+
+      case 48: // type
+      case 54: // method_ret_type
+        value.copy< ValueType > (v);
+        break;
+
+      case 65: // variable_expr
+        value.copy< VariableExprNode* > (v);
+        break;
+
+      case 50: // variable
+        value.copy< VariableNode* > (v);
+        break;
+
+      case 62: // expr_list
+      case 63: // more_expr
         value.copy< std::list<ExprNode*>* > (v);
+        break;
+
+      case 52: // method_decs
+        value.copy< std::list<MethodNode*>* > (v);
+        break;
+
+      case 55: // parameters
+      case 56: // parameter_list
+        value.copy< std::list<ParameterNode*>* > (v);
+        break;
+
+      case 57: // statement_list
+        value.copy< std::list<StmNode*>* > (v);
+        break;
+
+      case 47: // variable_decs
+        value.copy< std::list<VariableDeclarationNode*>* > (v);
+        break;
+
+      case 49: // var_list
+        value.copy< std::list<VariableNode*>* > (v);
         break;
 
       case 40: // Identifier
@@ -1022,6 +1197,20 @@ namespace yy {
   {}
 
   template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const AssignStmNode*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const BlockStmNode*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
   parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const ExprNode*& v, const location_type& l)
     : Base (t)
     , value (v)
@@ -1029,7 +1218,84 @@ namespace yy {
   {}
 
   template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const IncrDecrStmNode*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const MethodNode*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const StmNode*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const ValueType& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const VariableExprNode*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const VariableNode*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
   parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<ExprNode*>*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<MethodNode*>*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<ParameterNode*>*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<StmNode*>*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<VariableDeclarationNode*>*& v, const location_type& l)
+    : Base (t)
+    , value (v)
+    , location (l)
+  {}
+
+  template <typename Base>
+  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const std::list<VariableNode*>*& v, const location_type& l)
     : Base (t)
     , value (v)
     , location (l)
@@ -1066,15 +1332,69 @@ namespace yy {
     // Type destructor.
   switch (yytype)
     {
-      case 49: // expr
-      case 50: // varExpr
-      case 51: // valueExpr
+      case 51: // variable_assign
+        value.template destroy< AssignStmNode* > ();
+        break;
+
+      case 59: // statement_block
+      case 61: // optional_else
+        value.template destroy< BlockStmNode* > ();
+        break;
+
+      case 64: // expr
+      case 66: // value_expr
         value.template destroy< ExprNode* > ();
         break;
 
-      case 47: // expr_list
-      case 48: // more_expr
+      case 60: // incr_decr_var
+        value.template destroy< IncrDecrStmNode* > ();
+        break;
+
+      case 53: // method_dec
+        value.template destroy< MethodNode* > ();
+        break;
+
+      case 58: // statement
+        value.template destroy< StmNode* > ();
+        break;
+
+      case 48: // type
+      case 54: // method_ret_type
+        value.template destroy< ValueType > ();
+        break;
+
+      case 65: // variable_expr
+        value.template destroy< VariableExprNode* > ();
+        break;
+
+      case 50: // variable
+        value.template destroy< VariableNode* > ();
+        break;
+
+      case 62: // expr_list
+      case 63: // more_expr
         value.template destroy< std::list<ExprNode*>* > ();
+        break;
+
+      case 52: // method_decs
+        value.template destroy< std::list<MethodNode*>* > ();
+        break;
+
+      case 55: // parameters
+      case 56: // parameter_list
+        value.template destroy< std::list<ParameterNode*>* > ();
+        break;
+
+      case 57: // statement_list
+        value.template destroy< std::list<StmNode*>* > ();
+        break;
+
+      case 47: // variable_decs
+        value.template destroy< std::list<VariableDeclarationNode*>* > ();
+        break;
+
+      case 49: // var_list
+        value.template destroy< std::list<VariableNode*>* > ();
         break;
 
       case 40: // Identifier
@@ -1106,15 +1426,69 @@ namespace yy {
     super_type::move (s);
     switch (this->type_get ())
     {
-      case 49: // expr
-      case 50: // varExpr
-      case 51: // valueExpr
+      case 51: // variable_assign
+        value.move< AssignStmNode* > (s.value);
+        break;
+
+      case 59: // statement_block
+      case 61: // optional_else
+        value.move< BlockStmNode* > (s.value);
+        break;
+
+      case 64: // expr
+      case 66: // value_expr
         value.move< ExprNode* > (s.value);
         break;
 
-      case 47: // expr_list
-      case 48: // more_expr
+      case 60: // incr_decr_var
+        value.move< IncrDecrStmNode* > (s.value);
+        break;
+
+      case 53: // method_dec
+        value.move< MethodNode* > (s.value);
+        break;
+
+      case 58: // statement
+        value.move< StmNode* > (s.value);
+        break;
+
+      case 48: // type
+      case 54: // method_ret_type
+        value.move< ValueType > (s.value);
+        break;
+
+      case 65: // variable_expr
+        value.move< VariableExprNode* > (s.value);
+        break;
+
+      case 50: // variable
+        value.move< VariableNode* > (s.value);
+        break;
+
+      case 62: // expr_list
+      case 63: // more_expr
         value.move< std::list<ExprNode*>* > (s.value);
+        break;
+
+      case 52: // method_decs
+        value.move< std::list<MethodNode*>* > (s.value);
+        break;
+
+      case 55: // parameters
+      case 56: // parameter_list
+        value.move< std::list<ParameterNode*>* > (s.value);
+        break;
+
+      case 57: // statement_list
+        value.move< std::list<StmNode*>* > (s.value);
+        break;
+
+      case 47: // variable_decs
+        value.move< std::list<VariableDeclarationNode*>* > (s.value);
+        break;
+
+      case 49: // var_list
+        value.move< std::list<VariableNode*>* > (s.value);
         break;
 
       case 40: // Identifier
@@ -1450,7 +1824,7 @@ namespace yy {
 
 
 } // yy
-#line 1454 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
+#line 1828 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
 
 
 

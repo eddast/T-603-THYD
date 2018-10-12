@@ -1,9 +1,8 @@
 
-/*class Program {
+class Program {
 
     static void main() {
-        function( ab, ( y > 1 ), false, 23.4 );
+        int x;
+        x = x + y - 5 * 10 || 3;
     }
-}*/
-
-function( ab, ( y > 1 ), false, 23.4 )
+}

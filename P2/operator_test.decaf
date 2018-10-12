@@ -1,5 +1,4 @@
 
-/*
 class Program {
     bool x, y, z, res;
     int n, m, v, num;
