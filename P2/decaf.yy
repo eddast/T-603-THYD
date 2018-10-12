@@ -145,7 +145,7 @@ variable        :   Identifier                                  { $$ = new Varia
 
 variable_assign :   variable_expr OpAssign expr                 { $$ = new AssignStmNode( $1, $3 ); }
 
-method_decs     :   method_decs method_dec                      { $$ = $1; $$->push_front( $2 ); }
+method_decs     :   method_decs method_dec                      { $$ = $1; $$->push_back( $2 ); }
                 |   method_dec                                  { $$ = new std::list<MethodNode*>(); $$->push_back($1); }
 
 method_dec      :   kwStatic method_ret_type Identifier
@@ -166,15 +166,16 @@ statement_list  :   statement_list statement                    { $$ = $1; $$->p
                 |                                               { $$ = new std::list<StmNode*>(); }
 
 statement       :   variable_assign ptSemicolon                 { $$ = $1; }
-                /*|   Identifier ptLParen expr_list ptRParen      { $$ = MethodCallExprStmNode( $1, $3 ); }*/
+                |   Identifier
+                    ptLParen expr_list ptRParen ptSemicolon     { $$ = new MethodCallExprStmNode( $1, $3 ); }
                 |   kwIf ptLParen expr ptRParen
                     statement_block optional_else               { $$ = new IfStmNode( $3, $5, $6 ); }
-                /*|   kwFor ptLParen
+                |   kwFor ptLParen
                     variable_assign ptSemicolon
                     expr ptSemicolon
                     incr_decr_var
                     ptRParen
-                    statement_block                             { $$ = ForStmNode( $3, $5, $7, $9 ); }*/
+                    statement_block                             { $$ = new ForStmNode( $3, $5, $7, $9 ); }
                 |   kwReturn ptSemicolon                        { $$ = new ReturnStmNode( ); }
                 |   kwReturn expr ptSemicolon                   { $$ = new ReturnStmNode( $2 ); }
                 |   kwBreak ptSemicolon                         { $$ = new BreakStmNode( ); }
