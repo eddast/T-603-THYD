@@ -128,8 +128,7 @@ private:
     // Parse variables and types
     std::list<VariableDeclarationNode*>* variable_declarations();
     std::list<VariableNode*>* variable_list();
-    VariableNode* variable();
-    VariableExprNode* variable_expr();
+    VariableNode* variable( std::string id = "" );
     ValueType type();
 
     // Parse methods and parameters
@@ -142,7 +141,8 @@ private:
     // Parse statements and blocks
     std::list<StmNode*>* statement_list();
     StmNode* statement();
-    IncrDecrStmNode* inc_dec_statement();
+    AssignStmNode* variable_assignment( VariableExprNode* var = nullptr );
+    IncrDecrStmNode* inc_dec_statement( VariableExprNode* var = nullptr );
     StmNode* id_start_stm();
     BlockStmNode* statement_block();
     BlockStmNode* optional_else();
@@ -151,24 +151,23 @@ private:
     std::list<ExprNode*>* expr_list();
     std::list<ExprNode*>* more_expr( std::list<ExprNode*>* &list_ex );
     ExprNode* expr();
-    ExprNode* expr2( ExprNode* lhs );
     ExprNode* expr_and();
-    ExprNode* expr_and2( ExprNode* lhs );
     ExprNode* expr_eq();
-    ExprNode* expr_eq2( ExprNode* lhs );
     ExprNode* expr_rel();
-    ExprNode* expr_rel2( ExprNode* lhs );
     ExprNode* expr_add();
-    ExprNode* expr_add2( ExprNode* lhs );
     ExprNode* expr_mult();
-    ExprNode* expr_mult2( ExprNode* lhs );
     ExprNode* expr_unary();
+    ExprNode* expr_pr( ExprNode* lhs );
+    ExprNode* expr_and_pr( ExprNode* lhs );
+    ExprNode* expr_eq_pr( ExprNode* lhs );
+    ExprNode* expr_rel_pr( ExprNode* lhs );
+    ExprNode* expr_add_pr( ExprNode* lhs );
+    ExprNode* expr_mult_pr( ExprNode* lhs );
     bool next_token_is_expr();
 
     // Parse factors, variables and values (expressions)
     ExprNode* factor();
     ExprNode* value();
-    AssignStmNode* variable_assignment_expr();
 
 };
 #endif //DECAFPARSER_HPARSER_H

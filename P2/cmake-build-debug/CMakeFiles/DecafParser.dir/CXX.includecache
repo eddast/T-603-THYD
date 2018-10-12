@@ -32,22 +32,6 @@ list
 parser.h
 /Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/parser.h
 
-/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/lexer_decaf.cpp
-stdio.h
--
-string.h
--
-errno.h
--
-stdlib.h
--
-inttypes.h
--
-parser.h
-/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/parser.h
-unistd.h
--
-
 /Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/location.hh
 position.hh
 /Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/position.hh
@@ -67,14 +51,6 @@ ast.h
 /Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/ast.h
 parser_decaf.hpp
 /Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/parser_decaf.hpp
-
-/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/parser_decaf.cpp
-parser_decaf.hpp
-/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/parser_decaf.hpp
-parser.h
-/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/parser.h
-libintl.h
--
 
 /Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/parser_decaf.hpp
 string

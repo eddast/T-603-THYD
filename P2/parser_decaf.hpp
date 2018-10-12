@@ -324,38 +324,36 @@ namespace yy {
       // method_ret_type
       char dummy7[sizeof(ValueType)];
 
-      // variable_expr
-      char dummy8[sizeof(VariableExprNode*)];
-
       // variable
-      char dummy9[sizeof(VariableNode*)];
+      // variable_expr
+      char dummy8[sizeof(VariableNode*)];
 
       // expr_list
       // more_expr
-      char dummy10[sizeof(std::list<ExprNode*>*)];
+      char dummy9[sizeof(std::list<ExprNode*>*)];
 
       // method_decs
-      char dummy11[sizeof(std::list<MethodNode*>*)];
+      char dummy10[sizeof(std::list<MethodNode*>*)];
 
       // parameters
       // parameter_list
-      char dummy12[sizeof(std::list<ParameterNode*>*)];
+      char dummy11[sizeof(std::list<ParameterNode*>*)];
 
       // statement_list
-      char dummy13[sizeof(std::list<StmNode*>*)];
+      char dummy12[sizeof(std::list<StmNode*>*)];
 
       // variable_decs
-      char dummy14[sizeof(std::list<VariableDeclarationNode*>*)];
+      char dummy13[sizeof(std::list<VariableDeclarationNode*>*)];
 
       // var_list
-      char dummy15[sizeof(std::list<VariableNode*>*)];
+      char dummy14[sizeof(std::list<VariableNode*>*)];
 
       // Identifier
       // IntValue
       // RealValue
       // BoolValue
       // ErrUnknown
-      char dummy16[sizeof(std::string)];
+      char dummy15[sizeof(std::string)];
 };
 
     /// Symbol semantic values.
@@ -471,8 +469,6 @@ namespace yy {
   basic_symbol (typename Base::kind_type t, const StmNode*& v, const location_type& l);
 
   basic_symbol (typename Base::kind_type t, const ValueType& v, const location_type& l);
-
-  basic_symbol (typename Base::kind_type t, const VariableExprNode*& v, const location_type& l);
 
   basic_symbol (typename Base::kind_type t, const VariableNode*& v, const location_type& l);
 
@@ -1052,11 +1048,8 @@ namespace yy {
         value.copy< ValueType > (other.value);
         break;
 
-      case 65: // variable_expr
-        value.copy< VariableExprNode* > (other.value);
-        break;
-
       case 50: // variable
+      case 65: // variable_expr
         value.copy< VariableNode* > (other.value);
         break;
 
@@ -1140,11 +1133,8 @@ namespace yy {
         value.copy< ValueType > (v);
         break;
 
-      case 65: // variable_expr
-        value.copy< VariableExprNode* > (v);
-        break;
-
       case 50: // variable
+      case 65: // variable_expr
         value.copy< VariableNode* > (v);
         break;
 
@@ -1240,13 +1230,6 @@ namespace yy {
 
   template <typename Base>
   parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const ValueType& v, const location_type& l)
-    : Base (t)
-    , value (v)
-    , location (l)
-  {}
-
-  template <typename Base>
-  parser_decaf::basic_symbol<Base>::basic_symbol (typename Base::kind_type t, const VariableExprNode*& v, const location_type& l)
     : Base (t)
     , value (v)
     , location (l)
@@ -1363,11 +1346,8 @@ namespace yy {
         value.template destroy< ValueType > ();
         break;
 
-      case 65: // variable_expr
-        value.template destroy< VariableExprNode* > ();
-        break;
-
       case 50: // variable
+      case 65: // variable_expr
         value.template destroy< VariableNode* > ();
         break;
 
@@ -1457,11 +1437,8 @@ namespace yy {
         value.move< ValueType > (s.value);
         break;
 
-      case 65: // variable_expr
-        value.move< VariableExprNode* > (s.value);
-        break;
-
       case 50: // variable
+      case 65: // variable_expr
         value.move< VariableNode* > (s.value);
         break;
 
@@ -1824,7 +1801,7 @@ namespace yy {
 
 
 } // yy
-#line 1828 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
+#line 1805 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
 
 
 

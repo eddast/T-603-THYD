@@ -103,7 +103,7 @@ class Parser;
 /* Types of expression grammar */
 %type <ExprNode*> expr value_expr
 %type <std::list<ExprNode*>*> expr_list more_expr
-%type <VariableExprNode*> variable_expr
+%type <VariableNode*> variable_expr
 
 
 /****************************************
@@ -220,8 +220,8 @@ expr            :   expr OpLogOr expr                           { $$ = new OrExp
                 |   value_expr                                  { $$ = $1; }
                 |   ptLParen expr ptRParen                      { $$ = $2; }
 
-variable_expr   :   Identifier                                  { $$ = new VariableExprNode( $1 ); }
-                |   Identifier ptLBracket IntValue ptRBracket   { $$ = new VariableExprNode( $1 ); }
+variable_expr   :   Identifier                                  { $$ = new VariableNode( $1 ); }
+                |   Identifier ptLBracket IntValue ptRBracket   { $$ = new VariableNode($1,std::stoi($3)); }
 
 value_expr      :   IntValue                                    { $$ = new ValueExprNode( $1 ); }
                 |   RealValue                                   { $$ = new ValueExprNode( $1 ); }

@@ -106,55 +106,23 @@ HParser::variable_list()
  * @return AST variable node matched
  */
 VariableNode*
-HParser::variable()
+HParser::variable( string id )
 {
-    string id = token_.lexeme;
+    if ( id.empty() ) {
+        id = token_.lexeme;
+        match( decaf::token_type::Identifier );
+    }
     int dim = 0;
-    match( decaf::token_type::Identifier );
     if ( token_.type == decaf::token_type::ptLBracket ) {
         match( decaf::token_type::ptLBracket );
         if ( token_.type == decaf::token_type::IntValue) {
-            dim = stoi( token_.lexeme );
+            dim = stoi(token_.lexeme);
         }
         match( decaf::token_type::IntValue );
         match( decaf::token_type::ptRBracket );
     }
 
     return new VariableNode( id, dim );
-}
-
-/**
- * Matches variable expression within program
- * @return AST variable node matched
- */
-VariableExprNode*
-HParser::variable_expr()
-{
-    string id = token_.lexeme;
-    match( decaf::token_type::Identifier );
-    if ( token_.type == decaf::token_type::ptLBracket ) {
-        match( decaf::token_type::ptLBracket );
-        match( decaf::token_type::IntValue );
-        match( decaf::token_type::ptRBracket );
-    }
-
-    return new VariableExprNode( id );
-}
-
-/**
- * Matches variable assignment expression within program
- * variable = expr;
- * @return AST variable assignment node
- */
-AssignStmNode*
-HParser::variable_assignment_expr()
-{
-    auto lhs = variable_expr( );
-    match( decaf::token_type::OpAssign );
-    auto rhs = expr();
-    match( decaf::token_type::ptSemicolon );
-
-    return new AssignStmNode( lhs, rhs );
 }
 
 /**
@@ -239,12 +207,12 @@ HParser::parameter_list()
 {
     auto list_p = new list<ParameterNode*>();
     auto type = this->type( );
-    auto node_ve = this->variable_expr();
+    auto node_ve = this->variable( );
     list_p->push_back( new ParameterNode(type, node_ve) );
     while ( token_.type == decaf::token_type::ptComma ) {
         match( decaf::token_type::ptComma );
         type = this->type( );
-        node_ve = this->variable_expr( );
+        node_ve = this->variable( );
         list_p->push_back( new ParameterNode( type, node_ve ) );
     }
 
@@ -303,7 +271,7 @@ HParser::statement_list()
     else if( token_.type == decaf::token_type::kwFor ) {
         match( decaf::token_type::kwFor );
         match( decaf::token_type::ptLParen );
-        auto node_asstm = variable_assignment_expr( );
+        auto node_asstm = variable_assignment( );
         auto node_ex = expr( );
         match( decaf::token_type::ptSemicolon );
         auto node_inc_dec = inc_dec_statement( );
@@ -352,14 +320,42 @@ HParser::statement_list()
 }
 
 /**
+ * Matches variable assignment expression within program
+ * variable = expr;
+ * @return AST variable assignment node
+ */
+AssignStmNode*
+HParser::variable_assignment( VariableExprNode* var)
+{
+    VariableExprNode* lhs;
+    if( var == nullptr ) {
+        lhs = variable();
+    } else {
+        lhs = var;
+    }
+    match( decaf::token_type::OpAssign );
+    auto rhs = expr();
+    match( decaf::token_type::ptSemicolon );
+
+    return new AssignStmNode( lhs, rhs );
+}
+
+/**
  * Matches an increment or decrement statement for variable
+ * Takes in optional variable if it has been set which defaults to nullptr if set
  * i.e. variable op_incr_decr
  * @return increment or decrement AST statement node or error if none is matched
  */
 IncrDecrStmNode*
-HParser::inc_dec_statement()
+HParser::inc_dec_statement( VariableExprNode* var )
 {
-    auto node_v = variable_expr();
+    VariableExprNode* node_v;
+    if ( var == nullptr) {
+        node_v = variable();
+    }
+    else {
+        node_v = var;
+    }
     if( token_.type == decaf::token_type::OpArtInc ) {
         match( decaf::token_type::OpArtInc );
 
@@ -394,36 +390,20 @@ HParser::inc_dec_statement()
 
         return new MethodCallExprStmNode( name, list_ex );
     }
-    // variable
-    if ( token_.type == decaf::token_type::ptLBracket ) {
-        match( decaf::token_type::ptLBracket );
-        match( decaf::token_type::IntValue );
-        match( decaf::token_type::ptRBracket );
-    }
-    // variable op_incr_dec
+    // Otherwise we have variable
+    auto node_v = variable( name );
+    // If we encounter increment or decrement we have variable op_incr_dec
     if( token_.type == decaf::token_type::OpArtInc ||
         token_.type == decaf::token_type::OpArtDec ) {
 
-        if( token_.type == decaf::token_type::OpArtInc ) {
-            match( decaf::token_type::OpArtInc );
-            match( decaf::token_type::ptSemicolon );
+        auto node_inc_dec_stmt = inc_dec_statement( node_v );
+        match( decaf::token_type::ptSemicolon );
 
-            return new IncrStmNode( new VariableExprNode( name ) );
-        }
-        else {
-            match( decaf::token_type::OpArtDec );
-            match( decaf::token_type::ptSemicolon );
-
-            return new DecrStmNode( new VariableExprNode( name ) );
-        }
+        return node_inc_dec_stmt;
     }
     // variable = expr;
     else {
-        match( decaf::token_type::OpAssign );
-        auto rhs = expr();
-        match( decaf::token_type::ptSemicolon );
-
-        return new AssignStmNode( new VariableExprNode( name ), rhs );
+        return variable_assignment( node_v );
     }
 }
 
@@ -509,15 +489,8 @@ HParser::more_expr( list<ExprNode*>* &list_ex )
 ExprNode*
 HParser::expr( )
 {
-    // Match and expression (mandatory)
     auto node_ex = expr_and( );
-
-    // Check if next token is an or expression (expr2 is optional)
-    if( token_.type == decaf::token_type::OpLogOr ) {
-        return expr2( node_ex );
-    }
-
-    return node_ex;
+    return expr_pr( node_ex );
 }
 
 /**
@@ -526,12 +499,17 @@ HParser::expr( )
  * @return or expression node with all relevant expressions
  */
 ExprNode*
-HParser::expr2( ExprNode* lhs )
+HParser::expr_pr( ExprNode* lhs )
 {
-    match( decaf::token_type::OpLogOr );
-    auto rhs = expr();
+    if ( token_.type == decaf::token_type::OpLogOr ) {
+        match(decaf::token_type::OpLogOr);
+        auto rhs = expr_and();
 
-    return new OrExprNode( lhs, rhs );
+        return expr_pr( new OrExprNode( lhs, rhs ) );
+    }
+    else {
+        return lhs;
+    }
 }
 
 /**
@@ -542,15 +520,8 @@ HParser::expr2( ExprNode* lhs )
 ExprNode*
 HParser::expr_and( )
 {
-    // Match equality expresssion (mandatory)
     auto node_ex = expr_eq( );
-
-    // Check if next token is an and expression (expr_and2 is optional)
-    if( token_.type == decaf::token_type::OpLogAnd ) {
-        return expr_and2( node_ex );
-    }
-
-    return node_ex;
+    return expr_and_pr( node_ex );
 }
 
 /**
@@ -559,12 +530,17 @@ HParser::expr_and( )
  * @return and expression node with all relevant expressions
  */
 ExprNode*
-HParser::expr_and2( ExprNode* lhs )
+HParser::expr_and_pr( ExprNode* lhs )
 {
-    match( decaf::token_type::OpLogAnd );
-    auto rhs = expr_and();
+    if ( token_.type == decaf::token_type::OpLogAnd ) {
+        match(decaf::token_type::OpLogAnd);
+        auto rhs = expr_eq();
 
-    return new AndExprNode( lhs, rhs );
+        return expr_and_pr( new AndExprNode( lhs, rhs ) );
+    }
+    else {
+        return lhs;
+    }
 }
 
 /**
@@ -575,16 +551,8 @@ HParser::expr_and2( ExprNode* lhs )
 ExprNode*
 HParser::expr_eq( )
 {
-    // Match relational expression (mandatory)
     auto node_ex = expr_rel( );
-
-    // Check if next token is an equality expression (expr_eq2 is optional)
-    if( token_.type == decaf::token_type::OpRelEQ ||
-        token_.type == decaf::token_type::OpRelNEQ ) {
-        return expr_eq2( node_ex );
-    }
-
-    return node_ex;
+    return expr_eq_pr( node_ex );
 }
 
 /**
@@ -593,19 +561,22 @@ HParser::expr_eq( )
  * @return equality expression node with all relevant expressions
  */
 ExprNode*
-HParser::expr_eq2( ExprNode* lhs )
+HParser::expr_eq_pr( ExprNode* lhs )
 {
     if ( token_.type == decaf::token_type::OpRelEQ ) {
-        match( decaf::token_type::OpRelEQ );
-        auto rhs = expr_eq();
+        match(decaf::token_type::OpRelEQ);
+        auto rhs = expr_rel();
 
-        return new EqExprNode( lhs, rhs );
+        return expr_eq_pr( new EqExprNode( lhs, rhs ) );
+    }
+    if ( token_.type == decaf::token_type::OpRelNEQ ) {
+        match(decaf::token_type::OpRelNEQ);
+        auto rhs = expr_rel();
+
+        return expr_eq_pr( new NeqExprNode( lhs, rhs ) );
     }
     else {
-        match( decaf::token_type::OpRelNEQ );
-        auto rhs = expr_eq();
-
-        return new NeqExprNode( lhs, rhs );
+        return lhs;
     }
 }
 
@@ -617,18 +588,8 @@ HParser::expr_eq2( ExprNode* lhs )
 ExprNode*
 HParser::expr_rel( )
 {
-    // Match add expression (mandatory)
     auto node_ex = expr_add( );
-
-    // Check if next token is an relational expression (expr_rel2 is optional)
-    if( token_.type == decaf::token_type::OpRelGT ||
-        token_.type == decaf::token_type::OpRelGTE ||
-        token_.type == decaf::token_type::OpRelLT ||
-        token_.type == decaf::token_type::OpRelLTE ) {
-        return expr_rel2( node_ex );
-    }
-
-    return node_ex;
+    return expr_rel_pr( node_ex );
 }
 
 /**
@@ -637,31 +598,34 @@ HParser::expr_rel( )
  * @return equality expression node with all relevant expressions
  */
 ExprNode*
-HParser::expr_rel2( ExprNode* lhs )
+HParser::expr_rel_pr( ExprNode* lhs )
 {
     if ( token_.type == decaf::token_type::OpRelGT ) {
         match( decaf::token_type::OpRelGT );
-        auto rhs = expr_rel();
+        auto rhs = expr_add();
 
-        return new GtExprNode( lhs, rhs );
+        return expr_rel_pr( new GtExprNode( lhs, rhs ) );
     }
     else if ( token_.type == decaf::token_type::OpRelGTE ) {
         match( decaf::token_type::OpRelGTE );
-        auto rhs = expr_rel();
+        auto rhs = expr_add();
 
-        return new GteExprNode( lhs, rhs );
+        return expr_rel_pr( new GteExprNode( lhs, rhs ) );
     }
     else if ( token_.type == decaf::token_type::OpRelLT ) {
         match( decaf::token_type::OpRelLT );
-        auto rhs = expr_rel();
+        auto rhs = expr_add();
 
-        return new LtExprNode( lhs, rhs );
+        return expr_rel_pr( new LtExprNode( lhs, rhs ) );
+    }
+    else if ( token_.type == decaf::token_type::OpRelLTE ) {
+        match( decaf::token_type::OpRelLTE );
+        auto rhs = expr_add();
+
+        return expr_rel_pr( new LteExprNode( lhs, rhs ) );
     }
     else {
-        match( decaf::token_type::OpRelLTE );
-        auto rhs = expr_rel();
-
-        return new LteExprNode( lhs, rhs );
+        return lhs;
     }
 }
 
@@ -673,16 +637,8 @@ HParser::expr_rel2( ExprNode* lhs )
 ExprNode*
 HParser::expr_add( )
 {
-    // Match multiply expression (mandatory)
     auto node_ex = expr_mult( );
-
-    // Check if next token is an add expression (expr_rel2 is optional)
-    if( token_.type == decaf::token_type::OpArtPlus ||
-        token_.type == decaf::token_type::OpArtMinus ) {
-        return expr_add2( node_ex );
-    }
-
-    return node_ex;
+    return expr_add_pr( node_ex );
 }
 
 /**
@@ -691,19 +647,22 @@ HParser::expr_add( )
  * @return plus or minus expression node with all relevant expressions
  */
 ExprNode*
-HParser::expr_add2( ExprNode* lhs )
+HParser::expr_add_pr( ExprNode* lhs )
 {
     if ( token_.type == decaf::token_type::OpArtPlus ) {
         match( decaf::token_type::OpArtPlus );
-        auto rhs = expr_add();
+        auto rhs = expr_mult();
 
-        return new PlusExprNode( lhs, rhs );
+        return expr_add_pr( new PlusExprNode( lhs, rhs ) );
+    }
+    else if ( token_.type == decaf::token_type::OpArtMinus ) {
+        match( decaf::token_type::OpArtMinus );
+        auto rhs = expr_mult();
+
+        return expr_add_pr( new MinusExprNode( lhs, rhs ) );
     }
     else {
-        match( decaf::token_type::OpArtMinus );
-        auto rhs = expr_add();
-
-        return new MinusExprNode( lhs, rhs );
+        return lhs;
     }
 }
 
@@ -715,17 +674,8 @@ HParser::expr_add2( ExprNode* lhs )
 ExprNode*
 HParser::expr_mult( )
 {
-    // Match unary expression (mandatory)
     auto node_ex = expr_unary( );
-
-    // Check if next token is an add expression (expr_rel2 is optional)
-    if( token_.type == decaf::token_type::OpArtMult ||
-        token_.type == decaf::token_type::OpArtDiv ||
-        token_.type == decaf::token_type::OpArtModulus ) {
-        return expr_mult2( node_ex );
-    }
-
-    return node_ex;
+    return expr_mult_pr( node_ex );
 }
 
 /**
@@ -734,25 +684,28 @@ HParser::expr_mult( )
  * @return multiply expression node with all relevant expressions
  */
 ExprNode*
-HParser::expr_mult2( ExprNode* lhs )
+HParser::expr_mult_pr( ExprNode* lhs )
 {
     if ( token_.type == decaf::token_type::OpArtMult ) {
         match( decaf::token_type::OpArtMult );
-        auto rhs = expr_mult();
+        auto rhs = expr_unary();
 
-        return new MultiplyExprNode( lhs, rhs );
+        return expr_mult_pr( new MultiplyExprNode( lhs, rhs ) );
     }
     else if (token_.type == decaf::token_type::OpArtDiv ) {
         match( decaf::token_type::OpArtDiv );
-        auto rhs = expr_mult();
+        auto rhs = expr_unary();
 
-        return new DivideExprNode( lhs, rhs );
+        return expr_mult_pr( new DivideExprNode( lhs, rhs ) );
+    }
+    else if (token_.type == decaf::token_type::OpArtModulus ) {
+        match( decaf::token_type::OpArtModulus );
+        auto rhs = expr_unary();
+
+        return expr_mult_pr( new ModulusExprNode( lhs, rhs ) );
     }
     else {
-        match( decaf::token_type::OpArtModulus );
-        auto rhs = expr_mult();
-
-        return new ModulusExprNode( lhs, rhs );
+        return lhs;
     }
 }
 
