@@ -12,14 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a0f90ad-211c-459a-9a58-3f4578fbf3a9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/hparser.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/hparser.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/parser_decaf.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/parser_decaf.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/DecafParser" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DecafParser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/decaf.yy" beforeDir="false" afterPath="$PROJECT_DIR$/decaf.yy" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hparser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/hparser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser_decaf.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/parser_decaf.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,7 +51,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="cpp" value="12334" />
+          <entry key="cpp" value="12340" />
           <entry key="decaf" value="990" />
           <entry key="h" value="833" />
           <entry key="yy" value="3648" />
@@ -67,7 +60,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Doxygen file" value="103" />
-          <entry key="ObjectiveC" value="13064" />
+          <entry key="ObjectiveC" value="13070" />
           <entry key="PLAIN_TEXT" value="4638" />
         </counts>
       </usages-collector>
@@ -87,8 +80,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hparser.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="701" column="1" lean-forward="true" selection-start-line="701" selection-start-column="1" selection-end-line="701" selection-end-column="1" />
+            <state relative-caret-position="-1537">
+              <caret line="729" column="3" lean-forward="true" selection-start-line="729" selection-start-column="3" selection-end-line="729" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -273,7 +266,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DecafParser" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-h extended_test.decaf" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DecafParser" TARGET_NAME="DecafParser" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DecafParser" RUN_TARGET_NAME="DecafParser">
+    <configuration name="DecafParser" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-h extended_test_files/extended_test.decaf" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DecafParser" TARGET_NAME="DecafParser" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DecafParser" RUN_TARGET_NAME="DecafParser">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -294,12 +287,12 @@
       <option name="presentableId" value="Default" />
       <updated>1538148419198</updated>
       <workItem from="1538148420718" duration="1008000" />
-      <workItem from="1539118076749" duration="52202000" />
+      <workItem from="1539118076749" duration="52326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53210000" />
+    <option name="totallyTimeSpent" value="53334000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -445,8 +438,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hparser.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="701" column="1" lean-forward="true" selection-start-line="701" selection-start-column="1" selection-end-line="701" selection-end-column="1" />
+        <state relative-caret-position="-1537">
+          <caret line="729" column="3" lean-forward="true" selection-start-line="729" selection-start-column="3" selection-end-line="729" selection-end-column="3" />
         </state>
       </provider>
     </entry>

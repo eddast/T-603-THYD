@@ -740,6 +740,7 @@ HParser::expr_unary()
          token_.type == decaf::token_type::BoolValue) {
         return factor();
     }
+
     // If factor does not apply, we match unary expression
     else {
         if ( token_.type == decaf::token_type::OpArtPlus ) {
@@ -776,11 +777,14 @@ HParser::factor()
 
         return node_ex;
     }
+
     // If factor begins with identifier we match either factor -> variable
     // or factor -> id(expr_list)
     else if( token_.type == decaf::token_type::Identifier ) {
+
         string id = token_.lexeme;
         match( decaf::token_type::Identifier );
+
         // If after identifier we encounter left parenthesis, we match factor -> id(expr_list)
         if( token_.type == decaf::token_type::ptLParen ) {
             match( decaf::token_type::ptLParen );
@@ -789,11 +793,13 @@ HParser::factor()
 
             return new MethodCallExprStmNode( id, list_ex );
         }
+
         // Otherwise we have a variable
         else {
             return variable( id );
         }
     }
+
     // Otherwise, we mach a value (int real or bool)
     else {
         return value();
