@@ -811,7 +811,7 @@ namespace yy {
 
   case 3:
 #line 133 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< std::list<VariableDeclarationNode*>* > () = yystack_[3].value.as< std::list<VariableDeclarationNode*>* > (); yylhs.value.as< std::list<VariableDeclarationNode*>* > ()->push_back( new VariableDeclarationNode(yystack_[2].value.as< ValueType > (),yystack_[1].value.as< std::list<VariableNode*>* > ()) ); }
+    { yylhs.value.as< std::list<VariableDeclarationNode*>* > () = yystack_[3].value.as< std::list<VariableDeclarationNode*>* > (); yylhs.value.as< std::list<VariableDeclarationNode*>* > ()->push_back( new VariableDeclarationNode( yystack_[2].value.as< ValueType > (), yystack_[1].value.as< std::list<VariableNode*>* > () ) ); }
 #line 816 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
@@ -841,7 +841,7 @@ namespace yy {
 
   case 8:
 #line 140 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< std::list<VariableNode*>* > () = new std::list<VariableNode*>(); yylhs.value.as< std::list<VariableNode*>* > ()->push_back( yystack_[0].value.as< VariableNode* > () ); }
+    { yylhs.value.as< std::list<VariableNode*>* > () = new std::list<VariableNode*>( ); yylhs.value.as< std::list<VariableNode*>* > ()->push_back( yystack_[0].value.as< VariableNode* > () ); }
 #line 846 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
@@ -853,13 +853,13 @@ namespace yy {
 
   case 10:
 #line 143 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< VariableNode* > () = new VariableNode(yystack_[0].value.as< std::string > ()); }
+    { yylhs.value.as< VariableNode* > () = new VariableNode( yystack_[0].value.as< std::string > () ); }
 #line 858 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 11:
 #line 144 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< VariableNode* > () = new VariableNode(yystack_[3].value.as< std::string > (),std::stoi(yystack_[1].value.as< std::string > ())); }
+    { yylhs.value.as< VariableNode* > () = new VariableNode( yystack_[3].value.as< std::string > (),std::stoi( yystack_[1].value.as< std::string > () ) ); }
 #line 864 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
@@ -877,7 +877,7 @@ namespace yy {
 
   case 14:
 #line 149 "decaf.yy" // lalr1.cc:870
-    { yylhs.value.as< std::list<MethodNode*>* > () = new std::list<MethodNode*>(); yylhs.value.as< std::list<MethodNode*>* > ()->push_back(yystack_[0].value.as< MethodNode* > ()); }
+    { yylhs.value.as< std::list<MethodNode*>* > () = new std::list<MethodNode*>(); yylhs.value.as< std::list<MethodNode*>* > ()->push_back( yystack_[0].value.as< MethodNode* > () ); }
 #line 882 "/Users/eddarunarsdottir/Desktop/Haust2018/THYD/Project/P2/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 

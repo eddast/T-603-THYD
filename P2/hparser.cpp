@@ -175,8 +175,9 @@ ValueType HParser::method_return_type()
         match( decaf::token_type::kwVoid );
         return ValueType::VoidVal;
     }
-
-    return type();
+    else {
+        return type();
+    }
 }
 
 /**
@@ -188,6 +189,9 @@ list<ParameterNode*>*
 HParser::parameters()
 {
     auto list_p = new list<ParameterNode*>();
+
+    // If next token is in FIRST(parameter_list) = { int, real, bool }
+    // We match a parameter list
     if (token_.type == decaf::token_type::kwInt ||
         token_.type == decaf::token_type::kwReal ||
         token_.type == decaf::token_type::kwBool) {
@@ -206,9 +210,13 @@ list<ParameterNode*>*
 HParser::parameter_list()
 {
     auto list_p = new list<ParameterNode*>();
+
+    // Match one mandatory parameter
     auto type = this->type( );
     auto node_ve = this->variable( );
     list_p->push_back( new ParameterNode(type, node_ve) );
+
+    // Then match parameter and add to list while comma is next token, indicating another parameter
     while ( token_.type == decaf::token_type::ptComma ) {
         match( decaf::token_type::ptComma );
         type = this->type( );
@@ -228,6 +236,9 @@ list<StmNode*>*
 HParser::statement_list()
 {
     auto list_stm = new list<StmNode*>();
+
+    // Match statement while next token is in FIRST(statement)
+    // FIRST(statement) = { if, for, return, break, continue, (, id }
     while ( token_.type == decaf::token_type::kwIf ||
             token_.type == decaf::token_type::kwFor ||
             token_.type == decaf::token_type::kwReturn ||
@@ -381,7 +392,8 @@ HParser::inc_dec_statement( VariableExprNode* var )
     string name = token_.lexeme;
     match( decaf::token_type::Identifier );
 
-    // id (expression list)
+    // if we encounter left parentheses immediately after identifier,
+    // we match id_start_stm -> id (expression list)
     if( token_.type == decaf::token_type::ptLParen ) {
         match( decaf::token_type::ptLParen );
         auto list_ex = expr_list();
@@ -390,9 +402,12 @@ HParser::inc_dec_statement( VariableExprNode* var )
 
         return new MethodCallExprStmNode( name, list_ex );
     }
-    // Otherwise we have variable
+
+    // Otherwise we should match a variable
     auto node_v = variable( name );
-    // If we encounter increment or decrement we have variable op_incr_dec
+
+    // If we encounter increment or decrement operators immediately after variable,
+    // we match id_start_stm -> variable op_incr_dec
     if( token_.type == decaf::token_type::OpArtInc ||
         token_.type == decaf::token_type::OpArtDec ) {
 
@@ -401,7 +416,8 @@ HParser::inc_dec_statement( VariableExprNode* var )
 
         return node_inc_dec_stmt;
     }
-    // variable = expr;
+    // Otherwise we match id_start_stm -> variable = expr;
+    // If we end up here and don't have variable assignment, match yields error
     else {
         return variable_assignment( node_v );
     }
@@ -430,14 +446,12 @@ HParser::statement_block()
 BlockStmNode*
 HParser::optional_else()
 {
+    // If we encounter else keyword we return statement block
     if( token_.type == decaf::token_type::kwElse ) {
         match(decaf::token_type::kwElse);
-        match( decaf::token_type::ptLBrace );
-        auto list_stms = statement_list();
-        match( decaf::token_type::ptRBrace );
-
-        return new BlockStmNode( list_stms );
+        return statement_block( );
     }
+    // If not, nullptr (else block is optional)
     else {
         return nullptr;
     }
@@ -494,7 +508,7 @@ HParser::expr( )
 }
 
 /**
- * Matches an optional left-hand side or-expression within program
+ * Matches an optional or-expression within program
  * expr' ::= || expr_and expr' | Ɛ
  * @return or expression node with all relevant expressions
  */
@@ -593,7 +607,7 @@ HParser::expr_rel( )
 }
 
 /**
- * Matches an optional left-hand side relational-expression within program
+ * Matches an optional relational-expression within program
  * expr_rel' ::= op_rel expr_add expr_rel' | Ɛ
  * @return equality expression node with all relevant expressions
  */
@@ -642,7 +656,7 @@ HParser::expr_add( )
 }
 
 /**
- * Matches an optional left-hand side addition-expression within program
+ * Matches an optional addition-expression within program
  * expr_add' ::= op_add expr_mult expr_add' | Ɛ
  * @return plus or minus expression node with all relevant expressions
  */
@@ -717,15 +731,16 @@ HParser::expr_mult_pr( ExprNode* lhs )
 ExprNode*
 HParser::expr_unary()
 {
-    // factor
+    // FIRST(factor) = { (, id, int_value, real_value, bool_value }
+    // If any of those tokens are encountered, we match factor
     if ( token_.type == decaf::token_type::ptLParen ||
          token_.type == decaf::token_type::Identifier ||
          token_.type == decaf::token_type::IntValue ||
-         token_.type == decaf::token_type::BoolValue ||
-         token_.type == decaf::token_type::RealValue) {
+         token_.type == decaf::token_type::RealValue ||
+         token_.type == decaf::token_type::BoolValue) {
         return factor();
     }
-    // if not factor, we have unary expression
+    // If factor does not apply, we match unary expression
     else {
         if ( token_.type == decaf::token_type::OpArtPlus ) {
             match ( decaf::token_type::OpArtPlus );
@@ -753,7 +768,7 @@ HParser::expr_unary()
 ExprNode*
 HParser::factor()
 {
-    // (expr)
+    // If factor begins with left parentheses we match factor -> (expr)
     if ( token_.type == decaf::token_type::ptLParen ) {
         match( decaf::token_type::ptLParen );
         ExprNode* node_ex = expr( );
@@ -761,9 +776,12 @@ HParser::factor()
 
         return node_ex;
     }
+    // If factor begins with identifier we match either factor -> variable
+    // or factor -> id(expr_list)
     else if( token_.type == decaf::token_type::Identifier ) {
         string id = token_.lexeme;
         match( decaf::token_type::Identifier );
+        // If after identifier we encounter left parenthesis, we match factor -> id(expr_list)
         if( token_.type == decaf::token_type::ptLParen ) {
             match( decaf::token_type::ptLParen );
             auto list_ex = expr_list( );
@@ -771,23 +789,15 @@ HParser::factor()
 
             return new MethodCallExprStmNode( id, list_ex );
         }
+        // Otherwise we have a variable
         else {
-            if ( token_.type == decaf::token_type::ptLBracket ) {
-                match( decaf::token_type::ptLBracket );
-                match( decaf::token_type::IntValue );
-                match( decaf::token_type::ptRBracket );
-            }
-            return new VariableExprNode( id );
+            return variable( id );
         }
     }
-    else if ( token_.type == decaf::token_type::IntValue ||
-              token_.type == decaf::token_type::BoolValue ||
-              token_.type == decaf::token_type::RealValue) {
+    // Otherwise, we mach a value (int real or bool)
+    else {
         return value();
     }
-    error( decaf::token_type::ptLParen );
-
-    return nullptr;
 }
 
 /**
@@ -798,19 +808,31 @@ HParser::factor()
 ExprNode*
 HParser::value()
 {
-    if ( token_.type == decaf::token_type::IntValue ||
-         token_.type == decaf::token_type::BoolValue ||
-         token_.type == decaf::token_type::RealValue) {
-        string val = token_.lexeme;
-        match( token_.type );
-        return new ValueExprNode( val );
+    ValueExprNode* node_v;
+    string val = token_.lexeme;
+
+    // If int value set return value expression node for int
+    if ( token_.type == decaf::token_type::IntValue ) {
+        match( decaf::token_type::IntValue );
+        node_v = new ValueExprNode( val );
     }
-    error( decaf::token_type::IntValue );
-    return nullptr;
+    // If real value set return value expression node for real
+    else if ( token_.type == decaf::token_type::RealValue ) {
+        match( decaf::token_type::RealValue );
+        node_v = new ValueExprNode( val );
+    }
+    // Otherwise assume we have bool value and set return value to value expr node for bool
+    // Match func will yield error if we end up here and don't have bool value which is expected behavior
+    else {
+        match( decaf::token_type::BoolValue );
+        node_v = new ValueExprNode( val );
+    }
+
+    return node_v;
 }
 
 /**
- * Helper function, determines wheter current token is a member of FIRST(expr)
+ * Helper function, determines whether current token is a member of FIRST(expr)
  * That is, in the first set of any given expression
  * FIRST(expression) = { +, -, !, (, id, int_value, real_value, bool_value }
  * @return true if next token is in FIRST(expression)

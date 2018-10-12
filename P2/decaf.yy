@@ -130,23 +130,23 @@ class Parser;
 program         :   kwClass Identifier ptLBrace
                     variable_decs method_decs ptRBrace          { driver.set_AST( new ProgramNode( $2, $4, $5 ) ); }
 
-variable_decs   :   variable_decs type var_list ptSemicolon     { $$ = $1; $$->push_back( new VariableDeclarationNode($2,$3) ); }
+variable_decs   :   variable_decs type var_list ptSemicolon     { $$ = $1; $$->push_back( new VariableDeclarationNode( $2, $3 ) ); }
                 |                                               { $$ = new std::list<VariableDeclarationNode*>(); }
 
 type            :   kwInt                                       { $$ = ValueType::IntVal; }
                 |   kwReal                                      { $$ = ValueType::RealVal; }
                 |   kwBool                                      { $$ = ValueType::BoolVal; }
 
-var_list        :   variable                                    { $$ = new std::list<VariableNode*>(); $$->push_back( $1 ); }
+var_list        :   variable                                    { $$ = new std::list<VariableNode*>( ); $$->push_back( $1 ); }
                 |   var_list ptComma variable                   { $$ = $1; $$->push_back( $3 ); }
 
-variable        :   Identifier                                  { $$ = new VariableNode($1); }
-                |   Identifier ptLBracket IntValue ptRBracket   { $$ = new VariableNode($1,std::stoi($3)); }
+variable        :   Identifier                                  { $$ = new VariableNode( $1 ); }
+                |   Identifier ptLBracket IntValue ptRBracket   { $$ = new VariableNode( $1,std::stoi( $3 ) ); }
 
 variable_assign :   variable_expr OpAssign expr                 { $$ = new AssignStmNode( $1, $3 ); }
 
 method_decs     :   method_decs method_dec                      { $$ = $1; $$->push_back( $2 ); }
-                |   method_dec                                  { $$ = new std::list<MethodNode*>(); $$->push_back($1); }
+                |   method_dec                                  { $$ = new std::list<MethodNode*>(); $$->push_back( $1 ); }
 
 method_dec      :   kwStatic method_ret_type Identifier
                     ptLParen parameters ptRParen
