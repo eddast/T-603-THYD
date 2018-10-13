@@ -1,8 +1,6 @@
 
 class Program {
-
-    static void main() {
-        int x;
-        x = x + y - 5 * 10 || 3;
+    static void main( ) {
+        func( 5 % -8 + 5 || 9 && !18 * 3 - 6) ;
     }
 }
