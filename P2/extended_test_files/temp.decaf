@@ -1,0 +1,6 @@
+
+class Program {
+    static void main( ) {
+        func( 5 % -8 + 5 || 9 && !18 * 3 - 6) ;
+    }
+}

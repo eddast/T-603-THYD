@@ -1,0 +1,16 @@
+
+class Program {
+/*
+    bool x, y, z, res;
+    int n, m, v, num;
+*/
+    static void main() {
+        /*if ( x && !y || x && y >= z ) {
+            res = false;
+        }
+        if ( (n != m) && !( v >= n ) || ( m == n ) ) {
+            num = x + y % 5 * 44;
+        }*/
+        if(true || false || true) { return; }
+    }
+}

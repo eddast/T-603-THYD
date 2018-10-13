@@ -122,11 +122,52 @@ public:
 
 private:
 
-    // Add your private functions and variables here below ...
+    // Parse program as whole
     ProgramNode* program();
+
+    // Parse variables and types
     std::list<VariableDeclarationNode*>* variable_declarations();
     std::list<VariableNode*>* variable_list();
-    VariableNode* variable();
+    VariableNode* variable( std::string id = "" );
     ValueType type();
+
+    // Parse methods and parameters
+    std::list<MethodNode*>* method_declarations();
+    MethodNode* method_declaration();
+    ValueType method_return_type();
+    std::list<ParameterNode*>* parameters();
+    std::list<ParameterNode*>* parameter_list();
+
+    // Parse statements and blocks
+    std::list<StmNode*>* statement_list();
+    StmNode* statement();
+    AssignStmNode* variable_assignment( VariableExprNode* var = nullptr );
+    IncrDecrStmNode* inc_dec_statement( VariableExprNode* var = nullptr );
+    StmNode* id_start_stm();
+    BlockStmNode* statement_block();
+    BlockStmNode* optional_else();
+
+    // Parse expressions
+    std::list<ExprNode*>* expr_list();
+    std::list<ExprNode*>* more_expr( std::list<ExprNode*>* &list_ex );
+    ExprNode* expr();
+    ExprNode* expr_and();
+    ExprNode* expr_eq();
+    ExprNode* expr_rel();
+    ExprNode* expr_add();
+    ExprNode* expr_mult();
+    ExprNode* expr_unary();
+    ExprNode* expr_pr( ExprNode* lhs );
+    ExprNode* expr_and_pr( ExprNode* lhs );
+    ExprNode* expr_eq_pr( ExprNode* lhs );
+    ExprNode* expr_rel_pr( ExprNode* lhs );
+    ExprNode* expr_add_pr( ExprNode* lhs );
+    ExprNode* expr_mult_pr( ExprNode* lhs );
+    bool next_token_is_expr();
+
+    // Parse factors, variables and values (expressions)
+    ExprNode* factor();
+    ExprNode* value();
+
 };
 #endif //DECAFPARSER_HPARSER_H
