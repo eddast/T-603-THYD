@@ -705,7 +705,7 @@ public:
             std::string var_lhs = data.expr_return_var;
             tac.append( TAC::InstrType::APARAM, var_lhs);
         }
-        // Then call procedure after defining parameters
+        // Then append TAC code that calls procedure after defining parameters
         tac.append( TAC::InstrType::CALL, id_ );
     }
 
@@ -733,17 +733,21 @@ public:
     }
 
     virtual void icg( Data& data, TAC& tac ) const override {
-        // Provided.
+        // Extract name and return type of variable being assigned
         lvar_->icg( data, tac );
         std::string var = data.expr_return_var;
         ValueType var_type = data.expr_return_type;
 
+        // Extract name and return type of expression being assigned to variable
         expr_->icg( data, tac );
         std::string exp_var = data.expr_return_var;
         ValueType exp_type = data.expr_return_type;
 
+        // Then append TAC code that assigns expression to the variable
         tac.append( TAC::InstrType::ASSIGN, exp_var, var );
 
+        // Show warning on attempting assignment of values with type mismatch
+        // (Int and Bool arithmetic is considered OK)
         if ( (var_type == ValueType::RealVal && exp_type != ValueType::RealVal) ||
              (var_type != ValueType::RealVal && exp_type == ValueType::RealVal) ) {
             warning_msg("Type mismatch in assigning to variable '" + var + "'.");
@@ -777,7 +781,6 @@ public:
         if ( data.expr_return_type == ValueType::RealVal ) {
             tac.append( TAC::InstrType::ADD, data.expr_return_var, "1.0", data.expr_return_var );
         }
-
         // In case expression resolves to int or bool, add the value 1 to expression
         else {
             tac.append( TAC::InstrType::ADD, data.expr_return_var, "1", data.expr_return_var );
@@ -845,14 +848,12 @@ public:
 
         SymbolTable::Entry *entry = data.sym_table.lookup("", data.method_name);
         if ( entry != nullptr ) {
-
             // Check if user is attempting to return value for void function (illegal)
             // Check if user is not returning value for function that should turn value (illegal)
             if ( (expr_ != nullptr && entry->value_type == ValueType::VoidVal) ||
                  (expr_ == nullptr && entry->value_type != ValueType::VoidVal) ) {
                 error_msg( "Return statement in '" + data.method_name + "' does not match return value.");
             }
-
             // Check if return expression's type matches the type declared for method
             // (Int and Bool is considered interchangeable and mismatch between those is OK)
             if (  expr_ != nullptr &&

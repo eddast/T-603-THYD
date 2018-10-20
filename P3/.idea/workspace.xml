@@ -12,14 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73840127-78f8-48af-a07e-e6282ba94fa0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/lexer_decaf.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/lexer_decaf.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/parser_decaf.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/parser_decaf.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/DecafComp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DecafComp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.decaf" beforeDir="false" afterPath="$PROJECT_DIR$/test.decaf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.tac" beforeDir="false" afterPath="$PROJECT_DIR$/test.tac" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -115,12 +108,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="decaf" value="110" />
-          <entry key="h" value="1161" />
+          <entry key="h" value="1354" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="1161" />
+          <entry key="ObjectiveC" value="1354" />
           <entry key="PLAIN_TEXT" value="110" />
         </counts>
       </usages-collector>
@@ -131,8 +124,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ast.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="704" column="55" selection-start-line="704" selection-start-column="55" selection-end-line="704" selection-end-column="55" />
+            <state relative-caret-position="1998">
+              <caret line="979" column="10" lean-forward="true" selection-start-line="979" selection-start-column="10" selection-end-line="979" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -149,8 +142,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.decaf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+            <state relative-caret-position="180">
+              <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
             </state>
           </provider>
         </entry>
@@ -172,6 +165,7 @@
       <find>add_to_symbol</find>
       <find>incr</find>
       <find>add_to_</find>
+      <find>provided.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -269,12 +263,12 @@
       <workItem from="1539870083712" duration="459000" />
       <workItem from="1539942255151" duration="4443000" />
       <workItem from="1539958047232" duration="10291000" />
-      <workItem from="1540073709799" duration="1567000" />
+      <workItem from="1540073709799" duration="1962000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16760000" />
+    <option name="totallyTimeSpent" value="17155000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
@@ -387,8 +381,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test.decaf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        <state relative-caret-position="180">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
@@ -401,8 +395,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ast.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="704" column="55" selection-start-line="704" selection-start-column="55" selection-end-line="704" selection-end-column="55" />
+        <state relative-caret-position="1998">
+          <caret line="979" column="10" lean-forward="true" selection-start-line="979" selection-start-column="10" selection-end-line="979" selection-end-column="10" />
         </state>
       </provider>
     </entry>
