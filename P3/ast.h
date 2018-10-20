@@ -162,7 +162,7 @@ public:
 
         // Set up and configure return value
         data.expr_return_var = var;
-        data.expr_return_type = type_lhs;
+        data.expr_return_type = ValueType::IntVal;
 
         // Warn user if right-hand side type resolves to a Real value
         // (Int and Bool values both considered OK when using not operator)
@@ -226,7 +226,7 @@ public:
 
         // Set up and configure return value
         data.expr_return_var = var;
-        data.expr_return_type = type_lhs;
+        data.expr_return_type = ValueType::IntVal;
 
         // Warn user if right-hand side type resolves to a Real value
         // (Int and Bool values both considered OK when using not operator)
