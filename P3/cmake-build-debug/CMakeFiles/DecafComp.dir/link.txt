@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -Wall -Wno-deprecated-register -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/DecafComp.dir/parser_decaf.cpp.o CMakeFiles/DecafComp.dir/lexer_decaf.cpp.o CMakeFiles/DecafComp.dir/main.cpp.o  -o DecafComp 

@@ -1,0 +1,8 @@
+class Test {
+    static void main() {
+        int k, e, a, b;
+        k = a && b;
+        e = a || b;
+    }
+}
+

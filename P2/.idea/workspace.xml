@@ -13,7 +13,14 @@
   <component name="ChangeListManager">
     <list default="true" id="5a0f90ad-211c-459a-9a58-3f4578fbf3a9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Section 1 - CFG for Decaf for LL(1) Parsing/eddasr15_eddap13 -Decaf-CFG-for-LL(1)-Parsing.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/hparser.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/hparser.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafParser.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/DecafParser" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DecafParser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extended_test_files/temp.decaf" beforeDir="false" afterPath="$PROJECT_DIR$/extended_test_files/temp.decaf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hparser.h" beforeDir="false" afterPath="$PROJECT_DIR$/hparser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.decaf" beforeDir="false" afterPath="$PROJECT_DIR$/test.decaf" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,15 +34,17 @@
     <session id="471108239">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="2" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.12" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="cpp" value="4" />
-          <entry key="decaf" value="9" />
+          <entry key="decaf" value="10" />
           <entry key="h" value="10" />
           <entry key="hh" value="1" />
           <entry key="hpp" value="4" />
@@ -47,13 +56,13 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="ObjectiveC" value="21" />
-          <entry key="PLAIN_TEXT" value="11" />
+          <entry key="PLAIN_TEXT" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="cpp" value="12340" />
-          <entry key="decaf" value="1297" />
+          <entry key="decaf" value="1333" />
           <entry key="h" value="833" />
           <entry key="yy" value="3648" />
         </counts>
@@ -62,7 +71,7 @@
         <counts>
           <entry key="Doxygen file" value="103" />
           <entry key="ObjectiveC" value="13070" />
-          <entry key="PLAIN_TEXT" value="4945" />
+          <entry key="PLAIN_TEXT" value="4981" />
         </counts>
       </usages-collector>
     </session>
@@ -72,7 +81,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/decaf.yy">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
+            <state relative-caret-position="-410">
               <caret line="171" column="64" selection-start-line="171" selection-start-column="64" selection-end-line="171" selection-end-column="64" />
             </state>
           </provider>
@@ -81,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hparser.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10935">
-              <caret line="729" column="3" lean-forward="true" selection-start-line="729" selection-start-column="3" selection-end-line="729" selection-end-column="3" />
+            <state relative-caret-position="618">
+              <caret line="729" column="3" selection-start-line="729" selection-start-column="3" selection-end-line="729" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -90,17 +99,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hparser.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="158" column="27" selection-start-line="158" selection-start-column="27" selection-end-line="158" selection-end-column="27" />
+            <state relative-caret-position="618">
+              <caret line="171" selection-start-line="171" selection-end-line="171" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extended_test_files/temp.decaf">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
-              <caret line="3" column="44" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+              <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -108,7 +117,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ast.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
+            <state relative-caret-position="5505">
               <caret line="367" column="12" selection-start-line="367" selection-start-column="6" selection-end-line="367" selection-end-column="12" />
             </state>
           </provider>
@@ -118,16 +127,16 @@
         <entry file="file://$PROJECT_DIR$/extended_test_files/operator_test.decaf">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+              <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.decaf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
+            <state relative-caret-position="270">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
@@ -136,7 +145,7 @@
         <entry file="file://$PROJECT_DIR$/extended_test_files/extended_test.decaf">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1035">
-              <caret line="69" column="63" lean-forward="true" selection-start-line="69" selection-start-column="63" selection-end-line="69" selection-end-column="63" />
+              <caret line="69" column="63" selection-start-line="69" selection-start-column="63" selection-end-line="69" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -185,13 +194,13 @@
       <list>
         <option value="$PROJECT_DIR$/extended_test.decaf" />
         <option value="$PROJECT_DIR$/temp.decaf" />
-        <option value="$PROJECT_DIR$/test.decaf" />
         <option value="$PROJECT_DIR$/ast.h" />
         <option value="$PROJECT_DIR$/operator_test.decaf" />
         <option value="$PROJECT_DIR$/hparser.h" />
         <option value="$PROJECT_DIR$/decaf.yy" />
         <option value="$PROJECT_DIR$/hparser.cpp" />
         <option value="$PROJECT_DIR$/extended_test_files/temp.decaf" />
+        <option value="$PROJECT_DIR$/test.decaf" />
       </list>
     </option>
   </component>
@@ -211,6 +220,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -227,7 +237,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -237,11 +246,11 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/extended_test_files" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/extended_test_files" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -256,8 +265,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.HandmadeParser">
-    <configuration name="BisonParser" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-h extended_test_files/temp.decaf" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DecafParser" TARGET_NAME="DecafParser" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DecafParser" RUN_TARGET_NAME="DecafParser">
+  <component name="RunManager" selected="Application.BisonParser">
+    <configuration name="BisonParser" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-b" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DecafParser" TARGET_NAME="DecafParser" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DecafParser" RUN_TARGET_NAME="DecafParser">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -267,7 +276,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HandmadeParser" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-h extended_test_files/temp.decaf" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DecafParser" TARGET_NAME="DecafParser" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DecafParser" RUN_TARGET_NAME="DecafParser">
+    <configuration name="HandmadeParser" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-h extended_test_files/extended_test.decaf" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DecafParser" TARGET_NAME="DecafParser" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DecafParser" RUN_TARGET_NAME="DecafParser">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -289,12 +298,14 @@
       <option name="presentableId" value="Default" />
       <updated>1538148419198</updated>
       <workItem from="1538148420718" duration="1008000" />
-      <workItem from="1539118076749" duration="54067000" />
+      <workItem from="1539118076749" duration="55035000" />
+      <workItem from="1539445539179" duration="251000" />
+      <workItem from="1539597303950" duration="271000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55075000" />
+    <option name="totallyTimeSpent" value="56565000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -307,13 +318,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25377643" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2613293" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38108882" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.51432663" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39971346" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -341,9 +353,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
           <caret line="33" column="32" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -378,23 +387,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/decaf.yy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="171" column="64" selection-start-line="171" selection-start-column="64" selection-end-line="171" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inclasstest.decaf">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extended_test_files/operator_test.decaf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/inclasstest.decaf" />
     <entry file="file://$PROJECT_DIR$/parser_decaf.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -402,45 +395,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/extended_test_files/extended_test.decaf">
+    <entry file="file://$PROJECT_DIR$/extended_test_files/temp.decaf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="69" column="63" lean-forward="true" selection-start-line="69" selection-start-column="63" selection-end-line="69" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hparser.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="158" column="27" selection-start-line="158" selection-start-column="27" selection-end-line="158" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hparser.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10935">
-          <caret line="729" column="3" lean-forward="true" selection-start-line="729" selection-start-column="3" selection-end-line="729" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.decaf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
+        <state relative-caret-position="45">
+          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ast.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
+        <state relative-caret-position="5505">
           <caret line="367" column="12" selection-start-line="367" selection-start-column="6" selection-end-line="367" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/extended_test_files/temp.decaf">
+    <entry file="file://$PROJECT_DIR$/extended_test_files/operator_test.decaf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="44" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+        <state relative-caret-position="225">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extended_test_files/extended_test.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1035">
+          <caret line="69" column="63" selection-start-line="69" selection-start-column="63" selection-end-line="69" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hparser.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="618">
+          <caret line="171" selection-start-line="171" selection-end-line="171" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hparser.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="618">
+          <caret line="729" column="3" selection-start-line="729" selection-start-column="3" selection-end-line="729" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/decaf.yy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-410">
+          <caret line="171" column="64" selection-start-line="171" selection-start-column="64" selection-end-line="171" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
