@@ -169,7 +169,6 @@ public:
         if ( type_rhs == ValueType::RealVal ) {
             warning_msg("Type mismatch in logical ! operation (operand is not an integer/bool value)." );
         }
-
     }
 
     virtual const std::string str( ) const override {
@@ -360,6 +359,7 @@ protected:
     TAC::InstrType instr_type_;
     ExprNode *lhs_, *rhs_;
 };
+
 
 class EqExprNode : public RelationalExprNode
 {
@@ -583,21 +583,24 @@ public:
     }
 
     virtual void icg( Data& data, TAC& tac ) const override {
-        // Provided.
+        // Set up name of variable and initialize type to void before validation
         data.expr_return_var = id_;
         data.expr_return_type = ValueType::VoidVal;
 
+        // Look up identifier for local scope using symbol table
+        // Look up identifier for global scope using symbol table if not found there
         SymbolTable::Entry* entry = data.sym_table.lookup( data.method_name, id_ );
-        if ( entry == nullptr && !data.method_name.empty() ) { // also look in global scope.
+        if ( entry == nullptr && !data.method_name.empty() ) {
             entry = data.sym_table.lookup( "", id_ );
         }
+        // Output error if identifier is referenced but not declared
         if ( entry == nullptr ) {
             error_msg("Undeclared identifier '" + id_ + "'.");
         }
+        // Otherwise re-assign correct type to variable
         else {
             data.expr_return_type = entry->value_type;
         }
-
     }
 
     virtual const std::string str( ) const override {
@@ -638,7 +641,8 @@ public:
     }
 
     virtual void icg( Data& data, TAC& tac ) const override {
-        // Provided.
+        // Add new variable to symbol table for current scope
+        // Append variable assignment instruction to TAC code for variable
         for ( auto e : *vars_ ) {
             add_to_symbol_table( data.sym_table, EntryType::Variable, data.method_name, e->get_id(), type_, "" );
             tac.append( TAC::InstrType::VAR, e->get_id() );
@@ -665,7 +669,8 @@ public:
     }
 
     virtual void icg( Data& data, TAC& tac ) const override {
-        // Provided.
+        // When parameter is set for procedure it is added to symbol table
+        // Append procedure-bound parameter definition instruction to TAC code for parameter
         add_to_symbol_table( data.sym_table, EntryType::Variable, data.method_name, var_->get_id(), type_, "" );
         tac.append( TAC::InstrType::FPARAM, var_->get_id() );
     }
@@ -692,7 +697,16 @@ public:
     }
 
     virtual void icg( Data& data, TAC& tac ) const override {
-        // To do ...
+        // Extract value and type of each parameter passed in
+        // Append TAC code that defines a value of a parameter to a procedure call
+        // for each expression passed to procedure
+        for ( auto e : *expr_list_ ) {
+            e->icg( data, tac );
+            std::string var_lhs = data.expr_return_var;
+            tac.append( TAC::InstrType::APARAM, var_lhs);
+        }
+        // Then call procedure after defining parameters
+        tac.append( TAC::InstrType::CALL, id_ );
     }
 
     virtual const std::string str( ) const override {

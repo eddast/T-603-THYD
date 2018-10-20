@@ -1,8 +1,12 @@
 class Test {
+    static int hehe(int y, real x, bool z) {
+        return 1;
+    }
     static void main() {
-        int k, e, a, b;
-        k = a && b;
-        e = a || b;
+        int k;
+        real t;
+        bool a;
+        hehe(k,t,a);
     }
 }
 
