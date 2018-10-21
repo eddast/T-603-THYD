@@ -1002,15 +1002,6 @@ public:
                 BlockStmNode* stms_ )
             : assign_(assign), expr_(expr), inc_dec_(inc_dec), stms_(stms_) {}
 
-    /*
-                    ASSIGN val i
-    for_cond:       LT/GT/LTE/GTE i size for_block
-                    GOTO for_end
-    for_block:      <allur kóði innan forlúppu>
-    for_incr_decr:  ADD/SUB 1 i i
-                    GOTO for_cond
-    for_end:		…
-     */
     virtual void icg( Data& data, TAC& tac ) const override {
         // Start by assignment for loop variable
         assign_->icg( data, tac );
