@@ -1002,8 +1002,44 @@ public:
                 BlockStmNode* stms_ )
             : assign_(assign), expr_(expr), inc_dec_(inc_dec), stms_(stms_) {}
 
+    /*
+                    ASSIGN val i
+    for_cond:       LT/GT/LTE/GTE i size for_block
+                    GOTO for_end
+    for_block:      <allur kóði innan forlúppu>
+    for_incr_decr:  ADD/SUB 1 i i
+                    GOTO for_cond
+    for_end:		…
+     */
     virtual void icg( Data& data, TAC& tac ) const override {
-        // To do ...
+        // Start by assignment for loop variable
+        assign_->icg( data, tac );
+
+        // Create label for condition of for-loop, the for-loop block, increment/decrement statement
+        // and for the end of for-loop
+        std::string lab_for_cond = tac.label_name("for_cond", data.label_no);
+        std::string lab_for_block = tac.label_name("for_block", data.label_no);
+        std::string lab_for_incr_decr = tac.label_name("for_in_de", data.label_no);
+        std::string lab_for_end = tac.label_name("for_end", data.label_no);
+        data.label_no++;
+
+        // Set up code for for-loop condition go to block if expression is true,
+        // Otherwise jump over block to for-loop end
+        tac.label_next_instr( lab_for_cond );
+        expr_->icg( data, tac );
+        std::string expr_return_var = data.expr_return_var;
+        tac.append(TAC::InstrType::EQ, expr_return_var, "1", lab_for_block);
+        tac.append( TAC::InstrType::GOTO, lab_for_end );
+
+        // For-loop block statements code generation
+        tac.label_next_instr( lab_for_block );
+        stms_->icg( data, tac );
+
+        // Set up increment/decrement statement and revisit for-loop condition afterwards
+        tac.label_next_instr( lab_for_incr_decr );
+        inc_dec_->icg( data, tac );
+        tac.append( TAC::InstrType::GOTO, lab_for_cond );
+        tac.label_next_instr( lab_for_end );
     }
 
     virtual const std::string str( ) const override {

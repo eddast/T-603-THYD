@@ -1,12 +1,9 @@
 class Test {
     static void main() {
-            int k;
-            bool i;
-            k=0;
-        if(true) {
-            k = 1;
+        int i;
+        for(i=1; i <= 10; i++) {
+            writeln(i);
         }
-        writeln(k);
     }
 }
 
