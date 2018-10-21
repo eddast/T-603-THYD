@@ -966,10 +966,10 @@ public:
         // Generate intermediate code for if statement block body
         // Then (potentially) jump over else statement
         stm_if_->icg( data, tac );
-        tac.append( TAC::InstrType::GOTO, lab_if_end );
 
         // The else statement
         if ( stm_else_ != nullptr ) {
+            tac.append( TAC::InstrType::GOTO, lab_if_end );
             tac.label_next_instr( lab_else );
             stm_else_->icg( data, tac );
         }

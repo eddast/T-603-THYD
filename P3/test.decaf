@@ -2,12 +2,11 @@ class Test {
     static void main() {
             int k;
             bool i;
-        if(false) {
-            k = 0;
-        } else {
-            writeln(k);
-            i = false;
+            k=0;
+        if(true) {
+            k = 1;
         }
+        writeln(k);
     }
 }
 
