@@ -31,14 +31,14 @@
 // version 2.2 of Bison.
 
 /**
- ** \file /Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.hpp
+ ** \file /Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.hpp
  ** Define the yy::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
 
-#ifndef YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_PARSER_DECAF_HPP_INCLUDED
-# define YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_PARSER_DECAF_HPP_INCLUDED
+#ifndef YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_PARSER_DECAF_HPP_INCLUDED
+# define YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_PARSER_DECAF_HPP_INCLUDED
 // //                    "%code requires" blocks.
 #line 16 "decaf.yy" // lalr1.cc:395
 
@@ -46,7 +46,7 @@
 #include "ast.h"
 class Parser;
 
-#line 50 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
+#line 50 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -130,7 +130,7 @@ class Parser;
 
 
 namespace yy {
-#line 134 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
+#line 134 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
 
 
 
@@ -1796,9 +1796,9 @@ namespace yy {
 
 
 } // yy
-#line 1800 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
+#line 1800 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.hpp" // lalr1.cc:395
 
 
 
 
-#endif // !YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_PARSER_DECAF_HPP_INCLUDED
+#endif // !YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_PARSER_DECAF_HPP_INCLUDED

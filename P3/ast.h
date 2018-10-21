@@ -103,9 +103,9 @@ public:
     explicit ValueExprNode( const std::string value ) : value_(value) { }
 
     virtual void icg( Data& data, TAC& tac ) const override {
+        // Get retun value and the type of value
         data.expr_return_var = value_;
-        data.expr_return_type =
-                (std::all_of(value_.begin(), value_.end(), ::isdigit) ? ValueType::IntVal : ValueType::RealVal);
+        data.expr_return_type = (std::all_of(value_.begin(), value_.end(), ::isdigit) ? ValueType::IntVal : ValueType::RealVal);
     }
 
     virtual const std::string str( ) const override {
@@ -126,7 +126,6 @@ public:
         // Extract name and return type from left-hand side expression
         lhs_->icg( data, tac );
         std::string var_lhs = data.expr_return_var;
-        ValueType type_lhs = data.expr_return_type;
 
         // Extract name and return type from right-hand side expression
         rhs_->icg( data, tac );
@@ -189,7 +188,6 @@ public:
         // Extract name and return type from left-hand side expression
         lhs_->icg( data, tac );
         std::string var_lhs = data.expr_return_var;
-        ValueType type_lhs = data.expr_return_type;
 
         // Extract name and return type from right-hand side expression
         rhs_->icg( data, tac );
@@ -529,9 +527,11 @@ public:
     }
 
     virtual void icg( Data& data, TAC& tac ) const override {
+        // If there is no left hand side of plus expression we have unary plus
         if ( lhs_ == nullptr ) {
             rhs_->icg( data, tac );
         }
+        // Otherwise generate TAC code for simple arithmetic
         else {
             ArithmeticExprNode::icg( data, tac );
         }
@@ -557,7 +557,7 @@ public:
     }
 
     virtual void icg( Data& data, TAC& tac ) const override {
-        // Provided.
+        // If there is no left hand side of minus expression we have unary minus
         if ( lhs_ == nullptr ) {
             rhs_->icg( data, tac );
             std::string var = tac.tmp_variable_name(data.variable_no++);
@@ -565,6 +565,7 @@ public:
             tac.append( TAC::InstrType::UMINUS, data.expr_return_var, var );
             data.expr_return_var = var;
         }
+        // Otherwise generate TAC code for simple arithmetic
         else {
             ArithmeticExprNode::icg( data, tac );
         }
@@ -836,7 +837,6 @@ public:
             : expr_(expr) { }
 
     virtual void icg( Data& data, TAC& tac ) const override {
-
         // If any expression is returned, assign return value to method
         if ( expr_ != nullptr ) {
             expr_->icg( data, tac );
@@ -917,7 +917,10 @@ public:
     BlockStmNode( std::list<StmNode*>* stms ) : stms_(stms) {}
 
     virtual void icg( Data& data, TAC& tac ) const override {
-        // To do ...
+        // Generate intermediate code for each statements in block
+        for ( auto s : *stms_ ) {
+            s->icg( data, tac );
+        }
     }
 
     virtual const std::string str( ) const override {
@@ -942,7 +945,37 @@ public:
             : expr_(expr), stm_if_(stm_if), stm_else_(stm_else) {}
 
     virtual void icg( Data& data, TAC& tac ) const override {
-        // To do ...
+        // Generate intermediate code and extract value of if condition
+        expr_->icg( data, tac );
+        std::string expr_var = data.expr_return_var;
+
+        // Create label for point in program where we'd go to if if-condition is false
+        // (which is either an else statement or code immediately following if statement)
+        std::string lab_else = tac.label_name("else", data.label_no);
+        std::string lab_if_end = tac.label_name("if_end", data.label_no);
+        data.label_no++;
+
+        // If if-condition expression evaluates to false jump over if statement block
+        // Either to else statement or if none is provided to end of if statement
+        if ( stm_else_ != nullptr ) {
+            tac.append(TAC::InstrType::EQ, expr_var, "0", lab_else);
+        } else {
+            tac.append(TAC::InstrType::EQ, expr_var, "0", lab_if_end);
+        }
+
+        // Generate intermediate code for if statement block body
+        // Then (potentially) jump over else statement
+        stm_if_->icg( data, tac );
+        tac.append( TAC::InstrType::GOTO, lab_if_end );
+
+        // The else statement
+        if ( stm_else_ != nullptr ) {
+            tac.label_next_instr( lab_else );
+            stm_else_->icg( data, tac );
+        }
+
+        // Mark end of if statement with label
+        tac.label_next_instr( lab_if_end );
     }
 
     virtual const std::string str( ) const override {

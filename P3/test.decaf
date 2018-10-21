@@ -1,12 +1,13 @@
 class Test {
-    static int hehe(int y, real x, bool z) {
-        return 1;
-    }
     static void main() {
-        int k;
-        real t;
-        bool a;
-        hehe(k,t,a);
+            int k;
+            bool i;
+        if(false) {
+            k = 0;
+        } else {
+            writeln(k);
+            i = false;
+        }
     }
 }
 

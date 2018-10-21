@@ -1,6 +1,6 @@
-#line 2 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../lexer_decaf.cpp"
+#line 2 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../lexer_decaf.cpp"
 
-#line 4 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../lexer_decaf.cpp"
+#line 4 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../lexer_decaf.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -627,7 +627,7 @@ static yy::location loc;
 #line 16 "decaf.l"
   // Code run each time a pattern is matched.
   # define YY_USER_ACTION  loc.columns (yyleng);
-#line 631 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../lexer_decaf.cpp"
+#line 631 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../lexer_decaf.cpp"
 
 #define INITIAL 0
 #define comment 1
@@ -876,7 +876,7 @@ YY_DECL
   loc.step ();
 
 
-#line 880 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../lexer_decaf.cpp"
+#line 880 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../lexer_decaf.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -1253,7 +1253,7 @@ YY_RULE_SETUP
 #line 87 "decaf.l"
 ECHO;
 	YY_BREAK
-#line 1257 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../lexer_decaf.cpp"
+#line 1257 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../lexer_decaf.cpp"
 
 	case YY_END_OF_BUFFER:
 		{

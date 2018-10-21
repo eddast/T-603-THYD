@@ -1,14 +1,10 @@
                      GOTO                                                     main
-            hehe:  FPARAM                                                        y
-                   FPARAM                                                        x
-                   FPARAM                                                        z
-                   ASSIGN                  1                                  hehe
-                   RETURN                                                         
             main:     VAR                                                        k
-                      VAR                                                        t
-                      VAR                                                        a
-                   APARAM                                                        k
-                   APARAM                                                        t
-                   APARAM                                                        a
-                     CALL                                                     hehe
-                   RETURN                                                         
+                      VAR                                                        i
+                       EQ                  0                  0         lab_else_0
+                   ASSIGN                  0                                     k
+                     GOTO                                             lab_if_end_0
+      lab_else_0:  APARAM                                                        k
+                     CALL                                                  writeln
+                   ASSIGN                  0                                     i
+    lab_if_end_0:  RETURN                                                         

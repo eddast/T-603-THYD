@@ -31,12 +31,12 @@
 // version 2.2 of Bison.
 
 /**
- ** \file /Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../position.hh
+ ** \file /Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../position.hh
  ** Define the yy::position class.
  */
 
-#ifndef YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_POSITION_HH_INCLUDED
-# define YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_POSITION_HH_INCLUDED
+#ifndef YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_POSITION_HH_INCLUDED
+# define YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_POSITION_HH_INCLUDED
 
 # include <algorithm> // std::max
 # include <iostream>
@@ -52,7 +52,7 @@
 
 
 namespace yy {
-#line 56 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../position.hh" // location.cc:331
+#line 56 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../position.hh" // location.cc:331
   /// Abstract a position.
   class position
   {
@@ -173,5 +173,5 @@ namespace yy {
 
 
 } // yy
-#line 177 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../position.hh" // location.cc:331
-#endif // !YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_POSITION_HH_INCLUDED
+#line 177 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../position.hh" // location.cc:331
+#endif // !YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_POSITION_HH_INCLUDED

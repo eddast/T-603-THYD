@@ -31,18 +31,18 @@
 // version 2.2 of Bison.
 
 /**
- ** \file /Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../location.hh
+ ** \file /Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../location.hh
  ** Define the yy::location class.
  */
 
-#ifndef YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_LOCATION_HH_INCLUDED
-# define YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_LOCATION_HH_INCLUDED
+#ifndef YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_LOCATION_HH_INCLUDED
+# define YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_LOCATION_HH_INCLUDED
 
 # include "position.hh"
 
 
 namespace yy {
-#line 46 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../location.hh" // location.cc:331
+#line 46 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../location.hh" // location.cc:331
   /// Abstract a location.
   class location
   {
@@ -185,5 +185,5 @@ namespace yy {
 
 
 } // yy
-#line 189 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../location.hh" // location.cc:331
-#endif // !YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_LOCATION_HH_INCLUDED
+#line 189 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../location.hh" // location.cc:331
+#endif // !YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_LOCATION_HH_INCLUDED

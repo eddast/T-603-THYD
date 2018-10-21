@@ -33,7 +33,7 @@
 
 // First part of user declarations.
 
-#line 37 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:407
+#line 37 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:407
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -47,13 +47,13 @@
 
 // User implementation prologue.
 
-#line 51 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:415
+#line 51 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:415
 // Unqualified %code blocks.
 #line 25 "decaf.yy" // lalr1.cc:416
 
 #include "parser.h"
 
-#line 57 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:416
+#line 57 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:416
 
 
 #ifndef YY_
@@ -148,7 +148,7 @@
 
 
 namespace yy {
-#line 152 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:491
+#line 152 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:491
 
   /* Return YYSTR after stripping away unnecessary quotes and
      backslashes, so that it's suitable for yyerror.  The heuristic is
@@ -802,392 +802,392 @@ namespace yy {
   case 2:
 #line 115 "decaf.yy" // lalr1.cc:870
     { driver.set_AST( new ProgramNode( yystack_[4].value.as< std::string > (), yystack_[2].value.as< std::list<VariableDeclarationNode*>* > (), yystack_[1].value.as< std::list<MethodNode*>* > () ) ); }
-#line 806 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 806 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 3:
 #line 118 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<VariableDeclarationNode*>* > () = yystack_[3].value.as< std::list<VariableDeclarationNode*>* > (); yylhs.value.as< std::list<VariableDeclarationNode*>* > ()->push_back( new VariableDeclarationNode(yystack_[2].value.as< ValueType > (),yystack_[1].value.as< std::list<VariableNode*>* > ()) ); }
-#line 812 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 812 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 4:
 #line 119 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<VariableDeclarationNode*>* > () = new std::list<VariableDeclarationNode*>(); }
-#line 818 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 818 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 5:
 #line 121 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ValueType > () = ValueType::IntVal; }
-#line 824 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 824 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 6:
 #line 122 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ValueType > () = ValueType::RealVal; }
-#line 830 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 830 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 7:
 #line 123 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ValueType > () = ValueType::BoolVal; }
-#line 836 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 836 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 8:
 #line 126 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<VariableNode*>* > () = new std::list<VariableNode*>(); yylhs.value.as< std::list<VariableNode*>* > ()->push_back( yystack_[0].value.as< VariableNode* > () ); }
-#line 842 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 842 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 9:
 #line 128 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<VariableNode*>* > () = yystack_[2].value.as< std::list<VariableNode*>* > (); yylhs.value.as< std::list<VariableNode*>* > ()->push_back( yystack_[0].value.as< VariableNode* > () ); }
-#line 848 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 848 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 10:
 #line 130 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< VariableNode* > () = new VariableNode(yystack_[0].value.as< std::string > ()); }
-#line 854 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 854 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 11:
 #line 131 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< VariableNode* > () = new VariableNode(yystack_[3].value.as< std::string > (),std::stoi(yystack_[1].value.as< std::string > ())); }
-#line 860 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 860 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 12:
 #line 134 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<MethodNode*>* > () = yystack_[1].value.as< std::list<MethodNode*>* > (); yylhs.value.as< std::list<MethodNode*>* > ()->push_back( yystack_[0].value.as< MethodNode* > () ); }
-#line 866 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 866 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 13:
 #line 136 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<MethodNode*>* > () = new std::list<MethodNode*>(); yylhs.value.as< std::list<MethodNode*>* > ()->push_back( yystack_[0].value.as< MethodNode* > () ); }
-#line 872 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 872 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 14:
 #line 143 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< MethodNode* > () = new MethodNode( yystack_[8].value.as< ValueType > (), yystack_[7].value.as< std::string > (), yystack_[5].value.as< std::list<ParameterNode*>* > (), yystack_[2].value.as< std::list<VariableDeclarationNode*>* > (), yystack_[1].value.as< std::list<StmNode*>* > () ); }
-#line 878 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 878 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 15:
 #line 145 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ValueType > () = yystack_[0].value.as< ValueType > (); }
-#line 884 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 884 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 16:
 #line 146 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ValueType > () = ValueType::VoidVal; }
-#line 890 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 890 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 17:
 #line 148 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<ParameterNode*>* > () = yystack_[0].value.as< std::list<ParameterNode*>* > (); }
-#line 896 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 896 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 18:
 #line 149 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<ParameterNode*>* > () = new std::list<ParameterNode*>(); }
-#line 902 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 902 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 19:
 #line 152 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<ParameterNode*>* > () = new std::list<ParameterNode*>();
                   yylhs.value.as< std::list<ParameterNode*>* > ()->push_back( new ParameterNode(yystack_[1].value.as< ValueType > (), yystack_[0].value.as< VariableNode* > ()) ); }
-#line 909 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 909 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 20:
 #line 155 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<ParameterNode*>* > () = yystack_[3].value.as< std::list<ParameterNode*>* > ();
                   yylhs.value.as< std::list<ParameterNode*>* > ()->push_back( new ParameterNode(yystack_[1].value.as< ValueType > (), yystack_[0].value.as< VariableNode* > ()) ); }
-#line 916 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 916 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 21:
 #line 159 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<StmNode*>* > () = yystack_[1].value.as< std::list<StmNode*>* > ();  yylhs.value.as< std::list<StmNode*>* > ()->push_back( yystack_[0].value.as< StmNode* > () ); }
-#line 922 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 922 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 22:
 #line 160 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<StmNode*>* > () = new std::list<StmNode*>(); }
-#line 928 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 928 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 23:
 #line 163 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = new AssignStmNode( yystack_[3].value.as< VariableNode* > (), yystack_[1].value.as< ExprNode* > () ); }
-#line 934 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 934 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 24:
 #line 165 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = new MethodCallExprStmNode( yystack_[4].value.as< std::string > (), yystack_[2].value.as< std::list<ExprNode*>* > () ); }
-#line 940 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 940 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 25:
 #line 167 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = new IfStmNode( yystack_[3].value.as< ExprNode* > (), yystack_[1].value.as< BlockStmNode* > (), yystack_[0].value.as< BlockStmNode* > () ); }
-#line 946 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 946 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 26:
 #line 170 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = new ForStmNode( new AssignStmNode( yystack_[8].value.as< VariableNode* > (), yystack_[6].value.as< ExprNode* > () ),
                                   yystack_[4].value.as< ExprNode* > (), yystack_[2].value.as< IncrDecrStmNode* > (), yystack_[0].value.as< BlockStmNode* > () ); }
-#line 953 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 953 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 27:
 #line 173 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = new ReturnStmNode( yystack_[1].value.as< ExprNode* > () ); }
-#line 959 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 959 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 28:
 #line 175 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = new BreakStmNode( ); }
-#line 965 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 965 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 29:
 #line 177 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = new ContinueStmNode( ); }
-#line 971 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 971 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 30:
 #line 179 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = yystack_[1].value.as< IncrDecrStmNode* > (); }
-#line 977 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 977 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 31:
 #line 181 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< StmNode* > () = yystack_[0].value.as< BlockStmNode* > (); }
-#line 983 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 983 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 32:
 #line 183 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = yystack_[0].value.as< ExprNode* > (); }
-#line 989 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 989 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 33:
 #line 184 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = nullptr; }
-#line 995 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 995 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 34:
 #line 186 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< BlockStmNode* > () = new BlockStmNode(yystack_[1].value.as< std::list<StmNode*>* > ()); }
-#line 1001 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1001 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 35:
 #line 188 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< IncrDecrStmNode* > () = new IncrStmNode( yystack_[1].value.as< VariableNode* > () ); }
-#line 1007 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1007 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 36:
 #line 189 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< IncrDecrStmNode* > () = new DecrStmNode( yystack_[1].value.as< VariableNode* > () ); }
-#line 1013 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1013 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 37:
 #line 191 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< BlockStmNode* > () = yystack_[0].value.as< BlockStmNode* > (); }
-#line 1019 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1019 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 38:
 #line 192 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< BlockStmNode* > () = nullptr; }
-#line 1025 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1025 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 39:
 #line 194 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<ExprNode*>* > () = yystack_[0].value.as< std::list<ExprNode*>* > (); yylhs.value.as< std::list<ExprNode*>* > ()->push_front( yystack_[1].value.as< ExprNode* > () ); }
-#line 1031 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1031 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 40:
 #line 195 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<ExprNode*>* > () = new std::list<ExprNode*>(); }
-#line 1037 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1037 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 41:
 #line 197 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<ExprNode*>* > () = yystack_[0].value.as< std::list<ExprNode*>* > (); yylhs.value.as< std::list<ExprNode*>* > ()->push_front( yystack_[1].value.as< ExprNode* > () ); }
-#line 1043 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1043 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 42:
 #line 198 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< std::list<ExprNode*>* > () = new std::list<ExprNode*>(); }
-#line 1049 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1049 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 43:
 #line 200 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ValueExprNode* > () = new ValueExprNode(yystack_[0].value.as< std::string > ()); }
-#line 1055 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1055 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 44:
 #line 201 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ValueExprNode* > () = new ValueExprNode(yystack_[0].value.as< std::string > ()); }
-#line 1061 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1061 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 45:
 #line 202 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ValueExprNode* > () = new ValueExprNode(yystack_[0].value.as< std::string > ()); }
-#line 1067 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1067 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 46:
 #line 204 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = yystack_[0].value.as< ValueExprNode* > (); }
-#line 1073 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1073 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 47:
 #line 205 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = yystack_[0].value.as< VariableNode* > (); }
-#line 1079 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1079 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 48:
 #line 206 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new MethodCallExprStmNode(yystack_[3].value.as< std::string > (),yystack_[1].value.as< std::list<ExprNode*>* > ()); }
-#line 1085 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1085 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 49:
 #line 207 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = yystack_[1].value.as< ExprNode* > (); }
-#line 1091 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1091 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 50:
 #line 208 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new PlusExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1097 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1097 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 51:
 #line 209 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new MinusExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1103 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1103 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 52:
 #line 210 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new MultiplyExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1109 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1109 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 53:
 #line 211 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new DivideExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1115 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1115 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 54:
 #line 212 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new ModulusExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1121 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1121 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 55:
 #line 213 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new EqExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1127 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1127 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 56:
 #line 214 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new NeqExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1133 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1133 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 57:
 #line 215 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new LtExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1139 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1139 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 58:
 #line 216 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new LteExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1145 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1145 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 59:
 #line 217 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new GtExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1151 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1151 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 60:
 #line 218 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new GteExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1157 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1157 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 61:
 #line 219 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new AndExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1163 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1163 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 62:
 #line 220 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new OrExprNode(yystack_[2].value.as< ExprNode* > (),yystack_[0].value.as< ExprNode* > ()); }
-#line 1169 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1169 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 63:
 #line 221 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new NotExprNode(yystack_[0].value.as< ExprNode* > ()); }
-#line 1175 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1175 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 64:
 #line 222 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new PlusExprNode(yystack_[0].value.as< ExprNode* > ()); }
-#line 1181 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1181 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
   case 65:
 #line 223 "decaf.yy" // lalr1.cc:870
     { yylhs.value.as< ExprNode* > () = new MinusExprNode(yystack_[0].value.as< ExprNode* > ()); }
-#line 1187 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1187 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
     break;
 
 
-#line 1191 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
+#line 1191 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:870
             default:
               break;
             }
@@ -1675,7 +1675,7 @@ namespace yy {
 
 
 } // yy
-#line 1679 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:1181
+#line 1679 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../parser_decaf.cpp" // lalr1.cc:1181
 #line 225 "decaf.yy" // lalr1.cc:1182
 
 

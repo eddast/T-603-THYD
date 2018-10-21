@@ -31,18 +31,18 @@
 // version 2.2 of Bison.
 
 /**
- ** \file /Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../stack.hh
+ ** \file /Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../stack.hh
  ** Define the yy::stack class.
  */
 
-#ifndef YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_STACK_HH_INCLUDED
-# define YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_STACK_HH_INCLUDED
+#ifndef YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_STACK_HH_INCLUDED
+# define YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_STACK_HH_INCLUDED
 
 # include <vector>
 
 
 namespace yy {
-#line 46 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../stack.hh" // stack.hh:151
+#line 46 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../stack.hh" // stack.hh:151
   /// A stack with random access from its top.
   template <class T, class S = std::vector<T> >
   class stack
@@ -152,6 +152,6 @@ namespace yy {
 
 
 } // yy
-#line 156 "/Users/eddarunarsdottir/Desktop/DecafComp/cmake-build-debug/../stack.hh" // stack.hh:151
+#line 156 "/Users/eddarunarsdottir/Desktop/Haust2018/T-603-THYD/Project/P3/cmake-build-debug/../stack.hh" // stack.hh:151
 
-#endif // !YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_DECAFCOMP_CMAKE_BUILD_DEBUG_STACK_HH_INCLUDED
+#endif // !YY_YY_USERS_EDDARUNARSDOTTIR_DESKTOP_HAUST2018_T_603_THYD_PROJECT_P3_CMAKE_BUILD_DEBUG_STACK_HH_INCLUDED
