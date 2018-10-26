@@ -102,8 +102,9 @@ class ValueExprNode : public ExprNode
 public:
     explicit ValueExprNode( const std::string value ) : value_(value) { }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
-        // Get retun value and the type of value
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
+        // Get return value and the type of value
         data.expr_return_var = value_;
         data.expr_return_type = (std::all_of(value_.begin(), value_.end(), ::isdigit) ? ValueType::IntVal : ValueType::RealVal);
     }
@@ -122,7 +123,8 @@ class AndExprNode : public ExprNode
 public:
     AndExprNode( ExprNode *lhs, ExprNode *rhs ) : lhs_(lhs), rhs_(rhs) {}
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Extract name and return type from left-hand side expression
         lhs_->icg( data, tac );
         std::string var_lhs = data.expr_return_var;
