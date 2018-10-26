@@ -128,6 +128,7 @@ public:
         // Extract name and return type from left-hand side expression
         lhs_->icg( data, tac );
         std::string var_lhs = data.expr_return_var;
+        ValueType type_lhs = data.expr_return_type;
 
         // Extract name and return type from right-hand side expression
         rhs_->icg( data, tac );
@@ -167,7 +168,7 @@ public:
 
         // Warn user if right-hand side type resolves to a Real value
         // (Int and Bool values both considered OK when using not operator)
-        if ( type_rhs == ValueType::RealVal ) {
+        if ( type_lhs == ValueType::RealVal || type_rhs == ValueType::RealVal ) {
             warning_msg("Type mismatch in logical && operation (operand is not an integer/bool value)." );
         }
     }
@@ -190,6 +191,7 @@ public:
         // Extract name and return type from left-hand side expression
         lhs_->icg( data, tac );
         std::string var_lhs = data.expr_return_var;
+        ValueType type_lhs = data.expr_return_type;
 
         // Extract name and return type from right-hand side expression
         rhs_->icg( data, tac );
@@ -229,7 +231,7 @@ public:
 
         // Warn user if right-hand side type resolves to a Real value
         // (Int and Bool values both considered OK when using not operator)
-        if ( type_rhs == ValueType::RealVal ) {
+        if ( type_lhs == ValueType::RealVal || type_rhs == ValueType::RealVal ) {
             warning_msg("Type mismatch in logical || operation (operand is not an integer/bool value)." );
         }
     }
@@ -708,13 +710,32 @@ public:
         // Extract value and type of each parameter passed in
         // Append TAC code that defines a value of a parameter to a procedure call
         // for each expression passed to procedure
+        std::string signature;
         for ( auto e : *expr_list_ ) {
             e->icg( data, tac );
-            std::string var_lhs = data.expr_return_var;
-            tac.append( TAC::InstrType::APARAM, var_lhs);
+            if ( !signature.empty() ) {
+                signature += "::";
+            }
+            signature += tostr( data.expr_return_type );
+            std::string e_return_var = data.expr_return_var;
+            tac.append( TAC::InstrType::APARAM, e_return_var);
         }
-        // Then append TAC code that calls procedure after defining parameters
-        tac.append( TAC::InstrType::CALL, id_ );
+        SymbolTable::Entry* entry = data.sym_table.lookup( "", id_ );
+        if ( id_ != "writeln" && ( entry == nullptr || entry->entry_type != EntryType::Method)) {
+            error_msg( "method " + id_ + " is missing." );
+        }
+        else if ( entry->signature != signature ) {
+            error_msg( "method " + id_ + " does not match signature." );
+        }
+        else {
+            // Then append TAC code that calls procedure after defining parameters
+            tac.append(TAC::InstrType::CALL, id_);
+
+            // Set up and configure return value
+            data.expr_return_var = id_;
+            data.expr_return_type = entry == NULL ? ValueType::VoidVal : entry->value_type;
+        }
+
     }
 
     virtual const std::string str( ) const override {
@@ -897,13 +918,17 @@ public:
 
     virtual void icg( Data& data, TAC& tac ) const override
     {
-        // Break statement breaks out of for loop by going to label for current for loop's end
-        std::string lab_current_for_loop_end = tac.label_name( "for_end", data.for_label_no.top( ) );
-        tac.append( TAC::InstrType::GOTO, lab_current_for_loop_end );
+        if( !data.for_label_no.empty( ) ) {
+            // Break statement breaks out of for loop by going to label for current for loop's end
+            std::string lab_current_for_loop_end = tac.label_name("for_end", data.for_label_no.top());
+            tac.append(TAC::InstrType::GOTO, lab_current_for_loop_end);
 
-        // Break statement explicitly exits for loop so pop of for loop label stack
-        // since this operation exits the current for loop
-        data.for_label_no.pop( );
+            // Break statement explicitly exits for loop so pop of for loop label stack
+            // since this operation exits the current for loop
+            data.for_label_no.pop();
+        } else {
+            error_msg("Illegal break statement encountered: not enclosed in a for-loop");
+        }
     }
 
     virtual const std::string str( ) const override {
@@ -920,9 +945,13 @@ public:
 
     virtual void icg( Data& data, TAC& tac ) const override
     {
-        // Continue statement goes from current iteration to next by visiting increment condition
-        std::string lab_current_for_loop_end = tac.label_name( "for_in_de", data.for_label_no.top( ) );
-        tac.append( TAC::InstrType::GOTO, lab_current_for_loop_end );
+        if( !data.for_label_no.empty( ) ) {
+            // Continue statement goes from current iteration to next by visiting increment condition
+            std::string lab_current_for_loop_inc_dec = tac.label_name("for_in_de", data.for_label_no.top());
+            tac.append(TAC::InstrType::GOTO, lab_current_for_loop_inc_dec);
+        } else {
+            error_msg("Illegal continue statement encountered: not enclosed in a for-loop");
+        }
     }
 
     virtual const std::string str( ) const override {
@@ -1101,7 +1130,6 @@ public:
             }
             signature += tostr( pd->get_type() );
         }
-        // NOTE: int vs bool in signature
         add_to_symbol_table( data.sym_table, EntryType::Method, "", id_, return_type_, signature );
         // Prevent someone from using a variable with the same name as the enclosing method.
         add_to_symbol_table( data.sym_table, EntryType::Method, id_, id_, return_type_, signature );

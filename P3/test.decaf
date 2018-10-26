@@ -1,84 +1,12 @@
 class Program
 {
+     static int haha(int a, real b) {
+        return 1;
+     }
      static void main( )
      {
-        // TESTING &&, || AND IF
-        /*
-        int a, b, c, d, e, f;
-        a = 1; b = 0; c = 5; d = 10; e = 15; f = 20;
-        if(a && b)      { writeln(c); }
-        else            { writeln(d); }
-        if(!(a || b))   { writeln(e); }
-        else            { writeln(f); }
-        */
-
-        // TEST ARITHMETIC
-        /*
-        int a, b, c, res;
-        a = 40; b = 13; c = -3;
-        res = 40/-1; writeln(res);
-        res = 40 % 13; writeln(res);
-        res = -3 + 40; writeln(res);
-        res = -1;
-        res--; writeln(res);
-        //res = 40/0; writeln(res);
-        */
-
-        // ATH ATH ATH
-        /*
-        real res;
-        res = -4.5;
-        res--;
-        writeln(res);
-        */
-
-        // ATH ATH ATH
-        /*
-        bool resBool;
-        int resInt;
-        real resReal;
-        resBool = -true;
-        writeln(resBool);
-        resInt = -10;
-        writeln(resInt);
-        resReal = -10.0;
-        writeln(resReal);
-        */
-
-        // TEST BREAK STM
-        /*
-        int i, j;
-        for(i = 0; i < 10; i++)
-        {
-            writeln(i);
-            for(j = 10; j < 20; j++) {
-                if(j == 12) {
-                    break;
-                }
-                writeln(j);
-            }
-            if(i == 7){
-                break;
-            }
-        }
-        */
-        // TEST CONTINUE STM
-        int i, j;
-        for(i = 0; i < 10; i++)
-        {
-            if(i == 7 || i == 3){
-                continue;
-            }
-            writeln(i);
-            writeln(i);
-                for(j = 10; j < 15; j++)
-                   {
-                        if(j == 12 || j == 13){
-                            continue;
-                        }
-                        writeln(j);
-                        writeln(j);
-                   }
-        }
+        int i;
+        i = haha(1);
+        writeln(i);
      }
 }
