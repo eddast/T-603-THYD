@@ -71,7 +71,14 @@ class Program
             }
             writeln(i);
             writeln(i);
-            writeln(i);
+                for(j = 10; j < 15; j++)
+                   {
+                        if(j == 12 || j == 13){
+                            continue;
+                        }
+                        writeln(j);
+                        writeln(j);
+                   }
         }
      }
 }

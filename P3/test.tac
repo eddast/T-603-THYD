@@ -31,8 +31,39 @@
                      CALL                                                  writeln
                    APARAM                                                        i
                      CALL                                                  writeln
-                   APARAM                                                        i
+                   ASSIGN                 10                                     j
+  lab_for_cond_6:     VAR                                                       t4
+                       LT                  j                 15     lab_rel_true_7
+                   ASSIGN                  0                                    t4
+                     GOTO                                            lab_rel_end_7
+  lab_rel_true_7:  ASSIGN                  1                                    t4
+   lab_rel_end_7:      EQ                 t4                  1    lab_for_block_6
+                     GOTO                                            lab_for_end_6
+ lab_for_block_6:     VAR                                                       t5
+                       EQ                  j                 12     lab_rel_true_8
+                   ASSIGN                  0                                    t5
+                     GOTO                                            lab_rel_end_8
+  lab_rel_true_8:  ASSIGN                  1                                    t5
+   lab_rel_end_8:     VAR                                                       t6
+                       EQ                  j                 13     lab_rel_true_9
+                   ASSIGN                  0                                    t6
+                     GOTO                                            lab_rel_end_9
+  lab_rel_true_9:  ASSIGN                  1                                    t6
+   lab_rel_end_9:     VAR                                                       t7
+                       EQ                 t5                  1     lab_or_true_10
+                       EQ                 t6                  1     lab_or_true_10
+                   ASSIGN                  0                                    t7
+                     GOTO                                            lab_or_end_10
+  lab_or_true_10:  ASSIGN                  1                                    t7
+   lab_or_end_10:      EQ                 t7                  0      lab_if_end_11
+                     GOTO                                          lab_for_in_de_6
+   lab_if_end_11:  APARAM                                                        j
                      CALL                                                  writeln
+                   APARAM                                                        j
+                     CALL                                                  writeln
+ lab_for_in_de_6:     ADD                  j                  1                  j
+                     GOTO                                           lab_for_cond_6
+   lab_for_end_6:    GOTO                                          lab_for_in_de_0
  lab_for_in_de_0:     ADD                  i                  1                  i
                      GOTO                                           lab_for_cond_0
    lab_for_end_0:  RETURN                                                         
