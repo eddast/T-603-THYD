@@ -46,6 +46,7 @@ class Program
         */
 
         // TEST BREAK STM
+        /*
         int i, j;
         for(i = 0; i < 10; i++)
         {
@@ -59,6 +60,18 @@ class Program
             if(i == 7){
                 break;
             }
+        }
+        */
+        // TEST CONTINUE STM
+        int i, j;
+        for(i = 0; i < 10; i++)
+        {
+            if(i == 7 || i == 3){
+                continue;
+            }
+            writeln(i);
+            writeln(i);
+            writeln(i);
         }
      }
 }
