@@ -166,7 +166,7 @@ public:
         // Warn user if right-hand side type resolves to a Real value
         // (Int and Bool values both considered OK when using not operator)
         if ( type_rhs == ValueType::RealVal ) {
-            warning_msg("Type mismatch in logical ! operation (operand is not an integer/bool value)." );
+            warning_msg("Type mismatch in logical && operation (operand is not an integer/bool value)." );
         }
     }
 
@@ -228,7 +228,7 @@ public:
         // Warn user if right-hand side type resolves to a Real value
         // (Int and Bool values both considered OK when using not operator)
         if ( type_rhs == ValueType::RealVal ) {
-            warning_msg("Type mismatch in logical ! operation (operand is not an integer/bool value)." );
+            warning_msg("Type mismatch in logical || operation (operand is not an integer/bool value)." );
         }
     }
 
@@ -556,7 +556,8 @@ public:
         return s;
     }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // If there is no left hand side of minus expression we have unary minus
         if ( lhs_ == nullptr ) {
             rhs_->icg( data, tac );
@@ -583,7 +584,8 @@ public:
         }
     }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Set up name of variable and initialize type to void before validation
         data.expr_return_var = id_;
         data.expr_return_type = ValueType::VoidVal;
@@ -641,7 +643,8 @@ public:
         return s;
     }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Add new variable to symbol table for current scope
         // Append variable assignment instruction to TAC code for variable
         for ( auto e : *vars_ ) {
@@ -669,7 +672,8 @@ public:
         return std::string("(PARAM ") + tostr(type_) + tostr(var_) + ")";
     }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // When parameter is set for procedure it is added to symbol table
         // Append procedure-bound parameter definition instruction to TAC code for parameter
         add_to_symbol_table( data.sym_table, EntryType::Variable, data.method_name, var_->get_id(), type_, "" );
@@ -697,7 +701,8 @@ public:
             : id_(id), expr_list_(expr_list) {
     }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Extract value and type of each parameter passed in
         // Append TAC code that defines a value of a parameter to a procedure call
         // for each expression passed to procedure
@@ -733,7 +738,8 @@ public:
             : lvar_(lvar), expr_(expr) {
     }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Extract name and return type of variable being assigned
         lvar_->icg( data, tac );
         std::string var = data.expr_return_var;
@@ -774,7 +780,8 @@ public:
 
     IncrStmNode( VariableExprNode *var ) : var_(var) {}
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Evaluate and generate TAC code for expression that is being incremented
         var_->icg( data, tac );
 
@@ -803,7 +810,8 @@ public:
 
     DecrStmNode( VariableExprNode *var ) : var_(var) {}
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Evaluate and generate TAC code for expression that is being decremented
         var_->icg( data, tac );
 
@@ -836,7 +844,8 @@ public:
     ReturnStmNode( ExprNode *expr )
             : expr_(expr) { }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // If any expression is returned, assign return value to method
         if ( expr_ != nullptr ) {
             expr_->icg( data, tac );
@@ -916,7 +925,8 @@ public:
 
     BlockStmNode( std::list<StmNode*>* stms ) : stms_(stms) {}
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Generate intermediate code for each statements in block
         for ( auto s : *stms_ ) {
             s->icg( data, tac );
@@ -944,7 +954,8 @@ public:
     IfStmNode( ExprNode* expr, BlockStmNode* stm_if, BlockStmNode* stm_else )
             : expr_(expr), stm_if_(stm_if), stm_else_(stm_else) {}
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Generate intermediate code and extract value of if condition
         expr_->icg( data, tac );
         std::string expr_var = data.expr_return_var;
@@ -1002,7 +1013,8 @@ public:
                 BlockStmNode* stms_ )
             : assign_(assign), expr_(expr), inc_dec_(inc_dec), stms_(stms_) {}
 
-    virtual void icg( Data& data, TAC& tac ) const override {
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
         // Start by assignment for loop variable
         assign_->icg( data, tac );
 
@@ -1055,8 +1067,10 @@ public:
                 std::list<StmNode*>* stms )
             : return_type_(return_type), id_(id), params_(params), vars_decl_(vars_decl), stms_(stms) {}
 
-    virtual void icg( Data& data, TAC& tac ) const override {
-        // Provided.
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
+        // Add method with parameters (e.g. signature), id and return type to symbol table
+        // Set up label for method in TAC intermediate code denoting this function will follow
         std::string signature;
         data.method_name = id_;
         tac.label_next_instr( data.method_name );
@@ -1072,12 +1086,15 @@ public:
         // Prevent someone from using a variable with the same name as the enclosing method.
         add_to_symbol_table( data.sym_table, EntryType::Method, id_, id_, return_type_, signature );
 
+        // Generate intermediate code for all variable declarations and statements for method
         for ( auto vd : *vars_decl_ ) {
             vd->icg( data, tac );
         }
         for ( auto stm : *stms_ ) {
             stm->icg( data, tac );
         }
+        // Generate return TAC code in case no return statement was set for method
+        // (Return command is required in TAC to mark all method' end)
         if ( tac.last_instr_type() != TAC::InstrType::RETURN ) {
             tac.append( TAC::InstrType::RETURN );
         }
@@ -1115,8 +1132,11 @@ public:
                 std::list<MethodNode*> *method_decls )
             : id_(id), var_decls_(var_decls), method_decls_(method_decls) {}
 
-    virtual void icg( Data& data, TAC& tac ) const override {
-        // Provided.
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
+        // First, create intermediate code for all variable declarations
+        // Then unconditionally jump to main function as per Decaf functionality
+        // Then generate intermediate code for all program method declarations
         for ( auto vd : *var_decls_ ) {
             vd->icg( data, tac );
         }
@@ -1125,6 +1145,7 @@ public:
             md->icg( data, tac );
         }
 
+        // Raise error if main method is missing (is always requried)
         SymbolTable::Entry* entry = data.sym_table.lookup( "", "main" );
         if ( entry == nullptr || entry->entry_type != EntryType::Method) {
             error_msg( "Main method is missing." );
