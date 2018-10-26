@@ -895,8 +895,15 @@ public:
 
     BreakStmNode(  ) { }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
-        // To do ...
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
+        // Break statement breaks out of for loop by going to label for current for loop's end
+        std::string lab_current_for_loop_end = tac.label_name( "for_end", data.for_label_no.top( ) );
+        tac.append( TAC::InstrType::GOTO, lab_current_for_loop_end );
+
+        // Break statement explicitly exits for loop so pop of for loop label stack
+        // since this operation exits the current for loop
+        data.for_label_no.pop( );
     }
 
     virtual const std::string str( ) const override {
@@ -911,8 +918,11 @@ public:
 
     ContinueStmNode(  ) { }
 
-    virtual void icg( Data& data, TAC& tac ) const override {
-        // To do ...
+    virtual void icg( Data& data, TAC& tac ) const override
+    {
+        // Continue statement goes from current iteration to next by visiting increment condition
+        std::string lab_current_for_loop_end = tac.label_name( "for_in_de", data.for_label_no.top( ) );
+        tac.append( TAC::InstrType::GOTO, lab_current_for_loop_end );
     }
 
     virtual const std::string str( ) const override {
@@ -1020,12 +1030,14 @@ public:
         // Start by assignment for loop variable
         assign_->icg( data, tac );
 
-        // Create label for condition of for-loop, the for-loop block, increment/decrement statement
-        // and for the end of for-loop
-        std::string lab_for_cond = tac.label_name("for_cond", data.label_no);
-        std::string lab_for_block = tac.label_name("for_block", data.label_no);
-        std::string lab_for_incr_decr = tac.label_name("for_in_de", data.label_no);
-        std::string lab_for_end = tac.label_name("for_end", data.label_no);
+        // Create label for loop condition, loop block, increment/decrement statement and for loop end
+        // Then push the label number for this for loop to data
+        int for_loop_data_label_no = data.label_no;
+        std::string lab_for_cond = tac.label_name("for_cond", for_loop_data_label_no);
+        std::string lab_for_block = tac.label_name("for_block", for_loop_data_label_no);
+        std::string lab_for_incr_decr = tac.label_name("for_in_de", for_loop_data_label_no);
+        std::string lab_for_end = tac.label_name("for_end", for_loop_data_label_no);
+        data.for_label_no.push( for_loop_data_label_no );
         data.label_no++;
 
         // Set up code for for-loop condition go to block if expression is true,
@@ -1045,6 +1057,12 @@ public:
         inc_dec_->icg( data, tac );
         tac.append( TAC::InstrType::GOTO, lab_for_cond );
         tac.label_next_instr( lab_for_end );
+
+        // Pop off for loop label as at this point for loop is exiting
+        // IF not already exited (via break statement)
+        if( !data.for_label_no.empty( ) && ( data.for_label_no.top( ) == for_loop_data_label_no ) ) {
+            data.for_label_no.pop();
+        }
     }
 
     virtual const std::string str( ) const override {
