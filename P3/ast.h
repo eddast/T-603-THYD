@@ -724,7 +724,7 @@ public:
         if ( id_ != "writeln" && ( entry == nullptr || entry->entry_type != EntryType::Method)) {
             error_msg( "method " + id_ + " is missing." );
         }
-        else if ( entry->signature != signature ) {
+        else if ( id_ != "writeln" && entry->signature != signature ) {
             error_msg( "method " + id_ + " does not match signature." );
         }
         else {

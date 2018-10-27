@@ -12,58 +12,6 @@
 class Program
 {
     /*
-     * Runs main application of program
-     */
-     static void main( )
-     {
-        real mean, _val1, _val2, _val3, _val4, largest;
-        bool is_leap_now, is_leap_next, is_leap_previous;
-        int intfirst, intsecond, gcd, sum_of_ten_subsequents, factorial, sum_1_to_10, year;
-
-        // Get GCD of two integer values 'intfirst' and 'intsecond'
-        intfirst = 400;
-        intsecond = 4;
-        gcd = calculate_gcd( intfirst, intsecond );
-        writeln( gcd );
-
-        // Calculate sum of maximum of ten subsequent non negative numbers for 'intsecond'
-        sum_of_ten_subsequents = calculate_sum_of_ten_non_negative( intsecond );
-        writeln( sum_of_ten_subsequents );
-
-        // Calculate factorial value of 'intsecond'
-        factorial = calculate_factorial( intsecond );
-        writeln( factorial );
-
-        // Calculate the sum of 1-10 in an array
-        // sum_1_to_10 = sum_of_1_to_10_array( );
-
-        // Get mean value of three real values
-        _val1 = 13.1;
-        _val2 = 13.20;
-        _val3 = 13.57;
-        _val4 = 13.37;
-        mean = calculate_mean_of_three( _val1, _val2, _val3 );
-        writeln( mean );
-
-        // Get largest of three real values
-        largest = get_largest_of_four_distinct_numbers( _val1, _val2, _val3, _val4 );
-        writeln( largest );
-
-        // Check whether this year is a leap year
-        // Then check if next year is a leap year
-        // If neither years are leap years, check whether previous year is a leap year
-        year = 2018;
-        is_leap_now = is_leap_year ( year );
-        is_leap_next = is_leap_year ( year+1 );
-        if( !(is_leap_now || is_leap_next) ) {
-            is_leap_previous = is_leap_year ( year-1 );
-        }
-        writeln( is_leap_now );
-        writeln( is_leap_next );
-        writeln( is_leap_previous );
-     }
-
-    /*
      * Calculates the greatest common denominator between two numbers
      *
      * @param a left-hand side integer to calculate gcd
@@ -92,7 +40,7 @@ class Program
         int sum, array[10], i;
         sum = 0;
         for( i = 9; i >= 0; i-- ) {
-         	 sum = sum + array[1];
+             sum = sum + array[1];
         }
         return sum;
     }
@@ -211,4 +159,56 @@ class Program
 
         return _is_leap;
     }
+
+    /*
+     * Runs main application of program
+     */
+     static void main( )
+     {
+        real mean, _val1, _val2, _val3, _val4, largest;
+        bool is_leap_now, is_leap_next, is_leap_previous;
+        int intfirst, intsecond, gcd, sum_of_ten_subsequents, factorial, sum_1_to_10, year;
+
+        // Get GCD of two integer values 'intfirst' and 'intsecond'
+        intfirst = 400;
+        intsecond = 4;
+        gcd = calculate_gcd( intfirst, intsecond );
+        writeln( gcd );
+
+        // Calculate sum of maximum of ten subsequent non negative numbers for 'intsecond'
+        sum_of_ten_subsequents = calculate_sum_of_ten_non_negative( intsecond );
+        writeln( sum_of_ten_subsequents );
+
+        // Calculate factorial value of 'intsecond'
+        factorial = calculate_factorial( intsecond );
+        writeln( factorial );
+
+        // Calculate the sum of 1-10 in an array
+        // sum_1_to_10 = sum_of_1_to_10_array( );
+
+        // Get mean value of three real values
+        _val1 = 13.1;
+        _val2 = 13.20;
+        _val3 = 13.57;
+        _val4 = 13.37;
+        mean = calculate_mean_of_three( _val1, _val2, _val3 );
+        writeln( mean );
+
+        // Get largest of three real values
+        largest = get_largest_of_four_distinct_numbers( _val1, _val2, _val3, _val4 );
+        writeln( largest );
+
+        // Check whether this year is a leap year
+        // Then check if next year is a leap year
+        // If neither years are leap years, check whether previous year is a leap year
+        year = 2018;
+        is_leap_now = is_leap_year ( year );
+        is_leap_next = is_leap_year ( year+1 );
+        if( !(is_leap_now || is_leap_next) ) {
+            is_leap_previous = is_leap_year ( year-1 );
+        }
+        writeln( is_leap_now );
+        writeln( is_leap_next );
+        writeln( is_leap_previous );
+     }
 }
