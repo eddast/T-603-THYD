@@ -164,8 +164,6 @@ private:
     ExprNode* expr_add_pr( ExprNode* lhs );
     ExprNode* expr_mult_pr( ExprNode* lhs );
     bool next_token_is_expr();
-
-    // Parse factors, variables and values (expressions)
     ExprNode* factor();
     ExprNode* value();
 

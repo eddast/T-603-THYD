@@ -1,0 +1,211 @@
+/***********************************************************
+ *      SC-T-603-THYD Fall 2018
+ *      Assignment: Project part I
+ *      Due: 24th of September 2018
+ *      Part:   Decaf Test File for Lexers
+ *              (Includes all tokens lexer recognizer)
+ *      Authors:
+ *          Edda Pétursdóttir
+ *          Edda Steinunn Rúnarsdóttir
+ **********************************************************/
+
+class Program
+{
+    /*
+     * Calculates n's corresponding fibonacci number
+     *
+     * @param n number to get corresponding fibonacci number for
+     * @returns fibonacci number corresponding to n
+     */
+    static int fib( int n ) {
+        if ( n == 1 || n == 0 ) {
+            return 1;
+        }
+        return fib( n-1 ) + fib( n-2 );
+     }
+
+    /*
+     * Calculates the greatest common denominator between two numbers
+     *
+     * @param a left-hand side integer to calculate gcd
+     * @param b right-hand side integer to calculate gcd
+     * @returns the greatest common demoniator of a and b
+     */
+    static int calculate_gcd( int a, int b )
+    {
+        if ( b == 0 ) {
+            return a;
+        }
+        else {
+            return calculate_gcd( b, a % b );
+        }
+    }
+
+    /* Calculates the sum of n to n's maximum of ten subsequent numbers
+    * But skips negative numbers from calculation
+    * Will also stop adding to sum for any number above the number 30000
+    *
+    * @param n starting point number to calculate sum from
+    * @returns the sum of 10 subsequent non-negative numbers from n
+    */
+    static int calculate_sum_of_ten_non_negative( int n )
+    {
+        int sum, i;
+        sum = 0;
+        for( i = 0; i < 10; i++ ) {
+            n++;
+
+            // Skip negative numbers and stop calculation if n is larger than 3000
+            if( n < 0 ) {
+                continue;
+            }
+            if( n > 30000 ) {
+                break;
+            }
+
+            // Otherwise add n to the sum
+            sum = sum + n; n++;
+        }
+        return sum;
+    }
+
+    /*
+     * Calculates factorial for int value
+     *
+     * @param number integer to calculate factorial of
+     * @returns the factorial of parameter number
+     */
+    static int calculate_factorial( int number )
+    {
+      int factorial, i;
+      factorial = 1;
+      for( i = 1; i <= number; i++ ) {
+        factorial = factorial * i;
+      }
+      return factorial;
+    }
+
+    /*
+     * Returns the largest of three distinct real numbers
+     *
+     * @param a real value
+     * @param b real value
+     * @param c real value
+     * @param d real value
+     * @returns the largest number among a,b and c if they are distinct values, otherwise 0
+     */
+    static real get_largest_of_four_distinct_numbers( real a, real b, real c, real d )
+    {
+        // Numbers must all be distinct for function to work
+        if( a >= b && c <= a ) {
+            return a;
+        }
+        if ( b >= a && c <= b ) {
+            return b;
+        }
+        else {
+            return c;
+        }
+        return 0.0;
+    }
+
+    /*
+     * Calculates the mean value of three real values
+     *
+     * @param one real value
+     * @param two real value
+     * @param three real value
+     * @returns real value, the mean value of the three parameter values
+     */
+    static real calculate_mean_of_three( real one, real two, real three )
+    {
+        real sum, mean;
+        sum = one + two + three;
+        mean = sum/3.0;
+
+        return sum/3.0;
+    }
+
+    /*
+     * Determines whether year is a leap year
+     *
+     * @param year to determine whether it is a leap year
+     * @returns bool, true if year is a leap year false otherwise
+     */
+    static bool is_leap_year( int year )
+    {
+        bool _is_leap;
+        _is_leap = false;
+
+        if( year % 4 != 0 ) {
+            _is_leap = false;
+        }
+        if( year % 100 == 0 ) {
+            if ( year % 400 == 0) {
+                _is_leap = true;
+            }
+            else {
+                _is_leap = false;
+            }
+        } else {
+            _is_leap = true;
+        }
+
+        return _is_leap;
+    }
+
+    /*
+     * Runs main application of program
+     */
+     static void main( )
+     {
+        real mean, _val1, _val2, _val3, _val4, largest;
+        bool is_leap_now, is_leap_next, is_leap_previous;
+        int intfirst, intsecond, gcd, sum_of_ten_subsequents, factorial, sum_1_to_10, year, fibi;
+        writeln( fib( 10 ) );
+        writeln( fib( 15 ) );
+        writeln( fib( 3 ) );
+
+        // Get GCD of two integer values 'intfirst' and 'intsecond'
+        intfirst = 400;
+        intsecond = 4;
+        gcd = calculate_gcd( intfirst, intsecond );
+        writeln( gcd );
+
+        // Calculate sum of maximum of ten subsequent non negative numbers for 'intsecond'
+        sum_of_ten_subsequents = calculate_sum_of_ten_non_negative( intsecond );
+        writeln( sum_of_ten_subsequents );
+
+        // Calculate factorial value of 'intsecond'
+        factorial = calculate_factorial( intsecond );
+        writeln( factorial );
+
+        // Calculate the sum of 1-10 in an array
+        // sum_1_to_10 = sum_of_1_to_10_array( );
+
+        // Get mean value of three real values
+        _val1 = 13.1;
+        _val2 = 13.20;
+        _val3 = 13.57;
+        _val4 = 13.37;
+        mean = calculate_mean_of_three( _val1, _val2, _val3 );
+        writeln( mean );
+
+        // Get largest of three real values
+        largest = get_largest_of_four_distinct_numbers( _val1, _val2, _val3, _val4 );
+        writeln( largest );
+
+        // Check whether this year is a leap year
+        // Then check if next year is a leap year
+        // If neither years are leap years, check whether previous year is a leap year
+        year = 2018;
+        is_leap_now = is_leap_year ( year );
+        is_leap_next = is_leap_year ( year+1 );
+        if( !(is_leap_now || is_leap_next) ) {
+            is_leap_previous = is_leap_year ( year-1 );
+        }
+        writeln( is_leap_now );
+        writeln( is_leap_next );
+        writeln( is_leap_previous );
+     }
+}

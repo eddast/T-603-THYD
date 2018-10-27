@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+4035f14036b3ac654d0bf7904b8c9f66 ../lexer_decaf.cpp
+f6336e65f9c7c86fc2ac16e40d83a6bf ../parser_decaf.cpp
