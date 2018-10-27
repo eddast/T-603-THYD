@@ -1,6 +1,6 @@
                      GOTO                                                     main
-            main:     VAR                                                        i
-                       EQ                4.6                  0       lab_if_end_0
-                   APARAM                                                        i
+            main:     VAR                                                       t0
+                   APARAM                                                        3
                      CALL                                                  writeln
-    lab_if_end_0:  RETURN                                                         
+                   ASSIGN            writeln                                    t0
+                   RETURN                                                         

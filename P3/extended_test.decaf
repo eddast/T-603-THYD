@@ -173,9 +173,9 @@ class Program
      {
         real mean, _val1, _val2, _val3, _val4, largest;
         bool is_leap_now, is_leap_next, is_leap_previous;
-        int intfirst, intsecond, gcd, sum_of_ten_subsequents, factorial, sum_1_to_10, year;
-
-        writeln( fib( 10 ) );
+        int intfirst, intsecond, gcd, sum_of_ten_subsequents, factorial, sum_1_to_10, year, fibi;
+        fibi = fib( 10 );
+        writeln(fibi);
 
         // Get GCD of two integer values 'intfirst' and 'intsecond'
         intfirst = 400;

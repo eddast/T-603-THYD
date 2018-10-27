@@ -702,8 +702,7 @@ class MethodCallExprStmNode: public ExprNode, public StmNode
 public:
 
     MethodCallExprStmNode( std::string id, std::list<ExprNode*>* expr_list )
-            : id_(id), expr_list_(expr_list) {
-    }
+            : id_(id), expr_list_(expr_list) { }
 
     virtual void icg( Data& data, TAC& tac ) const override
     {
@@ -745,14 +744,21 @@ public:
         // Otherwise all is OK, generate code to call function
         // Then set up return value for expression
         else {
+            // Create temporary variable for return value (for returning recursive calls)
+            std::string var = tac.tmp_variable_name( data.variable_no++ );
+            tac.append( TAC::InstrType::VAR, var );
+
+            // Call all actual parameters
             for ( auto p : params ) {
                 tac.append( TAC::InstrType::APARAM, p);
             }
+
+            // Call function and then set up return value correctly
             tac.append(TAC::InstrType::CALL, id_);
-            data.expr_return_var = entry->name;
+            tac.append( TAC::InstrType::ASSIGN, id_, var );
+            data.expr_return_var = var;
             data.expr_return_type = entry->value_type;
         }
-
     }
 
     virtual const std::string str( ) const override {

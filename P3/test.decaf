@@ -2,10 +2,6 @@ class Program
 {
      static void main( )
      {
-        int i;
-        if(4.6)
-        {
-            writeln(i);
-        }
+        writeln( 3 );
      }
 }

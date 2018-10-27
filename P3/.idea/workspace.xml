@@ -12,7 +12,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="73840127-78f8-48af-a07e-e6282ba94fa0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/lexer_decaf.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/main.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/DecafComp.dir/parser_decaf.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/DecafComp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/DecafComp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extended_test.decaf" beforeDir="false" afterPath="$PROJECT_DIR$/extended_test.decaf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extended_test.tac" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.decaf" beforeDir="false" afterPath="$PROJECT_DIR$/test.decaf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.tac" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -110,14 +119,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="decaf" value="1882" />
-          <entry key="h" value="6487" />
+          <entry key="decaf" value="1984" />
+          <entry key="h" value="6697" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="ObjectiveC" value="6487" />
-          <entry key="PLAIN_TEXT" value="1882" />
+          <entry key="ObjectiveC" value="6697" />
+          <entry key="PLAIN_TEXT" value="1984" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -128,7 +137,7 @@
           <entry key="h" value="1" />
           <entry key="stack" value="1" />
           <entry key="string" value="3" />
-          <entry key="tac" value="8" />
+          <entry key="tac" value="11" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
@@ -136,7 +145,7 @@
         <counts>
           <entry key="CMakeLists.txt" value="1" />
           <entry key="ObjectiveC" value="13" />
-          <entry key="PLAIN_TEXT" value="14" />
+          <entry key="PLAIN_TEXT" value="17" />
         </counts>
       </usages-collector>
     </session>
@@ -146,8 +155,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ast.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="1020" column="8" lean-forward="true" selection-start-line="1020" selection-start-column="8" selection-end-line="1024" selection-end-column="9" />
+            <state relative-caret-position="206">
+              <caret line="732" column="38" selection-start-line="732" selection-start-column="38" selection-end-line="732" selection-end-column="38" />
               <folding>
                 <element signature="e#53#72#0" expanded="true" />
               </folding>
@@ -156,37 +165,24 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Developer/CommandLineTools/usr/include/c++/v1/string">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="1220" selection-start-line="1220" selection-end-line="1220" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/symbol_table.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="22" column="59" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extended_test.decaf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="177" column="24" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="24" />
+            <state relative-caret-position="197">
+              <caret line="177" column="20" selection-start-line="177" selection-start-column="20" selection-end-line="177" selection-end-column="20" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/extended_test.tac">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.decaf">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            <state relative-caret-position="60">
+              <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -195,7 +191,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ifst</find>
       <find>stms</find>
       <find>_val1</find>
       <find>get_largest_of_four_distinct_numbers</find>
@@ -220,11 +215,12 @@
       <find>calculate_gcd</find>
       <find>sum_of_ten_sub</find>
       <find>calculate_sum_of_ten_non_negative</find>
-      <find>methodcall</find>
       <find>methodcallex</find>
       <find>exprnode</find>
       <find>if</find>
       <find>ifstm</find>
+      <find>forstm</find>
+      <find>methodcall</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -305,7 +301,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DecafComp" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DecafComp" TARGET_NAME="DecafComp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DecafComp" RUN_TARGET_NAME="DecafComp">
+    <configuration name="DecafComp" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="extended_test.decaf" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DecafComp" TARGET_NAME="DecafComp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DecafComp" RUN_TARGET_NAME="DecafComp">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -330,12 +326,12 @@
       <workItem from="1539958047232" duration="10291000" />
       <workItem from="1540073709799" duration="7316000" />
       <workItem from="1540555428924" duration="11923000" />
-      <workItem from="1540631531104" duration="4175000" />
+      <workItem from="1540631531104" duration="6524000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38607000" />
+    <option name="totallyTimeSpent" value="40956000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
@@ -346,13 +342,13 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3381089" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3381089" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39971346" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.40401146" />
+      <window_info active="true" anchor="bottom" id="Messages" order="8" visible="true" weight="0.40401146" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
@@ -370,6 +366,15 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/ast.h</url>
+          <line>726</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
         <watch expression="method_decls_" />
@@ -439,10 +444,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.tac">
+    <entry file="file://$PROJECT_DIR$/symbol_table.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="22" lean-forward="true" selection-start-line="3" selection-end-line="4" />
+        <state relative-caret-position="780">
+          <caret line="54" column="24" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -453,34 +458,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/symbol_table.h">
+    <entry file="file://$PROJECT_DIR$/test.decaf">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="22" column="59" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="59" />
+        <state relative-caret-position="60">
+          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.tac">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="22" lean-forward="true" selection-start-line="3" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extended_test.decaf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="177" column="20" selection-start-line="177" selection-start-column="20" selection-end-line="177" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/extended_test.tac">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/test.decaf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extended_test.decaf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="177" column="24" selection-start-line="177" selection-start-column="24" selection-end-line="177" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ast.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="1020" column="8" lean-forward="true" selection-start-line="1020" selection-start-column="8" selection-end-line="1024" selection-end-column="9" />
+        <state relative-caret-position="206">
+          <caret line="732" column="38" selection-start-line="732" selection-start-column="38" selection-end-line="732" selection-end-column="38" />
           <folding>
             <element signature="e#53#72#0" expanded="true" />
           </folding>
