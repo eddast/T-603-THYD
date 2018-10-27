@@ -11,6 +11,12 @@
 
 class Program
 {
+    static int fib(int n){
+        if ( n == 1 || n == 0 ) {
+            return 1;
+        }
+        return fib(n-1) + fib(n-2);
+     }
     /*
      * Calculates the greatest common denominator between two numbers
      *
@@ -168,6 +174,8 @@ class Program
         real mean, _val1, _val2, _val3, _val4, largest;
         bool is_leap_now, is_leap_next, is_leap_previous;
         int intfirst, intsecond, gcd, sum_of_ten_subsequents, factorial, sum_1_to_10, year;
+
+        writeln( fib( 10 ) );
 
         // Get GCD of two integer values 'intfirst' and 'intsecond'
         intfirst = 400;

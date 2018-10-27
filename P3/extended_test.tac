@@ -1,175 +1,207 @@
                      GOTO                                                     main
-   calculate_gcd:  FPARAM                                                        a
-                   FPARAM                                                        b
+             fib:  FPARAM                                                        n
                       VAR                                                       t0
-                       EQ                  b                  0     lab_rel_true_0
+                       EQ                  n                  1     lab_rel_true_0
                    ASSIGN                  0                                    t0
                      GOTO                                            lab_rel_end_0
   lab_rel_true_0:  ASSIGN                  1                                    t0
-   lab_rel_end_0:      EQ                 t0                  0         lab_else_1
+   lab_rel_end_0:     VAR                                                       t1
+                       EQ                  n                  0     lab_rel_true_1
+                   ASSIGN                  0                                    t1
+                     GOTO                                            lab_rel_end_1
+  lab_rel_true_1:  ASSIGN                  1                                    t1
+   lab_rel_end_1:     VAR                                                       t2
+                       EQ                 t0                  1      lab_or_true_2
+                       EQ                 t1                  1      lab_or_true_2
+                   ASSIGN                  0                                    t2
+                     GOTO                                             lab_or_end_2
+   lab_or_true_2:  ASSIGN                  1                                    t2
+    lab_or_end_2:      EQ                 t2                  0       lab_if_end_3
+                   ASSIGN                  1                                   fib
+                   RETURN                                                         
+    lab_if_end_3:     VAR                                                       t3
+                      SUB                  n                  1                 t3
+                   APARAM                                                       t3
+                     CALL                                                      fib
+                      VAR                                                       t4
+                      SUB                  n                  2                 t4
+                   APARAM                                                       t4
+                     CALL                                                      fib
+                      VAR                                                       t5
+                      ADD                fib                fib                 t5
+                   ASSIGN                 t5                                   fib
+                   RETURN                                                         
+   calculate_gcd:  FPARAM                                                        a
+                   FPARAM                                                        b
+                      VAR                                                       t6
+                       EQ                  b                  0     lab_rel_true_4
+                   ASSIGN                  0                                    t6
+                     GOTO                                            lab_rel_end_4
+  lab_rel_true_4:  ASSIGN                  1                                    t6
+   lab_rel_end_4:      EQ                 t6                  0         lab_else_5
                    ASSIGN                  a                         calculate_gcd
                    RETURN                                                         
-                     GOTO                                             lab_if_end_1
-      lab_else_1:  APARAM                                                        b
-                      VAR                                                       t1
-                      MOD                  a                  b                 t1
-                   APARAM                                                       t1
+                     GOTO                                             lab_if_end_5
+      lab_else_5:     VAR                                                       t7
+                      MOD                  a                  b                 t7
+                   APARAM                                                        b
+                   APARAM                                                       t7
                      CALL                                            calculate_gcd
                    ASSIGN      calculate_gcd                         calculate_gcd
                    RETURN                                                         
-    lab_if_end_1:    GOTO                                        calculate_sum_of_ten_non_negative
+    lab_if_end_5:    GOTO                                        calculate_sum_of_ten_non_negative
 calculate_sum_of_ten_non_negative:  FPARAM                                                        n
                       VAR                                                      sum
                       VAR                                                        i
                    ASSIGN                  0                                   sum
                    ASSIGN                  0                                     i
-  lab_for_cond_2:     VAR                                                       t2
-                       LT                  i                 10     lab_rel_true_3
-                   ASSIGN                  0                                    t2
-                     GOTO                                            lab_rel_end_3
-  lab_rel_true_3:  ASSIGN                  1                                    t2
-   lab_rel_end_3:      EQ                 t2                  1    lab_for_block_2
-                     GOTO                                            lab_for_end_2
- lab_for_block_2:     ADD                  n                  1                  n
-                      VAR                                                       t3
-                       LT                  n                  0     lab_rel_true_4
-                   ASSIGN                  0                                    t3
-                     GOTO                                            lab_rel_end_4
-  lab_rel_true_4:  ASSIGN                  1                                    t3
-   lab_rel_end_4:      EQ                 t3                  0       lab_if_end_5
-                     GOTO                                          lab_for_in_de_2
-    lab_if_end_5:     VAR                                                       t4
-                       GT                  n              30000     lab_rel_true_6
-                   ASSIGN                  0                                    t4
-                     GOTO                                            lab_rel_end_6
-  lab_rel_true_6:  ASSIGN                  1                                    t4
-   lab_rel_end_6:      EQ                 t4                  0       lab_if_end_7
-                     GOTO                                            lab_for_end_2
-    lab_if_end_7:     VAR                                                       t5
-                      ADD                sum                  n                 t5
-                   ASSIGN                 t5                                   sum
+  lab_for_cond_6:     VAR                                                       t8
+                       LT                  i                 10     lab_rel_true_7
+                   ASSIGN                  0                                    t8
+                     GOTO                                            lab_rel_end_7
+  lab_rel_true_7:  ASSIGN                  1                                    t8
+   lab_rel_end_7:      EQ                 t8                  1    lab_for_block_6
+                     GOTO                                            lab_for_end_6
+ lab_for_block_6:     ADD                  n                  1                  n
+                      VAR                                                       t9
+                       LT                  n                  0     lab_rel_true_8
+                   ASSIGN                  0                                    t9
+                     GOTO                                            lab_rel_end_8
+  lab_rel_true_8:  ASSIGN                  1                                    t9
+   lab_rel_end_8:      EQ                 t9                  0       lab_if_end_9
+                     GOTO                                          lab_for_in_de_6
+    lab_if_end_9:     VAR                                                      t10
+                       GT                  n              30000    lab_rel_true_10
+                   ASSIGN                  0                                   t10
+                     GOTO                                           lab_rel_end_10
+ lab_rel_true_10:  ASSIGN                  1                                   t10
+  lab_rel_end_10:      EQ                t10                  0      lab_if_end_11
+                     GOTO                                            lab_for_end_6
+   lab_if_end_11:     VAR                                                      t11
+                      ADD                sum                  n                t11
+                   ASSIGN                t11                                   sum
                       ADD                  n                  1                  n
- lab_for_in_de_2:     ADD                  i                  1                  i
-                     GOTO                                           lab_for_cond_2
-   lab_for_end_2:  ASSIGN                sum                     calculate_sum_of_ten_non_negative
+ lab_for_in_de_6:     ADD                  i                  1                  i
+                     GOTO                                           lab_for_cond_6
+   lab_for_end_6:  ASSIGN                sum                     calculate_sum_of_ten_non_negative
                    RETURN                                                         
 calculate_factorial:  FPARAM                                                   number
                       VAR                                                factorial
                       VAR                                                        i
                    ASSIGN                  1                             factorial
                    ASSIGN                  1                                     i
-  lab_for_cond_8:     VAR                                                       t6
-                       LE                  i             number     lab_rel_true_9
-                   ASSIGN                  0                                    t6
-                     GOTO                                            lab_rel_end_9
-  lab_rel_true_9:  ASSIGN                  1                                    t6
-   lab_rel_end_9:      EQ                 t6                  1    lab_for_block_8
-                     GOTO                                            lab_for_end_8
- lab_for_block_8:     VAR                                                       t7
-                     MULT          factorial                  i                 t7
-                   ASSIGN                 t7                             factorial
- lab_for_in_de_8:     ADD                  i                  1                  i
-                     GOTO                                           lab_for_cond_8
-   lab_for_end_8:  ASSIGN          factorial                     calculate_factorial
+ lab_for_cond_12:     VAR                                                      t12
+                       LE                  i             number    lab_rel_true_13
+                   ASSIGN                  0                                   t12
+                     GOTO                                           lab_rel_end_13
+ lab_rel_true_13:  ASSIGN                  1                                   t12
+  lab_rel_end_13:      EQ                t12                  1   lab_for_block_12
+                     GOTO                                           lab_for_end_12
+lab_for_block_12:     VAR                                                      t13
+                     MULT          factorial                  i                t13
+                   ASSIGN                t13                             factorial
+lab_for_in_de_12:     ADD                  i                  1                  i
+                     GOTO                                          lab_for_cond_12
+  lab_for_end_12:  ASSIGN          factorial                     calculate_factorial
                    RETURN                                                         
 get_largest_of_four_distinct_numbers:  FPARAM                                                        a
                    FPARAM                                                        b
                    FPARAM                                                        c
                    FPARAM                                                        d
-                      VAR                                                       t8
-                       GE                  a                  b    lab_rel_true_10
-                   ASSIGN                  0                                    t8
-                     GOTO                                           lab_rel_end_10
- lab_rel_true_10:  ASSIGN                  1                                    t8
-  lab_rel_end_10:     VAR                                                       t9
-                       LE                  c                  a    lab_rel_true_11
-                   ASSIGN                  0                                    t9
-                     GOTO                                           lab_rel_end_11
- lab_rel_true_11:  ASSIGN                  1                                    t9
-  lab_rel_end_11:     VAR                                                      t10
-                       EQ                 t8                  0   lab_and_false_12
-                       EQ                 t9                  0   lab_and_false_12
-                   ASSIGN                  1                                   t10
-                     GOTO                                           lab_and_end_12
-lab_and_false_12:  ASSIGN                  0                                   t10
-  lab_and_end_12:      EQ                t10                  0      lab_if_end_13
+                      VAR                                                      t14
+                       GE                  a                  b    lab_rel_true_14
+                   ASSIGN                  0                                   t14
+                     GOTO                                           lab_rel_end_14
+ lab_rel_true_14:  ASSIGN                  1                                   t14
+  lab_rel_end_14:     VAR                                                      t15
+                       LE                  c                  a    lab_rel_true_15
+                   ASSIGN                  0                                   t15
+                     GOTO                                           lab_rel_end_15
+ lab_rel_true_15:  ASSIGN                  1                                   t15
+  lab_rel_end_15:     VAR                                                      t16
+                       EQ                t14                  0   lab_and_false_16
+                       EQ                t15                  0   lab_and_false_16
+                   ASSIGN                  1                                   t16
+                     GOTO                                           lab_and_end_16
+lab_and_false_16:  ASSIGN                  0                                   t16
+  lab_and_end_16:      EQ                t16                  0      lab_if_end_17
                    ASSIGN                  a                     get_largest_of_four_distinct_numbers
                    RETURN                                                         
-   lab_if_end_13:     VAR                                                      t11
-                       GE                  b                  a    lab_rel_true_14
-                   ASSIGN                  0                                   t11
-                     GOTO                                           lab_rel_end_14
- lab_rel_true_14:  ASSIGN                  1                                   t11
-  lab_rel_end_14:     VAR                                                      t12
-                       LE                  c                  b    lab_rel_true_15
-                   ASSIGN                  0                                   t12
-                     GOTO                                           lab_rel_end_15
- lab_rel_true_15:  ASSIGN                  1                                   t12
-  lab_rel_end_15:     VAR                                                      t13
-                       EQ                t11                  0   lab_and_false_16
-                       EQ                t12                  0   lab_and_false_16
-                   ASSIGN                  1                                   t13
-                     GOTO                                           lab_and_end_16
-lab_and_false_16:  ASSIGN                  0                                   t13
-  lab_and_end_16:      EQ                t13                  0        lab_else_17
+   lab_if_end_17:     VAR                                                      t17
+                       GE                  b                  a    lab_rel_true_18
+                   ASSIGN                  0                                   t17
+                     GOTO                                           lab_rel_end_18
+ lab_rel_true_18:  ASSIGN                  1                                   t17
+  lab_rel_end_18:     VAR                                                      t18
+                       LE                  c                  b    lab_rel_true_19
+                   ASSIGN                  0                                   t18
+                     GOTO                                           lab_rel_end_19
+ lab_rel_true_19:  ASSIGN                  1                                   t18
+  lab_rel_end_19:     VAR                                                      t19
+                       EQ                t17                  0   lab_and_false_20
+                       EQ                t18                  0   lab_and_false_20
+                   ASSIGN                  1                                   t19
+                     GOTO                                           lab_and_end_20
+lab_and_false_20:  ASSIGN                  0                                   t19
+  lab_and_end_20:      EQ                t19                  0        lab_else_21
                    ASSIGN                  b                     get_largest_of_four_distinct_numbers
                    RETURN                                                         
-                     GOTO                                            lab_if_end_17
-     lab_else_17:  ASSIGN                  c                     get_largest_of_four_distinct_numbers
+                     GOTO                                            lab_if_end_21
+     lab_else_21:  ASSIGN                  c                     get_largest_of_four_distinct_numbers
                    RETURN                                                         
-   lab_if_end_17:  ASSIGN                0.0                     get_largest_of_four_distinct_numbers
+   lab_if_end_21:  ASSIGN                0.0                     get_largest_of_four_distinct_numbers
                    RETURN                                                         
 calculate_mean_of_three:  FPARAM                                                      one
                    FPARAM                                                      two
                    FPARAM                                                    three
                       VAR                                                      sum
                       VAR                                                     mean
-                      VAR                                                      t14
-                      ADD                one                two                t14
-                      VAR                                                      t15
-                      ADD                t14              three                t15
-                   ASSIGN                t15                                   sum
-                      VAR                                                      t16
-                   DIVIDE                sum                3.0                t16
-                   ASSIGN                t16                                  mean
-                      VAR                                                      t17
-                   DIVIDE                sum                3.0                t17
-                   ASSIGN                t17                     calculate_mean_of_three
+                      VAR                                                      t20
+                      ADD                one                two                t20
+                      VAR                                                      t21
+                      ADD                t20              three                t21
+                   ASSIGN                t21                                   sum
+                      VAR                                                      t22
+                   DIVIDE                sum                3.0                t22
+                   ASSIGN                t22                                  mean
+                      VAR                                                      t23
+                   DIVIDE                sum                3.0                t23
+                   ASSIGN                t23                     calculate_mean_of_three
                    RETURN                                                         
     is_leap_year:  FPARAM                                                     year
                       VAR                                                 _is_leap
                    ASSIGN                  0                              _is_leap
-                      VAR                                                      t18
-                      MOD               year                  4                t18
-                      VAR                                                      t19
-                       NE                t18                  0    lab_rel_true_18
-                   ASSIGN                  0                                   t19
-                     GOTO                                           lab_rel_end_18
- lab_rel_true_18:  ASSIGN                  1                                   t19
-  lab_rel_end_18:      EQ                t19                  0      lab_if_end_19
-                   ASSIGN                  0                              _is_leap
-   lab_if_end_19:     VAR                                                      t20
-                      MOD               year                100                t20
-                      VAR                                                      t21
-                       EQ                t20                  0    lab_rel_true_20
-                   ASSIGN                  0                                   t21
-                     GOTO                                           lab_rel_end_20
- lab_rel_true_20:  ASSIGN                  1                                   t21
-  lab_rel_end_20:      EQ                t21                  0        lab_else_21
-                      VAR                                                      t22
-                      MOD               year                400                t22
-                      VAR                                                      t23
-                       EQ                t22                  0    lab_rel_true_22
-                   ASSIGN                  0                                   t23
+                      VAR                                                      t24
+                      MOD               year                  4                t24
+                      VAR                                                      t25
+                       NE                t24                  0    lab_rel_true_22
+                   ASSIGN                  0                                   t25
                      GOTO                                           lab_rel_end_22
- lab_rel_true_22:  ASSIGN                  1                                   t23
-  lab_rel_end_22:      EQ                t23                  0        lab_else_23
+ lab_rel_true_22:  ASSIGN                  1                                   t25
+  lab_rel_end_22:      EQ                t25                  0      lab_if_end_23
+                   ASSIGN                  0                              _is_leap
+   lab_if_end_23:     VAR                                                      t26
+                      MOD               year                100                t26
+                      VAR                                                      t27
+                       EQ                t26                  0    lab_rel_true_24
+                   ASSIGN                  0                                   t27
+                     GOTO                                           lab_rel_end_24
+ lab_rel_true_24:  ASSIGN                  1                                   t27
+  lab_rel_end_24:      EQ                t27                  0        lab_else_25
+                      VAR                                                      t28
+                      MOD               year                400                t28
+                      VAR                                                      t29
+                       EQ                t28                  0    lab_rel_true_26
+                   ASSIGN                  0                                   t29
+                     GOTO                                           lab_rel_end_26
+ lab_rel_true_26:  ASSIGN                  1                                   t29
+  lab_rel_end_26:      EQ                t29                  0        lab_else_27
                    ASSIGN                  1                              _is_leap
-                     GOTO                                            lab_if_end_23
-     lab_else_23:  ASSIGN                  0                              _is_leap
-   lab_if_end_23:    GOTO                                            lab_if_end_21
-     lab_else_21:  ASSIGN                  1                              _is_leap
-   lab_if_end_21:  ASSIGN           _is_leap                          is_leap_year
+                     GOTO                                            lab_if_end_27
+     lab_else_27:  ASSIGN                  0                              _is_leap
+   lab_if_end_27:    GOTO                                            lab_if_end_25
+     lab_else_25:  ASSIGN                  1                              _is_leap
+   lab_if_end_25:  ASSIGN           _is_leap                          is_leap_year
                    RETURN                                                         
             main:     VAR                                                     mean
                       VAR                                                    _val1
@@ -187,6 +219,10 @@ calculate_mean_of_three:  FPARAM                                                
                       VAR                                                factorial
                       VAR                                              sum_1_to_10
                       VAR                                                     year
+                   APARAM                                                       10
+                     CALL                                                      fib
+                   APARAM                                                      fib
+                     CALL                                                  writeln
                    ASSIGN                400                              intfirst
                    ASSIGN                  4                             intsecond
                    APARAM                                                 intfirst
@@ -228,29 +264,29 @@ calculate_mean_of_three:  FPARAM                                                
                    APARAM                                                     year
                      CALL                                             is_leap_year
                    ASSIGN       is_leap_year                           is_leap_now
-                      VAR                                                      t24
-                      ADD               year                  1                t24
-                   APARAM                                                      t24
+                      VAR                                                      t30
+                      ADD               year                  1                t30
+                   APARAM                                                      t30
                      CALL                                             is_leap_year
                    ASSIGN       is_leap_year                          is_leap_next
-                      VAR                                                      t25
-                      VAR                                                      t26
-                       EQ        is_leap_now                  1     lab_or_true_25
-                       EQ       is_leap_next                  1     lab_or_true_25
-                   ASSIGN                  0                                   t26
-                     GOTO                                            lab_or_end_25
-  lab_or_true_25:  ASSIGN                  1                                   t26
-   lab_or_end_25:      NE                t26                  0    lab_not_true_24
-                   ASSIGN                  1                                   t25
-                     GOTO                                           lab_not_end_24
- lab_not_true_24:  ASSIGN                  0                                   t25
-  lab_not_end_24:      EQ                t25                  0      lab_if_end_26
-                      VAR                                                      t27
-                      SUB               year                  1                t27
-                   APARAM                                                      t27
+                      VAR                                                      t31
+                      VAR                                                      t32
+                       EQ        is_leap_now                  1     lab_or_true_29
+                       EQ       is_leap_next                  1     lab_or_true_29
+                   ASSIGN                  0                                   t32
+                     GOTO                                            lab_or_end_29
+  lab_or_true_29:  ASSIGN                  1                                   t32
+   lab_or_end_29:      NE                t32                  0    lab_not_true_28
+                   ASSIGN                  1                                   t31
+                     GOTO                                           lab_not_end_28
+ lab_not_true_28:  ASSIGN                  0                                   t31
+  lab_not_end_28:      EQ                t31                  0      lab_if_end_30
+                      VAR                                                      t33
+                      SUB               year                  1                t33
+                   APARAM                                                      t33
                      CALL                                             is_leap_year
                    ASSIGN       is_leap_year                      is_leap_previous
-   lab_if_end_26:  APARAM                                              is_leap_now
+   lab_if_end_30:  APARAM                                              is_leap_now
                      CALL                                                  writeln
                    APARAM                                             is_leap_next
                      CALL                                                  writeln

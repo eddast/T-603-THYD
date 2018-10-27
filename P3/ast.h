@@ -711,21 +711,25 @@ public:
         // Append TAC code that defines a value of a parameter to a procedure call
         // for each expression passed to procedure
         std::string signature;
+        std::list<std::string> params;
         for ( auto e : *expr_list_ ) {
             e->icg( data, tac );
             if ( !signature.empty() ) {
                 signature += "::";
             }
             signature += tostr( data.expr_return_type );
-            std::string e_return_var = data.expr_return_var;
-            tac.append( TAC::InstrType::APARAM, e_return_var);
+            params.push_back( data.expr_return_var );
         }
 
         // Look up method being called in symbol table
         SymbolTable::Entry* entry = data.sym_table.lookup( "", id_ );
 
         // Built in functions are special case and are not looked up in symbol table
-        if ( id_ == "writeln" || id_ == "write") {
+        // For simplicity we assume built in functions are void expressions
+        if ( id_ == "writeln" || id_ == "write" ) {
+            for ( auto p : params ) {
+                tac.append( TAC::InstrType::APARAM, p);
+            }
             tac.append(TAC::InstrType::CALL, id_);
             data.expr_return_var = id_;
             data.expr_return_type = ValueType::VoidVal;
@@ -739,8 +743,11 @@ public:
             error_msg( "method " + id_ + " does not match signature." );
         }
         // Otherwise all is OK, generate code to call function
-        // Set up return value for expression
+        // Then set up return value for expression
         else {
+            for ( auto p : params ) {
+                tac.append( TAC::InstrType::APARAM, p);
+            }
             tac.append(TAC::InstrType::CALL, id_);
             data.expr_return_var = entry->name;
             data.expr_return_type = entry->value_type;
