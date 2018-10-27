@@ -720,20 +720,30 @@ public:
             std::string e_return_var = data.expr_return_var;
             tac.append( TAC::InstrType::APARAM, e_return_var);
         }
+
+        // Look up method being called in symbol table
         SymbolTable::Entry* entry = data.sym_table.lookup( "", id_ );
-        if ( id_ != "writeln" && ( entry == nullptr || entry->entry_type != EntryType::Method)) {
+
+        // Built in functions are special case and are not looked up in symbol table
+        if ( id_ == "writeln" || id_ == "write") {
+            tac.append(TAC::InstrType::CALL, id_);
+            data.expr_return_var = id_;
+            data.expr_return_type = ValueType::VoidVal;
+        }
+        // If method is missing from symbol table we raise error
+        else if ( entry == nullptr || entry->entry_type != EntryType::Method ) {
             error_msg( "method " + id_ + " is missing." );
         }
-        else if ( id_ != "writeln" && entry->signature != signature ) {
+        // If method is declared but number of actual parameters do not match formal parameters raise error
+        else if (  entry->signature != signature ) {
             error_msg( "method " + id_ + " does not match signature." );
         }
+        // Otherwise all is OK, generate code to call function
+        // Set up return value for expression
         else {
-            // Then append TAC code that calls procedure after defining parameters
             tac.append(TAC::InstrType::CALL, id_);
-
-            // Set up and configure return value
-            data.expr_return_var = id_;
-            data.expr_return_type = entry == NULL ? ValueType::VoidVal : entry->value_type;
+            data.expr_return_var = entry->name;
+            data.expr_return_type = entry->value_type;
         }
 
     }
