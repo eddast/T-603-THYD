@@ -1,13 +1,6 @@
                      GOTO                                                     main
-            haha:  FPARAM                                                        a
-                   FPARAM                                                        b
-                   ASSIGN                  1                                  haha
-                   RETURN                                                         
             main:     VAR                                                        i
-                   APARAM                                                        1
-                   APARAM                                                      4.0
-                     CALL                                                     haha
-                   ASSIGN               haha                                     i
+                       EQ                4.6                  0       lab_if_end_0
                    APARAM                                                        i
                      CALL                                                  writeln
-                   RETURN                                                         
+    lab_if_end_0:  RETURN                                                         

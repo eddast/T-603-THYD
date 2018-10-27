@@ -1018,6 +1018,12 @@ public:
         expr_->icg( data, tac );
         std::string expr_var = data.expr_return_var;
 
+        // Expression for if statement should not be a real value, only int or bool values
+        // Output warning if it is
+        if ( data.expr_return_type == ValueType::RealVal ) {
+            warning_msg( "Conditional if-statement expression is not of integer/bool value.");
+        }
+
         // Create label for point in program where we'd go to if if-condition is false
         // (which is either an else statement or code immediately following if statement)
         std::string lab_else = tac.label_name("else", data.label_no);
@@ -1091,6 +1097,13 @@ public:
         tac.label_next_instr( lab_for_cond );
         expr_->icg( data, tac );
         std::string expr_return_var = data.expr_return_var;
+
+        // Expression for if statement should not be a real value, only int or bool values
+        // Output warning if it is
+        if ( data.expr_return_type == ValueType::RealVal ) {
+            warning_msg( "Conditional for-statement expression is not of integer/bool value.");
+        }
+
         tac.append(TAC::InstrType::EQ, expr_return_var, "1", lab_for_block);
         tac.append( TAC::InstrType::GOTO, lab_for_end );
 

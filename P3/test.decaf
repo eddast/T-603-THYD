@@ -1,12 +1,11 @@
 class Program
 {
-     static int haha(int a, real b) {
-        return 1;
-     }
      static void main( )
      {
         int i;
-        i = haha(1);
-        writeln(i);
+        if(4.6)
+        {
+            writeln(i);
+        }
      }
 }
