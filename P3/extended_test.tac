@@ -230,88 +230,99 @@ calculate_mean_of_three:  FPARAM                                                
                    APARAM                                                       10
                      CALL                                                      fib
                    ASSIGN                fib                                   t33
-                   ASSIGN                t33                                  fibi
-                   APARAM                                                     fibi
+                   APARAM                                                      t33
+                     CALL                                                  writeln
+                      VAR                                                      t34
+                   APARAM                                                       15
+                     CALL                                                      fib
+                   ASSIGN                fib                                   t34
+                   APARAM                                                      t34
+                     CALL                                                  writeln
+                      VAR                                                      t35
+                   APARAM                                                        3
+                     CALL                                                      fib
+                   ASSIGN                fib                                   t35
+                   APARAM                                                      t35
                      CALL                                                  writeln
                    ASSIGN                400                              intfirst
                    ASSIGN                  4                             intsecond
-                      VAR                                                      t34
+                      VAR                                                      t36
                    APARAM                                                 intfirst
                    APARAM                                                intsecond
                      CALL                                            calculate_gcd
-                   ASSIGN      calculate_gcd                                   t34
-                   ASSIGN                t34                                   gcd
+                   ASSIGN      calculate_gcd                                   t36
+                   ASSIGN                t36                                   gcd
                    APARAM                                                      gcd
                      CALL                                                  writeln
-                      VAR                                                      t35
+                      VAR                                                      t37
                    APARAM                                                intsecond
                      CALL                                        calculate_sum_of_ten_non_negative
-                   ASSIGN  calculate_sum_of_ten_non_negative                                   t35
-                   ASSIGN                t35                     sum_of_ten_subsequents
+                   ASSIGN  calculate_sum_of_ten_non_negative                                   t37
+                   ASSIGN                t37                     sum_of_ten_subsequents
                    APARAM                                        sum_of_ten_subsequents
                      CALL                                                  writeln
-                      VAR                                                      t36
+                      VAR                                                      t38
                    APARAM                                                intsecond
                      CALL                                        calculate_factorial
-                   ASSIGN  calculate_factorial                                   t36
-                   ASSIGN                t36                             factorial
+                   ASSIGN  calculate_factorial                                   t38
+                   ASSIGN                t38                             factorial
                    APARAM                                                factorial
                      CALL                                                  writeln
                    ASSIGN               13.1                                 _val1
                    ASSIGN              13.20                                 _val2
                    ASSIGN              13.57                                 _val3
                    ASSIGN              13.37                                 _val4
-                      VAR                                                      t37
+                      VAR                                                      t39
                    APARAM                                                    _val1
                    APARAM                                                    _val2
                    APARAM                                                    _val3
                      CALL                                        calculate_mean_of_three
-                   ASSIGN  calculate_mean_of_three                                   t37
-                   ASSIGN                t37                                  mean
+                   ASSIGN  calculate_mean_of_three                                   t39
+                   ASSIGN                t39                                  mean
                    APARAM                                                     mean
                      CALL                                                  writeln
-                      VAR                                                      t38
+                      VAR                                                      t40
                    APARAM                                                    _val1
                    APARAM                                                    _val2
                    APARAM                                                    _val3
                    APARAM                                                    _val4
                      CALL                                        get_largest_of_four_distinct_numbers
-                   ASSIGN  get_largest_of_four_distinct_numbers                                   t38
-                   ASSIGN                t38                               largest
+                   ASSIGN  get_largest_of_four_distinct_numbers                                   t40
+                   ASSIGN                t40                               largest
                    APARAM                                                  largest
                      CALL                                                  writeln
                    ASSIGN               2018                                  year
-                      VAR                                                      t39
+                      VAR                                                      t41
                    APARAM                                                     year
                      CALL                                             is_leap_year
-                   ASSIGN       is_leap_year                                   t39
-                   ASSIGN                t39                           is_leap_now
-                      VAR                                                      t40
-                      ADD               year                  1                t40
-                      VAR                                                      t41
-                   APARAM                                                      t40
-                     CALL                                             is_leap_year
                    ASSIGN       is_leap_year                                   t41
-                   ASSIGN                t41                          is_leap_next
+                   ASSIGN                t41                           is_leap_now
                       VAR                                                      t42
+                      ADD               year                  1                t42
                       VAR                                                      t43
+                   APARAM                                                      t42
+                     CALL                                             is_leap_year
+                   ASSIGN       is_leap_year                                   t43
+                   ASSIGN                t43                          is_leap_next
+                      VAR                                                      t44
+                      VAR                                                      t45
                        EQ        is_leap_now                  1     lab_or_true_29
                        EQ       is_leap_next                  1     lab_or_true_29
-                   ASSIGN                  0                                   t43
+                   ASSIGN                  0                                   t45
                      GOTO                                            lab_or_end_29
-  lab_or_true_29:  ASSIGN                  1                                   t43
-   lab_or_end_29:      NE                t43                  0    lab_not_true_28
-                   ASSIGN                  1                                   t42
+  lab_or_true_29:  ASSIGN                  1                                   t45
+   lab_or_end_29:      NE                t45                  0    lab_not_true_28
+                   ASSIGN                  1                                   t44
                      GOTO                                           lab_not_end_28
- lab_not_true_28:  ASSIGN                  0                                   t42
-  lab_not_end_28:      EQ                t42                  0      lab_if_end_30
-                      VAR                                                      t44
-                      SUB               year                  1                t44
-                      VAR                                                      t45
-                   APARAM                                                      t44
+ lab_not_true_28:  ASSIGN                  0                                   t44
+  lab_not_end_28:      EQ                t44                  0      lab_if_end_30
+                      VAR                                                      t46
+                      SUB               year                  1                t46
+                      VAR                                                      t47
+                   APARAM                                                      t46
                      CALL                                             is_leap_year
-                   ASSIGN       is_leap_year                                   t45
-                   ASSIGN                t45                      is_leap_previous
+                   ASSIGN       is_leap_year                                   t47
+                   ASSIGN                t47                      is_leap_previous
    lab_if_end_30:  APARAM                                              is_leap_now
                      CALL                                                  writeln
                    APARAM                                             is_leap_next
